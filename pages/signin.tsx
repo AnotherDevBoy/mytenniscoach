@@ -14,7 +14,7 @@ const SignUp = () => {
 
   useEffect(() => {
     if (user) {
-      Router.push('/');
+      Router.push('/dashboard');
     }
   }, [user]);
 

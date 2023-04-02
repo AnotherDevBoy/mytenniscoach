@@ -5,7 +5,7 @@ import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { useState } from 'react';
 import { Database } from '@/types/types_db';
 import { MyUserContextProvider } from '@/utils/useUser';
-import Layout from '@/components/Layout';
+import Layout from '@/layouts/layout';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [supabaseClient] = useState(() =>

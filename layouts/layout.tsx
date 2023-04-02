@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import Head from 'next/head';
-import Navbar from './Navbar';
+import Navbar from '../components/Navbar';
 
 
 interface Props extends PropsWithChildren {
