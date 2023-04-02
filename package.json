@@ -7,9 +7,13 @@
     "build": "next build",
     "export": "next export",
     "lint": "next lint",
-    "format": "prettier --config .prettierrc 'app/**/*.{js,ts,jsx,tsx}' --write"
+    "format": "prettier --config .prettierrc 'pages/**/*.{js,ts,jsx,tsx}' --write"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.15",
     "@types/node": "18.15.11",
     "@types/react": "18.0.31",
     "@types/react-dom": "18.0.11",
