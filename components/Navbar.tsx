@@ -13,15 +13,16 @@ const NavBar = () => {
         <AppBar position="static">
           <Toolbar>
             <IconButton
+              onClick={() => {
+                Router.push("/");
+              }}
               size="large"
               edge="start"
               color="inherit"
               aria-label="menu"
               sx={{ mr: 2 }}
             >
-              <Home onClick={() => {
-                Router.push("/");
-              }} />
+              <Home  />
             </IconButton>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               My Tennis Coach
@@ -29,10 +30,10 @@ const NavBar = () => {
             <Button
               color="inherit"
               onClick={() => {
-                Router.push("/login");
+                Router.push("/signin");
               }}
             >
-              Login
+              Sign-In
             </Button>
           </Toolbar>
         </AppBar>
