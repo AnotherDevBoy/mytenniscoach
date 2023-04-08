@@ -13,12 +13,10 @@ const Matches = () => {
   }, [user]);
 
   if (user) {
-    return (
-      <Menu firstSelectedItem={3} />
-    );
+    return <Menu firstSelectedItem={3} />;
   }
 
   return <></>;
-}
+};
 
 export default Matches;

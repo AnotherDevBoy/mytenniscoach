@@ -13,12 +13,10 @@ const Opponents = () => {
   }, [user]);
 
   if (user) {
-    return (
-      <Menu firstSelectedItem={4} />
-    );
+    return <Menu firstSelectedItem={4} />;
   }
 
   return <></>;
-}
+};
 
 export default Opponents;

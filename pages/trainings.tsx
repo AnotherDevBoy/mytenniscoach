@@ -13,12 +13,10 @@ const Trainings = () => {
   }, [user]);
 
   if (user) {
-    return (
-      <Menu firstSelectedItem={2} />
-    );
+    return <Menu firstSelectedItem={2} />;
   }
 
   return <></>;
-}
+};
 
 export default Trainings;

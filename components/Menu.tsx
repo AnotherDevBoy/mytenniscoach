@@ -35,11 +35,9 @@ const sections = [
     name: 'Opponents',
     icon: <PeopleIcon />
   }
-]
+];
 
-
-
-const Menu = ( props: { firstSelectedItem: number; } ) => {
+const Menu = (props: { firstSelectedItem: number }) => {
   const Drawer = styled(MuiDrawer, {
     shouldForwardProp: (prop) => prop !== 'open'
   })(() => ({
@@ -49,11 +47,13 @@ const Menu = ( props: { firstSelectedItem: number; } ) => {
     }
   }));
 
-  const [ selectedIndex, setSelectedIndex ] = React.useState(props.firstSelectedItem);
+  const [selectedIndex, setSelectedIndex] = React.useState(
+    props.firstSelectedItem
+  );
 
   function onMenuItemSelected(index: number) {
     setSelectedIndex(index);
-    Router.push(`/${sections[index].name.toLowerCase()}`)
+    Router.push(`/${sections[index].name.toLowerCase()}`);
   }
 
   return (
@@ -64,11 +64,16 @@ const Menu = ( props: { firstSelectedItem: number; } ) => {
           <List component="nav">
             {sections.map((element, index) => {
               return (
-                <ListItemButton selected={ selectedIndex == index} onClick={() => onMenuItemSelected(index)}>
-                  <ListItemIcon>
-                    { element.icon }
-                  </ListItemIcon>
-                  <ListItemText primary={ selectedIndex == index? element.name : null}  secondary={ selectedIndex != index ? element.name : null}/>
+                <ListItemButton
+                  key={index}
+                  selected={selectedIndex == index}
+                  onClick={() => onMenuItemSelected(index)}
+                >
+                  <ListItemIcon>{element.icon}</ListItemIcon>
+                  <ListItemText
+                    primary={selectedIndex == index ? element.name : null}
+                    secondary={selectedIndex != index ? element.name : null}
+                  />
                 </ListItemButton>
               );
             })}

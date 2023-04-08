@@ -13,12 +13,10 @@ const Dashboard = () => {
   }, [user]);
 
   if (user) {
-    return (
-      <Menu firstSelectedItem={0} />
-    );
+    return <Menu firstSelectedItem={0} />;
   }
 
   return <></>;
-}
+};
 
 export default Dashboard;
