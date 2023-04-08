@@ -10,6 +10,7 @@
     "format": "prettier --config .prettierrc '*/**/*.{js,ts,jsx,tsx}' --write"
   },
   "dependencies": {
+    "@aldabil/react-scheduler": "^2.7.8",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@heroicons/react": "^2.0.17",

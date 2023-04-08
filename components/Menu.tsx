@@ -56,9 +56,6 @@ const Menu = ( props: { firstSelectedItem: number; } ) => {
     Router.push(`/${sections[index].name.toLowerCase()}`)
   }
 
-  // TODO: 
-  // Selected (primary vs secondary)
-  // Navigation on click
   return (
     <>
       <Box sx={{ display: 'flex' }}>
