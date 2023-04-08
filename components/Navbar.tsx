@@ -12,52 +12,50 @@ import { useUser } from '@/utils/useUser';
 const NavBar = () => {
   const supabaseClient = useSupabaseClient();
   const { user } = useUser();
-  
+
   return (
     <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton
-              onClick={() => {
-                Router.push("/");
-              }}
-              size="large"
-              edge="start"
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            onClick={() => {
+              Router.push('/');
+            }}
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <Home />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            My Tennis Coach
+          </Typography>
+          {user ? (
+            <Button
               color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <Home  />
-            </IconButton>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              My Tennis Coach
-            </Typography>
-            {
-              user ? (
-                <Button
-              color="inherit"
-              onClick={async() => {
+              onClick={async () => {
                 await supabaseClient.auth.signOut();
-                Router.push("/");
+                Router.push('/');
               }}
             >
               Sign-out
             </Button>
-              ) : (
-                <Button
+          ) : (
+            <Button
               color="inherit"
               onClick={() => {
-                Router.push("/signin");
+                Router.push('/signin');
               }}
             >
               Sign-In
             </Button>
-              )
-            }
-          </Toolbar>
-        </AppBar>
-      </Box>
-  )
-}
+          )}
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
+};
 
 export default NavBar;

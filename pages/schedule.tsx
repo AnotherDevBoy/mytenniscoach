@@ -3,7 +3,7 @@ import { useUser } from '@supabase/auth-helpers-react';
 import Router from 'next/router';
 import Menu from '@/components/Menu';
 
-const Dashboard = () => {
+const Schedule = () => {
   const user = useUser();
 
   React.useEffect(() => {
@@ -14,11 +14,11 @@ const Dashboard = () => {
 
   if (user) {
     return (
-      <Menu firstSelectedItem={0} />
+      <Menu firstSelectedItem={1} />
     );
   }
 
   return <></>;
 }
 
-export default Dashboard;
+export default Schedule;

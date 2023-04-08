@@ -30,24 +30,18 @@ export const MyUserContextProvider = (props: Props) => {
   const [isLoadingData, setIsloadingData] = useState(false);
 
   const getUserDetails = () => supabase.from('users').select('*').single();
-  const getSubscription = () =>
-    supabase
-      .from('subscriptions')
-      .select('*, prices(*, products(*))')
-      .in('status', ['trialing', 'active'])
-      .single();
 
   useEffect(() => {
     if (user && !isLoadingData) {
       setIsloadingData(true);
-      Promise.allSettled([getUserDetails(), getSubscription()]);
+      Promise.allSettled([getUserDetails()]);
     }
   }, [user, isLoadingUser]);
 
   const value = {
     accessToken,
     user,
-    isLoading: isLoadingUser || isLoadingData,
+    isLoading: isLoadingUser || isLoadingData
   };
 
   return <UserContext.Provider value={value} {...props} />;
