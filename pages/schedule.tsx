@@ -4,9 +4,16 @@ import Router from 'next/router';
 import Menu from '@/components/Menu';
 import { Scheduler } from '@aldabil/react-scheduler';
 import { Box, Container } from '@mui/material';
+import { EventActions, ProcessedEvent } from '@aldabil/react-scheduler/types';
+import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
+import { useState } from 'react';
 
 const Schedule = () => {
   const user = useUser();
+
+  const [loading, setLoading] = useState(true);
+  const [schedule, setSchedule] = useState([] as ProcessedEvent[]);
 
   React.useEffect(() => {
     if (!user) {
@@ -14,31 +21,74 @@ const Schedule = () => {
     }
   }, [user]);
 
+  React.useEffect(() => {
+    if (!user) {
+      return;
+    }
+
+    if (!loading) {
+      return;
+    }
+
+    axios
+      .get(`api/schedules/${user?.id}`)
+      .then((response) => {
+        const events: ProcessedEvent[] = response.data.map((e: any) => { 
+          return { title: e.title, start: new Date(e.start), end: new Date(e.end) };
+        });
+
+        setSchedule(events);
+        setLoading(false);
+      })
+      .catch(console.error);
+  }, [user, loading]);
+
+  async function createSchedule(
+    event: ProcessedEvent,
+    action: EventActions
+  ): Promise<ProcessedEvent> {
+    console.log(JSON.stringify(event));
+    console.log(JSON.stringify(action));
+
+    // TODO: types
+    const scheduleEvent = {
+      id: uuidv4(),
+      userId: user?.id,
+      start: event.start,
+      end: event.end,
+      type: 'Match',
+      title: event.title
+    };
+
+    const response = await axios.post(
+      `api/schedules/${user?.id}`,
+      scheduleEvent
+    );
+
+    console.log(JSON.stringify(response.data));
+
+    setLoading(true);
+
+    return event;
+  }
+
   if (user) {
     return (
       <>
         <Box sx={{ display: 'flex' }}>
           <Menu firstSelectedItem={1} />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Scheduler
-              view="month"
-              events={[
-                {
-                  event_id: 1,
-                  title: 'Event 1',
-                  type: 'Match',
-                  start: new Date('2021/5/2 09:30'),
-                  end: new Date('2021/5/2 10:30')
-                },
-                {
-                  event_id: 2,
-                  title: 'Event 2',
-                  type: 'Tournament',
-                  start: new Date('2021/5/4 10:00'),
-                  end: new Date('2021/5/4 11:00')
+            {loading ? (
+              <></>
+            ) : (
+              <Scheduler
+                view="month"
+                onConfirm={async (event, action) =>
+                  await createSchedule(event, action)
                 }
-              ]}
-            />
+                events={schedule}
+              />
+            )}
           </Container>
         </Box>
       </>
