@@ -4,16 +4,17 @@ import Router from 'next/router';
 import Menu from '@/components/Menu';
 import { Scheduler } from '@aldabil/react-scheduler';
 import { Box, Container } from '@mui/material';
-import { EventActions, ProcessedEvent } from '@aldabil/react-scheduler/types';
+import {
+  EventActions,
+  ProcessedEvent,
+  ViewEvent
+} from '@aldabil/react-scheduler/types';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
-import { useState } from 'react';
+import { EventType, ScheduleEventDTO } from '@/lib/types';
 
 const Schedule = () => {
   const user = useUser();
-
-  const [loading, setLoading] = useState(true);
-  const [schedule, setSchedule] = useState([] as ProcessedEvent[]);
 
   React.useEffect(() => {
     if (!user) {
@@ -21,59 +22,49 @@ const Schedule = () => {
     }
   }, [user]);
 
-  React.useEffect(() => {
-    if (!user) {
-      return;
-    }
+  const getScheduledEvents = async (
+    _: ViewEvent
+  ): Promise<ProcessedEvent[] | void> => {
+    const response = await axios.get(`api/schedules`);
 
-    if (!loading) {
-      return;
-    }
-
-    axios
-      .get(`api/schedules/${user?.id}`)
-      .then((response) => {
-        const events: ProcessedEvent[] = response.data.map((e: any) => {
-          return {
-            title: e.title,
-            start: new Date(e.start),
-            end: new Date(e.end)
-          };
-        });
-
-        setSchedule(events);
-        setLoading(false);
-      })
-      .catch(console.error);
-  }, [user, loading]);
+    return response.data.map((e: ScheduleEventDTO) => {
+      return {
+        event_id: e.id,
+        title: e.title,
+        start: new Date(e.start),
+        end: new Date(e.end)
+      } as ProcessedEvent;
+    }) as ProcessedEvent[];
+  };
 
   async function createSchedule(
     event: ProcessedEvent,
     action: EventActions
   ): Promise<ProcessedEvent> {
-    console.log(JSON.stringify(event));
-    console.log(JSON.stringify(action));
+    const event_id = action === 'create' ? uuidv4() : event.event_id;
 
-    // TODO: types
-    const scheduleEvent = {
-      id: uuidv4(),
-      userId: user?.id,
-      start: event.start,
-      end: event.end,
-      type: 'Match',
+    const scheduleEvent: ScheduleEventDTO = {
+      id: String(event_id),
+      userId: user?.id!!,
+      start: event.start.toISOString(),
+      end: event.end.toISOString(),
+      type: EventType.Match,
       title: event.title
     };
 
-    const response = await axios.post(
-      `api/schedules/${user?.id}`,
-      scheduleEvent
-    );
-
-    console.log(JSON.stringify(response.data));
-
-    setLoading(true);
+    const response =
+      action === 'create'
+        ? await axios.post(`api/schedules`, scheduleEvent)
+        : await axios.put(`api/schedules/${event_id}`, scheduleEvent);
 
     return event;
+  }
+
+  async function deleteScheduledEvent(
+    id: string | number
+  ): Promise<string | number> {
+    const response = await axios.delete(`api/schedules/${id}`);
+    return id;
   }
 
   if (user) {
@@ -82,17 +73,14 @@ const Schedule = () => {
         <Box sx={{ display: 'flex' }}>
           <Menu firstSelectedItem={1} />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            {loading ? (
-              <></>
-            ) : (
-              <Scheduler
-                view="month"
-                onConfirm={async (event, action) =>
-                  await createSchedule(event, action)
-                }
-                events={schedule}
-              />
-            )}
+            <Scheduler
+              view="month"
+              onConfirm={async (event, action) =>
+                await createSchedule(event, action)
+              }
+              onDelete={deleteScheduledEvent}
+              getRemoteEvents={getScheduledEvents}
+            />
           </Container>
         </Box>
       </>
