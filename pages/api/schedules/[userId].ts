@@ -8,7 +8,6 @@ import {
 } from '@/lib/repository';
 import { v4 as uuidv4 } from 'uuid';
 
-
 const repository = new MyTennisCoachRepository();
 
 enum EventType {
@@ -91,7 +90,7 @@ export default async function handler(
 
   if (req.method === 'GET') {
     const scheduleDAL = await repository.getSchedules(user);
-    const schedule = scheduleDAL.map(e => toScheduleEvent(e));
+    const schedule = scheduleDAL.map((e) => toScheduleEvent(e));
 
     return res.status(200).json(schedule);
   } else if (req.method === 'POST') {

@@ -33,8 +33,12 @@ const Schedule = () => {
     axios
       .get(`api/schedules/${user?.id}`)
       .then((response) => {
-        const events: ProcessedEvent[] = response.data.map((e: any) => { 
-          return { title: e.title, start: new Date(e.start), end: new Date(e.end) };
+        const events: ProcessedEvent[] = response.data.map((e: any) => {
+          return {
+            title: e.title,
+            start: new Date(e.start),
+            end: new Date(e.end)
+          };
         });
 
         setSchedule(events);
