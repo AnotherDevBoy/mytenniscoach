@@ -74,7 +74,5 @@ export class MyTennisCoachRepository {
       console.log(JSON.stringify(response.error));
       throw new Error('An error occurred');
     }
-
-    console.log(response);
   }
 }
