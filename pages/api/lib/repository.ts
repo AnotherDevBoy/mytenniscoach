@@ -1,6 +1,6 @@
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
 import Configuration from '@/pages/api/lib/configuration';
-import { Database } from '@/pages/api/lib/database.types';
+import { Database } from '@/lib/database.types';
 import { formatRFC3339 } from 'date-fns';
 import {
   PostgrestResponseFailure,
