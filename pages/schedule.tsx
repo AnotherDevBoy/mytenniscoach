@@ -14,10 +14,10 @@ import axios from 'axios';
 import { EventType, ScheduleEventDTO } from '@/lib/types';
 
 const colorsPerEventType = new Map<EventType, string>([
-  [EventType.Match, "#ff9914"],
-  [EventType.Training, "#f21b3f"],
-  [EventType.Coaching, "#08bdbd"],
-  [EventType.Gym, "#abff4f"]
+  [EventType.Match, '#ff9914'],
+  [EventType.Training, '#f21b3f'],
+  [EventType.Coaching, '#08bdbd'],
+  [EventType.Gym, '#abff4f']
 ]);
 
 function toProcessedEvent(e: ScheduleEventDTO) {
@@ -45,7 +45,9 @@ const Schedule = () => {
   ): Promise<ProcessedEvent[] | void> => {
     const response = await axios.get(`api/schedules`);
 
-    return response.data.map((e: ScheduleEventDTO) => toProcessedEvent(e)) as ProcessedEvent[];
+    return response.data.map((e: ScheduleEventDTO) =>
+      toProcessedEvent(e)
+    ) as ProcessedEvent[];
   };
 
   async function createSchedule(
@@ -59,7 +61,7 @@ const Schedule = () => {
       userId: user?.id!!,
       start: event.start.toISOString(),
       end: event.end.toISOString(),
-      type: event["type"],
+      type: event['type'],
       title: event.title
     };
 
@@ -93,15 +95,27 @@ const Schedule = () => {
               getRemoteEvents={getScheduledEvents}
               fields={[
                 {
-                  name: "type",
-                  type: "select",
+                  name: 'type',
+                  type: 'select',
                   options: [
                     { id: 1, text: EventType.Match, value: EventType.Match },
-                    { id: 2, text: EventType.Training, value: EventType.Training },
-                    { id: 3, text: EventType.Coaching, value: EventType.Coaching },
+                    {
+                      id: 2,
+                      text: EventType.Training,
+                      value: EventType.Training
+                    },
+                    {
+                      id: 3,
+                      text: EventType.Coaching,
+                      value: EventType.Coaching
+                    },
                     { id: 4, text: EventType.Gym, value: EventType.Gym }
                   ],
-                  config: { label: "Event Type", required: true, errMsg: "Please, select an event type" }
+                  config: {
+                    label: 'Event Type',
+                    required: true,
+                    errMsg: 'Please, select an event type'
+                  }
                 }
               ]}
             />
