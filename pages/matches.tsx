@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useUser } from '@supabase/auth-helpers-react';
 import Router from 'next/router';
-import Menu from '@/components/Menu';
+import AppNavigation from '@/components/AppNavigation';
 import { Box, Container, Stack, Tab, Tabs } from '@mui/material';
 import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid';
 
@@ -20,8 +20,8 @@ const Matches = () => {
     return (
       <>
         <Box sx={{ display: 'flex', height: '100%' }}>
-          <Menu firstSelectedItem={1} />
-          <Container>
+          <AppNavigation firstSelectedItem={1} />
+          <Container sx={{ paddingTop: 10 }}>
             <Box
               justifyContent={'center'}
               sx={{

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useUser } from '@supabase/auth-helpers-react';
 import Router from 'next/router';
-import Menu from '@/components/Menu';
+import AppNavigation from '@/components/AppNavigation';
 
 const Opponents = () => {
   const user = useUser();
@@ -13,7 +13,7 @@ const Opponents = () => {
   }, [user]);
 
   if (user) {
-    return <Menu firstSelectedItem={4} />;
+    return <AppNavigation firstSelectedItem={4} />;
   }
 
   return <></>;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useUser } from '@supabase/auth-helpers-react';
 import Router from 'next/router';
-import Menu from '@/components/Menu';
+import AppNavigation from '@/components/AppNavigation';
 import {
   Box,
   Button,
@@ -24,14 +24,14 @@ const Dashboard = () => {
     return (
       <>
         <Box sx={{ display: 'flex', height: '100%' }}>
-          <Menu firstSelectedItem={0} />
+          <AppNavigation firstSelectedItem={0} />
           <Box
             sx={{
               display: 'flex',
               height: '100%',
-              marginTop: 5,
               justifyContent: 'space-evenly',
-              width: '100%'
+              width: '100%',
+              paddingTop: 15
             }}
           >
             <Card sx={{ minWidth: 275, height: 100 }}>

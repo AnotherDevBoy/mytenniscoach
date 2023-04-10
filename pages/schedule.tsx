@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useUser } from '@supabase/auth-helpers-react';
 import Router from 'next/router';
-import Menu from '@/components/Menu';
+import AppNavigation from '@/components/AppNavigation';
 import { Scheduler } from '@aldabil/react-scheduler';
 import { Box, Container } from '@mui/material';
 import {
@@ -84,8 +84,8 @@ const Schedule = () => {
     return (
       <>
         <Box sx={{ display: 'flex' }}>
-          <Menu firstSelectedItem={1} />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <AppNavigation firstSelectedItem={1} />
+          <Container maxWidth="lg" sx={{ paddingTop: 10 }}>
             <Scheduler
               view="month"
               onConfirm={async (event, action) =>
