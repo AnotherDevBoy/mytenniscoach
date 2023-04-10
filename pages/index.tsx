@@ -9,19 +9,17 @@ export default function Landing() {
     <>
       <Stack>
         <Image
-            alt="Under development"
-            src={BasketImage}
-            
-            style={
-              {
-                maxHeight: 800,
-                width: "auto",
-                opacity: 0.9,
-                filter: "brightness(0.6)"
-            }}
-          />
-          <h1>My Tennis Coach </h1>
-        </Stack>
+          alt="Under development"
+          src={BasketImage}
+          style={{
+            maxHeight: 800,
+            width: 'auto',
+            opacity: 0.9,
+            filter: 'brightness(0.6)'
+          }}
+        />
+        <h1>My Tennis Coach </h1>
+      </Stack>
     </>
   );
 }
