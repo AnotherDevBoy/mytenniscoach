@@ -18,7 +18,6 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import { Toolbar, IconButton, Typography, Button } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
-import { useUser } from '@/utils/useUser';
 
 const drawerWidth = 240;
 
@@ -77,18 +76,14 @@ const Drawer = styled(MuiDrawer, {
 
 const AppNavigation = (props: AppNavigationProps) => {
   const supabaseClient = useSupabaseClient();
-  const { user } = useUser();
-
-  const [open, setOpen] = React.useState(false);
-  const toggleDrawer = () => {
-    setOpen(!open);
-  };
 
   const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const [open, setOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+    console.log('Mobile Drawer toggle');
+    setOpen(!open);
   };
 
   const [selectedIndex, setSelectedIndex] = React.useState(
@@ -145,10 +140,23 @@ const AppNavigation = (props: AppNavigationProps) => {
               edge="start"
               color="inherit"
               aria-label="open drawer"
-              onClick={toggleDrawer}
+              onClick={handleDrawerToggle}
               sx={{
+                display: { xs: 'none', sm: 'block' },
                 marginRight: '36px',
                 ...(open && { display: 'none' })
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerToggle}
+              sx={{
+                display: { xs: 'block', sm: 'none' },
+                marginRight: '36px'
               }}
             >
               <MenuIcon />
@@ -173,7 +181,29 @@ const AppNavigation = (props: AppNavigationProps) => {
           sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
           aria-label="mailbox folders"
         >
-          <Drawer variant="permanent" open={open}>
+          <MuiDrawer
+            container={container}
+            variant="temporary"
+            open={open}
+            onClose={handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true // Better open performance on mobile.
+            }}
+            sx={{
+              display: { xs: 'block', sm: 'none' },
+              '& .MuiDrawer-paper': {
+                boxSizing: 'border-box',
+                width: drawerWidth
+              }
+            }}
+          >
+            {drawerContent}
+          </MuiDrawer>
+          <Drawer
+            variant="permanent"
+            open={open}
+            sx={{ display: { xs: 'none', sm: 'block' } }}
+          >
             <Toolbar
               sx={{
                 display: 'flex',
@@ -182,7 +212,7 @@ const AppNavigation = (props: AppNavigationProps) => {
                 px: [1]
               }}
             >
-              <IconButton onClick={toggleDrawer}>
+              <IconButton onClick={handleDrawerToggle}>
                 <ChevronLeftIcon />
               </IconButton>
             </Toolbar>

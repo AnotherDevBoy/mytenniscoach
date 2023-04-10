@@ -6,3 +6,6 @@ style:
 
 schema:
 	./node_modules/supabase/bin/supabase gen types typescript --project-id ${PROJECT_ID} > ./lib/database.types.ts
+
+build:
+	npm run build
