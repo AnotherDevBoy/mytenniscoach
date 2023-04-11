@@ -3,8 +3,6 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import Home from '@mui/icons-material/Home';
 import Router from 'next/router';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useUser } from '@/utils/useUser';
