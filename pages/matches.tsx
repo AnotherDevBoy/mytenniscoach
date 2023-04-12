@@ -2,15 +2,13 @@ import * as React from 'react';
 import { useUser } from '@supabase/auth-helpers-react';
 import Router from 'next/router';
 import AppNavigation from '@/components/AppNavigation';
-import { Box, Container, Stack, Tab, Tabs } from '@mui/material';
-import {
-  DataGrid,
-  GridColDef,
-  GridRowParams,
-  GridRowsProp
-} from '@mui/x-data-grid';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid';
 import Modal from '@mui/material/Modal';
-import MatchResultForm from '@/components/MatchResultForm';
+import MatchResultForm from '@/components/matchForm/MatchResultForm';
 
 const Matches = () => {
   const user = useUser();

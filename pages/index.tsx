@@ -5,6 +5,7 @@ import Router from 'next/router';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import Navbar from '@/components/Navbar';
+
 export default function Landing() {
   let resolution = 'w_1600';
 
