@@ -3,12 +3,20 @@ import { useUser } from '@supabase/auth-helpers-react';
 import Router from 'next/router';
 import AppNavigation from '@/components/AppNavigation';
 import { Box, Container, Stack, Tab, Tabs } from '@mui/material';
-import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid';
+import {
+  DataGrid,
+  GridColDef,
+  GridRowParams,
+  GridRowsProp
+} from '@mui/x-data-grid';
+import Modal from '@mui/material/Modal';
+import MatchResultForm from '@/components/MatchResultForm';
 
 const Matches = () => {
   const user = useUser();
 
-  const [value, setValue] = React.useState(0);
+  const [displayOldMatches, setDisplayOldMatches] = React.useState(true);
+  const [modalOpen, setModalOpen] = React.useState(false);
 
   React.useEffect(() => {
     if (!user) {
@@ -32,11 +40,10 @@ const Matches = () => {
               }}
             >
               <Tabs
-                value={value}
-                onChange={(event: React.SyntheticEvent, newValue: number) =>
-                  setValue(newValue)
+                value={displayOldMatches ? 0 : 1}
+                onChange={(_: React.SyntheticEvent, newValue: number) =>
+                  setDisplayOldMatches(newValue === 0)
                 }
-                aria-label="basic tabs example"
               >
                 <Tab label="Previous matches" />
                 <Tab label="Upcoming matches" />
@@ -50,7 +57,11 @@ const Matches = () => {
               columnVisibilityModel={{
                 id: false
               }}
+              onRowClick={() => setModalOpen(true)}
             />
+            <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+              <MatchResultForm />
+            </Modal>
           </Container>
         </Box>
       </>

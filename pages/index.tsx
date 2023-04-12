@@ -4,21 +4,22 @@ import { Button } from '@mui/material';
 import Router from 'next/router';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import Navbar from '@/components/Navbar';
 export default function Landing() {
-  let imageToRender = "https://res.cloudinary.com/dmbedhocm/image/upload/w_1600/v1681227237/mytenniscoach/basket.webp";
+  let resolution = 'w_1600';
 
   const theme = useTheme();
 
   if (useMediaQuery(theme.breakpoints.down('sm'))) {
-    imageToRender = "https://res.cloudinary.com/dmbedhocm/image/upload/w_600/v1681227237/mytenniscoach/basket.webp"
+    resolution = 'w_600';
   }
 
   if (useMediaQuery(theme.breakpoints.between('sm', 'md'))) {
-    imageToRender = "https://res.cloudinary.com/dmbedhocm/image/upload/w_900/v1681227237/mytenniscoach/basket.webp"
+    resolution = 'w_900';
   }
 
   if (useMediaQuery(theme.breakpoints.between('md', 'lg'))) {
-    imageToRender = "https://res.cloudinary.com/dmbedhocm/image/upload/w_1200/v1681227237/mytenniscoach/basket.webp"
+    resolution = 'w_1200';
   }
 
   return (
@@ -26,20 +27,36 @@ export default function Landing() {
       <Grid
         container
         sx={{
-          backgroundImage: `url('${imageToRender}')`,
+          backgroundImage: `url('https://res.cloudinary.com/dmbedhocm/image/upload/${resolution}/v1681227237/mytenniscoach/basket.webp')`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
           height: '800px',
           width: '100%'
         }}
       >
-        <Grid xs={1} sx={{ height: '100%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Grid xs={1} sx={{ width: '100%' }}>
+          <Navbar />
+        </Grid>
+        <Grid
+          xs={1}
+          sx={{
+            height: '100%',
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
           <Grid container spacing={2}>
             <Grid xs={6}>
-            <Button variant="contained" onClick={() => Router.push('signin')}>Join as a Player</Button>
+              <Button variant="contained" onClick={() => Router.push('signin')}>
+                Join as a Player
+              </Button>
             </Grid>
             <Grid xs={6}>
-            <Button variant="contained" disabled>Join as a Coach</Button>
+              <Button variant="contained" disabled>
+                Join as a Coach
+              </Button>
             </Grid>
           </Grid>
         </Grid>
