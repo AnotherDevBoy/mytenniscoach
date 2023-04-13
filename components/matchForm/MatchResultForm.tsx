@@ -36,7 +36,11 @@ const style = {
   borderRadius: '10px'
 };
 
-const MatchResultForm = ({onFormCompleted}) => {
+interface MatchResultFormProps {
+  onFormCompleted: (data: any) => void;
+}
+
+const MatchResultForm = (props: MatchResultFormProps) => {
   const [formSection, setFormSection] = useState(0);
 
   function buildNavigation(): JSX.Element[] {
@@ -76,8 +80,7 @@ const MatchResultForm = ({onFormCompleted}) => {
             }
 
             console.log(data);
-            onFormCompleted(data);
-            // TODO: let parent know that form was submitted
+            props.onFormCompleted(data);
           })}
         >
           <Breadcrumbs separator="›">{buildNavigation()}</Breadcrumbs>
