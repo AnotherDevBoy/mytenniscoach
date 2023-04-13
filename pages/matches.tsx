@@ -58,7 +58,7 @@ const Matches = () => {
               onRowClick={() => setModalOpen(true)}
             />
             <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-              <MatchResultForm />
+              <MatchResultForm onFormCompleted={() => setModalOpen(false)} />
             </Modal>
           </Container>
         </Box>

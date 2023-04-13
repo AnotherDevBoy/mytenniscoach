@@ -36,7 +36,7 @@ const style = {
   borderRadius: '10px'
 };
 
-const MatchResultForm = () => {
+const MatchResultForm = ({onFormCompleted}) => {
   const [formSection, setFormSection] = useState(0);
 
   function buildNavigation(): JSX.Element[] {
@@ -76,6 +76,7 @@ const MatchResultForm = () => {
             }
 
             console.log(data);
+            onFormCompleted(data);
             // TODO: let parent know that form was submitted
           })}
         >
