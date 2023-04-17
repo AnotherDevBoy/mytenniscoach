@@ -82,7 +82,6 @@ const AppNavigation = (props: AppNavigationProps) => {
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
-    console.log('Mobile Drawer toggle');
     setOpen(!open);
   };
 

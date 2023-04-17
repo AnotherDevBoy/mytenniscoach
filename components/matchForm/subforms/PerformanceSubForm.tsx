@@ -50,7 +50,13 @@ const SummarySubForm = () => {
           />
         </Grid>
         <Grid xs={6}>
-          <SliderElement marks max={4} min={0} name="mental" label="Mental" />
+          <SliderElement
+            marks
+            max={4}
+            min={0}
+            name="mental"
+            label="Mental"
+          />
         </Grid>
         <Grid xs={6}>
           <TextareaAutosizeElement

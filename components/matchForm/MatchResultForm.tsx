@@ -5,18 +5,6 @@ import Stack from '@mui/material/Stack';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import {
-  AutocompleteElement,
-  RadioButtonGroup,
-  SliderElement,
-  TextFieldElement
-} from 'react-hook-form-mui';
-import Grid from '@mui/material/Unstable_Grid2';
-import Divider from '@mui/material/Divider';
-import WbSunnyIcon from '@mui/icons-material/WbSunny';
-import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
-import AirIcon from '@mui/icons-material/Air';
-import TornadoIcon from '@mui/icons-material/Tornado';
 import SummarySubForm from './subforms/SummarySubForm';
 import React from 'react';
 import OpponentSubForm from './subforms/OpponentSubForm';
@@ -40,7 +28,7 @@ interface MatchResultFormProps {
   onFormCompleted: (data: any) => void;
 }
 
-const MatchResultForm = (props: MatchResultFormProps) => {
+const MatchResultForm = (props: MatchResultFormProps, ref: any) => {
   const [formSection, setFormSection] = useState(0);
 
   function buildNavigation(): JSX.Element[] {
@@ -62,7 +50,11 @@ const MatchResultForm = (props: MatchResultFormProps) => {
     defaultValues: {
       rainLevel: 0,
       windLevel: 0,
-      courtSpeed: 0
+      courtSpeed: 0,
+      technical: 0,
+      tactical: 0,
+      physical: 0,
+      mental: 0
     }
   });
 
@@ -79,7 +71,6 @@ const MatchResultForm = (props: MatchResultFormProps) => {
               return;
             }
 
-            console.log(data);
             props.onFormCompleted(data);
           })}
         >

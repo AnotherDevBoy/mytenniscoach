@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import Configuration from '@/pages/api/lib/configuration';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 export const getUser = (
   cookies: Partial<{
@@ -14,4 +15,12 @@ export const getUser = (
   const authToken = JSON.parse(decodeURI(encodedAuthToken));
   var decodedToken = jwt.verify(authToken[0], Configuration.jwtSecret);
   return decodedToken.sub as string;
+};
+
+export const authHandler = (req: NextApiRequest, res: NextApiResponse) => {
+  const user = getUser(req.cookies);
+
+  if (!user) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
 };

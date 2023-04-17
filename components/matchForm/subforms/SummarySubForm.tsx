@@ -45,7 +45,12 @@ const SummarySubForm = () => {
           <WbSunnyIcon />
         </Grid>
         <Grid xs={4}>
-          <SliderElement marks max={4} min={0} name="rainLevel" />
+          <SliderElement
+            marks
+            max={4}
+            min={0}
+            name="rainLevel"
+          />
         </Grid>
         <Grid xs={1}>
           <ThunderstormIcon />
@@ -54,7 +59,12 @@ const SummarySubForm = () => {
           <AirIcon />
         </Grid>
         <Grid xs={4}>
-          <SliderElement marks max={4} min={0} name="windLevel" />
+          <SliderElement
+            marks
+            max={4}
+            min={0}
+            name="windLevel"
+          />
         </Grid>
         <Grid xs={1}>
           <TornadoIcon />
@@ -90,7 +100,12 @@ const SummarySubForm = () => {
         </Grid>
         <Grid xs={1}>🐢</Grid>
         <Grid xs={4}>
-          <SliderElement marks max={4} min={0} name="courtSpeed" />
+          <SliderElement
+            marks
+            max={4}
+            min={0}
+            name="courtSpeed"
+          />
         </Grid>
         <Grid xs={1}>🚀</Grid>
         <Grid xs={12}>

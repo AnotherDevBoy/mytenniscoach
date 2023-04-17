@@ -25,6 +25,14 @@ export type ScheduleEventDAL = {
   deleted_at: string | undefined;
 };
 
+export type OpponentDAL = {
+  id: string;
+  userId: string;
+  name: string;
+  created_at: string | undefined;
+  deleted_at: string | undefined;
+};
+
 export class MyTennisCoachRepository {
   private supabase: SupabaseClient<Database>;
 
@@ -63,6 +71,33 @@ export class MyTennisCoachRepository {
       .from('Schedules')
       .update({ deleted_at: formatRFC3339(new Date()) })
       .eq('id', scheduleId);
+
+    this.handleError(response);
+  }
+
+  async getOpponents(userId: string): Promise<OpponentDAL[]> {
+    const response = await this.supabase
+      .from('Opponents')
+      .select()
+      .eq('userId', userId)
+      .is('deleted_at', null);
+
+    this.handleError(response);
+
+    return response.data as OpponentDAL[];
+  }
+
+  async createOpponent(opponent: OpponentDAL) {
+    const response = await this.supabase.from('Opponents').insert(opponent);
+
+    this.handleError(response);
+  }
+
+  async deleteOpponent(opponentId: string) {
+    const response = await this.supabase
+      .from('Opponents')
+      .update({ deleted_at: formatRFC3339(new Date()) })
+      .eq('id', opponentId);
 
     this.handleError(response);
   }
