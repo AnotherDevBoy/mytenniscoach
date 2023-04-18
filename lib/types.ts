@@ -11,6 +11,7 @@ export type ScheduleEventDTO = {
   end: string;
   type: EventType;
   title: string;
+  opponent?: string;
 };
 
 export type OpponentDTO = {

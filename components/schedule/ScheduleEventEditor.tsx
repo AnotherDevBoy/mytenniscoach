@@ -47,11 +47,11 @@ interface OpponentDTO {
 
 const filter = createFilterOptions<SelectedOpponent>();
 
-interface EventEditorProps {
+interface ScheduleEventEditorProps {
   scheduler: SchedulerHelpers;
 }
 
-const EventEditor = ({ scheduler }: EventEditorProps) => {
+const ScheduleEventEditor = ({ scheduler }: ScheduleEventEditorProps) => {
   const event = scheduler.edited;
 
   const formContext = useForm<any>({
@@ -235,4 +235,4 @@ const EventEditor = ({ scheduler }: EventEditorProps) => {
   );
 };
 
-export default EventEditor;
+export default ScheduleEventEditor;

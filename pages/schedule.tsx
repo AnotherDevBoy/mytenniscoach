@@ -7,7 +7,7 @@ import { Box, Container } from '@mui/material';
 import { ProcessedEvent, ViewEvent } from '@aldabil/react-scheduler/types';
 
 import { ScheduleEventDTO } from '@/lib/types';
-import EventEditor from '@/components/schedule/EventEditor';
+import ScheduleEventEditor from '@/components/schedule/ScheduleEventEditor';
 import { toProcessedEvent } from '@/lib/convert';
 import { getScheduleEvents, deleteScheduleEvent } from '@/lib/api';
 
@@ -46,7 +46,7 @@ const Schedule = () => {
               onDelete={deleteScheduledEvent}
               getRemoteEvents={getScheduledEvents}
               customEditor={(scheduler) => (
-                <EventEditor scheduler={scheduler} />
+                <ScheduleEventEditor scheduler={scheduler} />
               )}
             />
           </Container>

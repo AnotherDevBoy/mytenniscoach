@@ -29,7 +29,9 @@ export default async function handler(
     case 'PUT':
       const eventToUpdate = req.body as ScheduleEventDTO;
 
-      await repository.upsertScheduleEvent(toScheduleEventDAL(eventToUpdate));
+      await repository.upsertScheduleEvent(
+        toScheduleEventDAL(eventToUpdate, user)
+      );
       return res.status(200).end();
     case 'DELETE':
       await repository.deleteScheduleEvent(scheduleId);

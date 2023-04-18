@@ -6,7 +6,6 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { DataGrid } from '@mui/x-data-grid/DataGrid';
 import { GridColDef } from '@mui/x-data-grid/models';
-import { get } from 'http';
 import { getOpponents } from '@/lib/api';
 
 const columns: GridColDef[] = [
