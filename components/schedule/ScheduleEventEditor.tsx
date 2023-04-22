@@ -5,19 +5,22 @@ import {
   DialogTitle,
   createFilterOptions
 } from '@mui/material';
-import type { SchedulerHelpers } from '@aldabil/react-scheduler/types';
+import type {
+  ProcessedEvent,
+  SchedulerHelpers
+} from '@aldabil/react-scheduler/types';
 import { toProcessedEvent } from '@/lib/convert';
 import {
-  ScheduleEventDTO,
+  EventDTO,
   getEventTypeFromIndex,
   getEventTypeIndex
 } from '@/lib/types';
 import { v4 as uuidv4 } from 'uuid';
 import {
   createOpponent,
-  createScheduleEvent,
+  createEvent,
   getOpponents,
-  updateScheduleEvent
+  updateEvent
 } from '@/lib/api';
 import Grid from '@mui/material/Unstable_Grid2';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -27,13 +30,11 @@ import {
   DateTimePickerElement,
   FormContainer,
   SelectElement,
-  TextFieldElement,
   useForm,
   useWatch
 } from 'react-hook-form-mui';
 import { EventType } from '@/lib/types';
 import React from 'react';
-
 interface SelectedOpponent {
   inputValue?: string;
   title: string;
@@ -52,34 +53,49 @@ interface ScheduleEventEditorProps {
 }
 
 const ScheduleEventEditor = ({ scheduler }: ScheduleEventEditorProps) => {
-  const event = scheduler.edited;
+  const event: ProcessedEvent | undefined = scheduler.edited;
+
+  const [opponents, setOpponents] = useState<OpponentDTO[]>([]);
+
+  const defaultOpponent = {
+    id: event?.opponent,
+    title: '',
+    inputValue: ''
+  };
+
+  const [selectedOpponent, setSelectedOpponent] =
+    React.useState<SelectedOpponent>(defaultOpponent);
 
   const formContext = useForm<any>({
     defaultValues: {
-      title: event?.title || '',
       type: getEventTypeIndex(event?.type || EventType.Match),
       start: event?.start || scheduler.state.start.value,
       end: event?.end || scheduler.state.end.value,
-      opponent: event?.opponent?.name || ''
+      opponent: ''
     }
   });
 
-  const { handleSubmit, control } = formContext;
+  const { handleSubmit, control, setValue } = formContext;
 
-  const [selectedOpponent, setSelectedOpponent] =
-    React.useState<SelectedOpponent | null>(null);
-  const [opponents, setOpponents] = useState<OpponentDTO[]>([]);
+  useEffect(() => {
+    getOpponents().then((receivedOpponents) => {
+      setOpponents(receivedOpponents);
+      const opponentName =
+        receivedOpponents.find((o) => o.id === event?.opponent)?.name || '';
+      const newSelectedOpponent = {
+        id: event?.opponent,
+        title: opponentName,
+        inputValue: opponentName
+      };
+      setSelectedOpponent(newSelectedOpponent);
+      setValue('opponent', selectedOpponent);
+    });
+  }, []);
 
   const [type] = useWatch({
     control: control,
     name: ['type']
   });
-
-  useEffect(() => {
-    if (type === 0) {
-      getOpponents().then((opponents) => setOpponents(opponents));
-    }
-  }, [type]);
 
   return (
     <FormContainer
@@ -94,21 +110,22 @@ const ScheduleEventEditor = ({ scheduler }: ScheduleEventEditorProps) => {
             getEventTypeFromIndex(data.type) === EventType.Match &&
             !opponentId
           ) {
-            const opponent = createOpponent(data.opponent.inputValue);
+            const opponent = await createOpponent(data.opponent.inputValue);
+            opponentId = opponent.id;
           }
 
-          // TODO: If Match ID to schedule event
-          const scheduleEvent: ScheduleEventDTO = {
+          const scheduleEvent: EventDTO = {
             id: String(event ? event.event_id : uuidv4()),
             start: data.start.toISOString(),
             end: data.end.toISOString(),
             type: Object.values(EventType)[data.type],
-            title: data.title
+            opponentId: opponentId
           };
 
-          const response = event
-            ? await updateScheduleEvent(scheduleEvent)
-            : await createScheduleEvent(scheduleEvent);
+          const response =
+            event != undefined
+              ? await updateEvent(scheduleEvent)
+              : await createEvent(scheduleEvent);
 
           const added_updated_event = toProcessedEvent(scheduleEvent);
 
@@ -121,12 +138,6 @@ const ScheduleEventEditor = ({ scheduler }: ScheduleEventEditorProps) => {
     >
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <Grid container spacing={2} margin={2}>
-          <Grid xs={12}>
-            <DialogTitle>Add Event</DialogTitle>
-          </Grid>
-          <Grid xs={12}>
-            <TextFieldElement label="Title" name="title" fullWidth required />
-          </Grid>
           <Grid xs={6}>
             <DateTimePickerElement
               label="Start"
@@ -157,8 +168,8 @@ const ScheduleEventEditor = ({ scheduler }: ScheduleEventEditorProps) => {
           <Grid xs={12}>
             {type === 0 ? (
               <AutocompleteElement
-                label="Opponent"
                 name="opponent"
+                label="Opponent"
                 options={opponents.map((o: OpponentDTO) => {
                   return { id: o.id, title: o.name };
                 })}
@@ -182,7 +193,6 @@ const ScheduleEventEditor = ({ scheduler }: ScheduleEventEditorProps) => {
 
                     return filtered;
                   },
-                  value: selectedOpponent,
                   onChange: (_, newValue) => {
                     if (typeof newValue === 'string') {
                       setSelectedOpponent({
@@ -201,15 +211,19 @@ const ScheduleEventEditor = ({ scheduler }: ScheduleEventEditorProps) => {
                       return option;
                     }
 
+                    if (option.id) {
+                      return opponents.find((o) => o.id === option.id)?.name;
+                    }
+
                     if (option.inputValue) {
                       return option.inputValue;
                     }
 
                     return option.title;
                   },
-                  renderOption: (props, option) => (
-                    <li {...props}>{option.title}</li>
-                  ),
+                  renderOption: (props, option) => {
+                    return <li {...props}>{option.title}</li>;
+                  },
                   selectOnFocus: true,
                   clearOnBlur: true,
                   handleHomeEndKeys: true

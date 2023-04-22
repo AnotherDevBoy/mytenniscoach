@@ -6,10 +6,10 @@ import { Scheduler } from '@aldabil/react-scheduler';
 import { Box, Container } from '@mui/material';
 import { ProcessedEvent, ViewEvent } from '@aldabil/react-scheduler/types';
 
-import { ScheduleEventDTO } from '@/lib/types';
+import { EventDTO } from '@/lib/types';
 import ScheduleEventEditor from '@/components/schedule/ScheduleEventEditor';
 import { toProcessedEvent } from '@/lib/convert';
-import { getScheduleEvents, deleteScheduleEvent } from '@/lib/api';
+import { getEvents, deleteEvent } from '@/lib/api';
 
 const Schedule = () => {
   const user = useUser();
@@ -23,15 +23,13 @@ const Schedule = () => {
   const getScheduledEvents = async (
     _: ViewEvent
   ): Promise<ProcessedEvent[] | void> => {
-    return (await getScheduleEvents()).map((e: ScheduleEventDTO) =>
+    return (await getEvents()).map((e: EventDTO) =>
       toProcessedEvent(e)
     ) as ProcessedEvent[];
   };
 
-  async function deleteScheduledEvent(
-    id: string | number
-  ): Promise<string | number> {
-    await deleteScheduleEvent(id as string);
+  async function onDeleteEvent(id: string | number): Promise<string | number> {
+    await deleteEvent(id as string);
     return id;
   }
 
@@ -43,7 +41,7 @@ const Schedule = () => {
           <Container maxWidth="lg" sx={{ paddingTop: 10 }}>
             <Scheduler
               view="month"
-              onDelete={deleteScheduledEvent}
+              onDelete={onDeleteEvent}
               getRemoteEvents={getScheduledEvents}
               customEditor={(scheduler) => (
                 <ScheduleEventEditor scheduler={scheduler} />

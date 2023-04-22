@@ -1,5 +1,5 @@
 import { ProcessedEvent } from '@aldabil/react-scheduler/types';
-import { EventType, ScheduleEventDTO } from './types';
+import { EventType, EventDTO } from './types';
 
 const colorsPerEventType = new Map<EventType, string>([
   [EventType.Match, '#ff9914'],
@@ -8,13 +8,14 @@ const colorsPerEventType = new Map<EventType, string>([
   [EventType.Gym, '#abff4f']
 ]);
 
-export function toProcessedEvent(e: ScheduleEventDTO) {
+export function toProcessedEvent(e: EventDTO) {
   return {
     event_id: e.id,
-    title: e.title,
+    title: '',
     start: new Date(e.start),
     end: new Date(e.end),
     type: e.type,
-    color: colorsPerEventType.get(e.type)
+    color: colorsPerEventType.get(e.type),
+    opponent: e.opponentId
   } as ProcessedEvent;
 }

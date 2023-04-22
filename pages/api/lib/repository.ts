@@ -14,23 +14,24 @@ export enum EventTypeDAL {
   Gym = 3
 }
 
-export type ScheduleEventDAL = {
+export type EventDAL = {
   id: string;
-  userId: string;
+  user_id: string;
+  opponent_id?: string;
+  created_at?: string;
+  deleted_at?: string;
   start: string;
   end: string;
   type: EventTypeDAL;
-  title: string;
-  created_at: string | undefined;
-  deleted_at: string | undefined;
+  metadata?: string;
 };
 
 export type OpponentDAL = {
   id: string;
   userId: string;
   name: string;
-  created_at: string | undefined;
-  deleted_at: string | undefined;
+  created_at?: string;
+  deleted_at?: string;
 };
 
 export class MyTennisCoachRepository {
@@ -43,43 +44,43 @@ export class MyTennisCoachRepository {
     );
   }
 
-  async getSchedules(userId: string): Promise<ScheduleEventDAL[]> {
+  async getEvents(userId: string): Promise<EventDAL[]> {
     const response = await this.supabase
-      .from('Schedules')
+      .from('Event')
       .select()
-      .eq('userId', userId)
+      .eq('user_id', userId)
       .is('deleted_at', null);
 
     this.handleError(response);
 
-    return response.data as ScheduleEventDAL[];
+    return response.data as EventDAL[];
   }
 
-  async createSchedule(schedule: ScheduleEventDAL) {
-    const response = await this.supabase.from('Schedules').insert(schedule);
+  async createEvent(event: EventDAL) {
+    const response = await this.supabase.from('Event').insert(event);
 
     this.handleError(response);
   }
 
-  async upsertScheduleEvent(schedule: ScheduleEventDAL) {
-    const response = await this.supabase.from('Schedules').upsert(schedule);
+  async updateEvent(event: EventDAL) {
+    const response = await this.supabase.from('Event').upsert(event);
     this.handleError(response);
   }
 
-  async deleteScheduleEvent(scheduleId: string) {
+  async deleteEvent(eventId: string) {
     const response = await this.supabase
-      .from('Schedules')
+      .from('Event')
       .update({ deleted_at: formatRFC3339(new Date()) })
-      .eq('id', scheduleId);
+      .eq('id', eventId);
 
     this.handleError(response);
   }
 
   async getOpponents(userId: string): Promise<OpponentDAL[]> {
     const response = await this.supabase
-      .from('Opponents')
+      .from('Opponent')
       .select()
-      .eq('userId', userId)
+      .eq('user_id', userId)
       .is('deleted_at', null);
 
     this.handleError(response);
@@ -88,14 +89,14 @@ export class MyTennisCoachRepository {
   }
 
   async createOpponent(opponent: OpponentDAL) {
-    const response = await this.supabase.from('Opponents').insert(opponent);
+    const response = await this.supabase.from('Opponent').insert(opponent);
 
     this.handleError(response);
   }
 
   async deleteOpponent(opponentId: string) {
     const response = await this.supabase
-      .from('Opponents')
+      .from('Opponent')
       .update({ deleted_at: formatRFC3339(new Date()) })
       .eq('id', opponentId);
 

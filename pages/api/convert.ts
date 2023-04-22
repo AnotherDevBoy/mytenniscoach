@@ -1,8 +1,8 @@
-import { EventType, OpponentDTO, ScheduleEventDTO } from '@/lib/types';
+import { EventType, OpponentDTO, EventDTO } from '@/lib/types';
 import {
   EventTypeDAL,
   OpponentDAL,
-  ScheduleEventDAL
+  EventDAL
 } from '@/pages/api/lib/repository';
 
 import { v4 as uuidv4 } from 'uuid';
@@ -37,45 +37,41 @@ export function toEventType(eventType: EventTypeDAL) {
   }
 }
 
-export function toScheduleEventDAL(
-  event: ScheduleEventDTO,
-  userId: string
-): ScheduleEventDAL {
+export function toEventDAL(event: EventDTO, userId: string): EventDAL {
   return {
     id: uuidv4(),
-    userId: userId,
-    title: event.title,
+    user_id: userId,
+    opponent_id: event.opponentId,
     start: event.start,
     end: event.end,
-    type: toEventTypeDAL(event.type),
-    created_at: undefined,
-    deleted_at: undefined
+    type: toEventTypeDAL(event.type)
   };
 }
 
-export function toScheduleEvent(event: ScheduleEventDAL): ScheduleEventDTO {
+export function toEventDTO(event: EventDAL): EventDTO {
   return {
     id: event.id,
-    title: event.title,
     start: event.start,
     end: event.end,
-    type: toEventType(event.type)
+    type: toEventType(event.type),
+    opponentId: event.opponent_id
   };
 }
 
-export function toOpponent(opponentDAL: OpponentDAL) {
+export function toOpponentDTO(opponentDAL: OpponentDAL): OpponentDTO {
   return {
     id: opponentDAL.id,
     name: opponentDAL.name
   };
 }
 
-export function toOpponentDAL(opponentDTO: OpponentDTO, userId: string) {
+export function toOpponentDAL(
+  opponentDTO: OpponentDTO,
+  userId: string
+): OpponentDAL {
   return {
     id: uuidv4(),
     userId: userId,
-    name: opponentDTO.name,
-    created_at: undefined,
-    deleted_at: undefined
+    name: opponentDTO.name
   };
 }

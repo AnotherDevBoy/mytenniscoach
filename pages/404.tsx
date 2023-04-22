@@ -32,10 +32,11 @@ const Page = () => (
             <Image
               alt="Under development"
               src="/assets/errors/error-404.png"
+              width={400}
+              height={400}
               style={{
                 display: 'inline-block',
-                maxWidth: '100%',
-                width: 400
+                maxWidth: '100%'
               }}
             />
           </Box>

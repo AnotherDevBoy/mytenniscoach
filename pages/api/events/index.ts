@@ -1,11 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { MyTennisCoachRepository } from '@/pages/api/lib/repository';
-import {
-  toScheduleEvent,
-  toScheduleEventDAL
-} from '@/pages/api/schedules/convert';
+import { toEventDTO, toEventDAL } from '@/pages/api/convert';
 import { getUser, authHandler } from '@/pages/api/lib/auth';
-import { ScheduleEventDTO } from '@/lib/types';
+import { EventDTO } from '@/lib/types';
 
 const repository = new MyTennisCoachRepository();
 
@@ -18,14 +15,14 @@ export default async function handler(
 
   switch (req.method) {
     case 'GET':
-      const scheduleDAL = await repository.getSchedules(user);
-      const schedule = scheduleDAL.map((e: any) => toScheduleEvent(e));
+      const eventsDAL = await repository.getEvents(user);
+      const eventsDTO = eventsDAL.map((e: any) => toEventDTO(e));
 
-      return res.status(200).json(schedule);
+      return res.status(200).json(eventsDTO);
     case 'POST':
-      const event = req.body as ScheduleEventDTO;
+      const event = req.body as EventDTO;
 
-      await repository.createSchedule(toScheduleEventDAL(event, user));
+      await repository.createEvent(toEventDAL(event, user));
       return res.status(201).end();
     default:
       return res.status(404).json({ message: 'Not found' });

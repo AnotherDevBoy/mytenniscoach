@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { MyTennisCoachRepository } from '@/pages/api/lib/repository';
-import { toOpponent, toOpponentDAL } from '@/pages/api/schedules/convert';
+import { toOpponentDTO, toOpponentDAL } from '@/pages/api/convert';
 import { getUser, authHandler } from '@/pages/api/lib/auth';
 import { OpponentDTO } from '@/lib/types';
 
@@ -16,7 +16,7 @@ export default async function handler(
   switch (req.method) {
     case 'GET':
       const opponentsDAL = await repository.getOpponents(user);
-      const opponentsDTO = opponentsDAL.map((e: any) => toOpponent(e));
+      const opponentsDTO = opponentsDAL.map((e: any) => toOpponentDTO(e));
 
       return res.status(200).json(opponentsDTO);
     case 'POST':

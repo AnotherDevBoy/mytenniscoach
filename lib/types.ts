@@ -5,13 +5,12 @@ export enum EventType {
   Gym = 'Gym'
 }
 
-export type ScheduleEventDTO = {
+export type EventDTO = {
   id: string;
   start: string;
   end: string;
   type: EventType;
-  title: string;
-  opponent?: string;
+  opponentId?: string;
 };
 
 export type OpponentDTO = {

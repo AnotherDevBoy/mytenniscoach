@@ -1,28 +1,22 @@
 import axios, { AxiosResponse } from 'axios';
-import { OpponentDTO, ScheduleEventDTO } from './types';
+import { OpponentDTO, EventDTO } from './types';
 
-export async function getScheduleEvents(): Promise<ScheduleEventDTO[]> {
-  const response = await axios.get(`api/schedules`);
+export async function getEvents(): Promise<EventDTO[]> {
+  const response = await axios.get(`api/events`);
 
   return response.data;
 }
 
-export async function createScheduleEvent(
-  event: ScheduleEventDTO
-): Promise<AxiosResponse> {
-  return await axios.post(`api/schedules`, event);
+export async function createEvent(event: EventDTO): Promise<AxiosResponse> {
+  return await axios.post(`api/events`, event);
 }
 
-export async function updateScheduleEvent(
-  event: ScheduleEventDTO
-): Promise<AxiosResponse> {
-  return await axios.put(`api/schedules/${event.id}`, event);
+export async function updateEvent(event: EventDTO): Promise<AxiosResponse> {
+  return await axios.put(`api/events/${event.id}`, event);
 }
 
-export async function deleteScheduleEvent(
-  eventId: string
-): Promise<AxiosResponse> {
-  return await axios.delete(`api/schedules/${eventId}`);
+export async function deleteEvent(eventId: string): Promise<AxiosResponse> {
+  return await axios.delete(`api/events/${eventId}`);
 }
 
 export async function createOpponent(name: string): Promise<OpponentDTO> {
