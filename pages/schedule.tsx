@@ -3,15 +3,28 @@ import { useUser } from '@supabase/auth-helpers-react';
 import Router from 'next/router';
 import AppNavigation from '@/components/AppNavigation';
 import { Scheduler } from '@aldabil/react-scheduler';
-import { Box, Container } from '@mui/material';
+import { Box, CircularProgress, Container } from '@mui/material';
 import { ProcessedEvent, ViewEvent } from '@aldabil/react-scheduler/types';
 
-import { EventDTO } from '@/lib/types';
+import { EventDTO, OpponentDTO } from '@/lib/types';
 import ScheduleEventEditor from '@/components/schedule/ScheduleEventEditor';
 import { toProcessedEvent } from '@/lib/convert';
-import { getEvents, deleteEvent } from '@/lib/api';
+import { getEvents, deleteEvent, getOpponents } from '@/lib/api';
 
 const Schedule = () => {
+  const [loading, setLoading] = React.useState(true);
+  const [opponents, setOpponents] = React.useState<OpponentDTO[]>([]);
+
+  const refreshOpponents = async (): Promise<void> => {
+    const receivedOpponents = await getOpponents();
+    setOpponents(receivedOpponents);
+    setLoading(false);
+  };
+
+  React.useEffect(() => {
+    refreshOpponents();
+  }, []);
+
   const user = useUser();
 
   React.useEffect(() => {
@@ -24,7 +37,7 @@ const Schedule = () => {
     _: ViewEvent
   ): Promise<ProcessedEvent[] | void> => {
     return (await getEvents()).map((e: EventDTO) =>
-      toProcessedEvent(e)
+      toProcessedEvent(e, opponents)
     ) as ProcessedEvent[];
   };
 
@@ -39,14 +52,25 @@ const Schedule = () => {
         <Box sx={{ display: 'flex' }}>
           <AppNavigation firstSelectedItem={1} />
           <Container maxWidth="lg" sx={{ paddingTop: 10 }}>
-            <Scheduler
-              view="month"
-              onDelete={onDeleteEvent}
-              getRemoteEvents={getScheduledEvents}
-              customEditor={(scheduler) => (
-                <ScheduleEventEditor scheduler={scheduler} />
-              )}
-            />
+            {loading ? (
+              <CircularProgress />
+            ) : (
+              <Scheduler
+                view="month"
+                onDelete={onDeleteEvent}
+                getRemoteEvents={getScheduledEvents}
+                customEditor={(scheduler) => (
+                  <ScheduleEventEditor
+                    scheduler={scheduler}
+                    opponents={opponents}
+                    onComplete={async () => {
+                      setLoading(true);
+                      await refreshOpponents();
+                    }}
+                  />
+                )}
+              />
+            )}
           </Container>
         </Box>
       </>

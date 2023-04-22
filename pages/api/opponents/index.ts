@@ -22,8 +22,9 @@ export default async function handler(
     case 'POST':
       const opponentDTO = req.body as OpponentDTO;
 
-      await repository.createOpponent(toOpponentDAL(opponentDTO, user));
-      return res.status(201).end();
+      const opponentDAL = toOpponentDAL(opponentDTO, user);
+      await repository.createOpponent(opponentDAL);
+      return res.status(201).json(toOpponentDTO(opponentDAL));
     default:
       return res.status(404).json({ message: 'Not found' });
   }

@@ -1,5 +1,5 @@
 import { ProcessedEvent } from '@aldabil/react-scheduler/types';
-import { EventType, EventDTO } from './types';
+import { EventType, EventDTO, OpponentDTO } from './types';
 
 const colorsPerEventType = new Map<EventType, string>([
   [EventType.Match, '#ff9914'],
@@ -8,14 +8,24 @@ const colorsPerEventType = new Map<EventType, string>([
   [EventType.Gym, '#abff4f']
 ]);
 
-export function toProcessedEvent(e: EventDTO) {
+function generateTitle(e: EventDTO, opponents: OpponentDTO[]) {
+  if (e.type === EventType.Match && opponents) {
+    const opponentName =
+      opponents.find((o) => o.id === e.opponentId)?.name || '';
+    return `${e.type} with ${opponentName}`;
+  }
+
+  return `${e.type}`;
+}
+
+export function toProcessedEvent(e: EventDTO, opponents: OpponentDTO[]) {
   return {
     event_id: e.id,
-    title: '',
     start: new Date(e.start),
     end: new Date(e.end),
     type: e.type,
     color: colorsPerEventType.get(e.type),
-    opponent: e.opponentId
+    opponent: e.opponentId,
+    title: generateTitle(e, opponents)
   } as ProcessedEvent;
 }

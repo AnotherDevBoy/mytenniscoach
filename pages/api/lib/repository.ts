@@ -28,7 +28,7 @@ export type EventDAL = {
 
 export type OpponentDAL = {
   id: string;
-  userId: string;
+  user_id: string;
   name: string;
   created_at?: string;
   deleted_at?: string;

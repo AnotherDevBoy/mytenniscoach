@@ -16,12 +16,7 @@ import {
   getEventTypeIndex
 } from '@/lib/types';
 import { v4 as uuidv4 } from 'uuid';
-import {
-  createOpponent,
-  createEvent,
-  getOpponents,
-  updateEvent
-} from '@/lib/api';
+import { createOpponent, createEvent, updateEvent } from '@/lib/api';
 import Grid from '@mui/material/Unstable_Grid2';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -50,47 +45,36 @@ const filter = createFilterOptions<SelectedOpponent>();
 
 interface ScheduleEventEditorProps {
   scheduler: SchedulerHelpers;
+  opponents: OpponentDTO[];
+  onComplete: Function;
 }
 
-const ScheduleEventEditor = ({ scheduler }: ScheduleEventEditorProps) => {
+const ScheduleEventEditor = ({
+  scheduler,
+  opponents,
+  onComplete
+}: ScheduleEventEditorProps) => {
   const event: ProcessedEvent | undefined = scheduler.edited;
 
-  const [opponents, setOpponents] = useState<OpponentDTO[]>([]);
+  const opponentName =
+    opponents.find((o) => o.id === event?.opponent)?.name || '';
 
   const defaultOpponent = {
     id: event?.opponent,
-    title: '',
-    inputValue: ''
+    title: opponentName,
+    inputValue: opponentName
   };
-
-  const [selectedOpponent, setSelectedOpponent] =
-    React.useState<SelectedOpponent>(defaultOpponent);
 
   const formContext = useForm<any>({
     defaultValues: {
       type: getEventTypeIndex(event?.type || EventType.Match),
       start: event?.start || scheduler.state.start.value,
       end: event?.end || scheduler.state.end.value,
-      opponent: ''
+      opponent: defaultOpponent
     }
   });
 
-  const { handleSubmit, control, setValue } = formContext;
-
-  useEffect(() => {
-    getOpponents().then((receivedOpponents) => {
-      setOpponents(receivedOpponents);
-      const opponentName =
-        receivedOpponents.find((o) => o.id === event?.opponent)?.name || '';
-      const newSelectedOpponent = {
-        id: event?.opponent,
-        title: opponentName,
-        inputValue: opponentName
-      };
-      setSelectedOpponent(newSelectedOpponent);
-      setValue('opponent', selectedOpponent);
-    });
-  }, []);
+  const { handleSubmit, control } = formContext;
 
   const [type] = useWatch({
     control: control,
@@ -127,9 +111,13 @@ const ScheduleEventEditor = ({ scheduler }: ScheduleEventEditorProps) => {
               ? await updateEvent(scheduleEvent)
               : await createEvent(scheduleEvent);
 
-          const added_updated_event = toProcessedEvent(scheduleEvent);
+          const added_updated_event = toProcessedEvent(
+            scheduleEvent,
+            opponents
+          );
 
           scheduler.onConfirm(added_updated_event, event ? 'edit' : 'create');
+          onComplete();
           scheduler.close();
         } finally {
           scheduler.loading(false);
@@ -192,19 +180,6 @@ const ScheduleEventEditor = ({ scheduler }: ScheduleEventEditorProps) => {
                     }
 
                     return filtered;
-                  },
-                  onChange: (_, newValue) => {
-                    if (typeof newValue === 'string') {
-                      setSelectedOpponent({
-                        title: newValue
-                      });
-                    } else if (newValue && newValue.inputValue) {
-                      setSelectedOpponent({
-                        title: newValue.inputValue
-                      });
-                    } else {
-                      setSelectedOpponent(newValue);
-                    }
                   },
                   getOptionLabel: (option) => {
                     if (typeof option === 'string') {
