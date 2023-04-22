@@ -210,10 +210,14 @@ const ScheduleEventEditor = ({
           </Grid>
           <Grid xs={12}>
             <DialogActions>
-              <Button variant="contained" onClick={scheduler.close}>
+              <Button
+                variant="contained"
+                onClick={scheduler.close}
+                color="secondary"
+              >
                 CANCEL
               </Button>
-              <Button type={'submit'} variant="contained">
+              <Button type={'submit'} variant="contained" color="success">
                 CONFIRM
               </Button>
             </DialogActions>
