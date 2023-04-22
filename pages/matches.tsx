@@ -9,18 +9,49 @@ import Tabs from '@mui/material/Tabs';
 import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid';
 import Modal from '@mui/material/Modal';
 import MatchResultForm from '@/components/matchForm/MatchResultForm';
+import { getEvents, getOpponents } from '@/lib/api';
+import { EventDTO, OpponentDTO } from '@/lib/types';
 
 const Matches = () => {
   const user = useUser();
 
   const [displayOldMatches, setDisplayOldMatches] = React.useState(true);
   const [modalOpen, setModalOpen] = React.useState(false);
+  const [events, setEvents] = React.useState<EventDTO[]>([]);
+  const [opponents, setOpponents] = React.useState<OpponentDTO[]>([]);
 
   React.useEffect(() => {
     if (!user) {
       Router.push('/signin');
     }
+
+    getOpponents()
+      .then((existingOpponents) => {
+        setOpponents(existingOpponents);
+        return getEvents();
+      })
+      .then((existingEvents) => {
+        setEvents(existingEvents);
+      });
   }, [user]);
+
+  const now = new Date();
+
+  const rows = events
+    .filter((e: EventDTO) =>
+      displayOldMatches ? new Date(e.start) < now : new Date(e.start) >= now
+    )
+    .map((e: EventDTO) => {
+      const opponentName =
+        opponents.find((o) => o.id === e.opponentId)?.name || '';
+
+      return {
+        id: e.id,
+        date: e.start,
+        opponent: opponentName,
+        played: displayOldMatches ? '✅' : '❌'
+      };
+    }) as GridRowsProp;
 
   if (user) {
     return (
@@ -55,7 +86,12 @@ const Matches = () => {
               columnVisibilityModel={{
                 id: false
               }}
-              onRowClick={() => setModalOpen(true)}
+              disableRowSelectionOnClick={true}
+              onRowClick={() => {
+                if (displayOldMatches) {
+                  setModalOpen(true);
+                }
+              }}
             />
             <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
               <MatchResultForm onFormCompleted={() => setModalOpen(false)} />
@@ -86,8 +122,8 @@ const columns: GridColDef[] = [
     headerAlign: 'center'
   },
   {
-    field: 'title',
-    headerName: 'Title',
+    field: 'opponent',
+    headerName: 'Opponent',
     width: 200,
     flex: 1,
     align: 'center',
@@ -101,11 +137,4 @@ const columns: GridColDef[] = [
     headerAlign: 'center'
   }
 ];
-
-const rows: GridRowsProp = [
-  { id: 1, date: '10/04/2023', title: 'Match with Miguel', played: '✅' },
-  { id: 2, date: '11/04/2023', title: 'Match with Bella', played: '❌' },
-  { id: 3, date: '12/04/2023', title: 'Match with Carla', played: '❌' }
-];
-
 export default Matches;

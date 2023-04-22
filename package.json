@@ -34,7 +34,6 @@
     "react-hook-form-mui": "^6.0.1",
     "recharts": "^2.5.0",
     "typescript": "5.0.3",
-    "use-axios": "^1.0.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
