@@ -56,7 +56,12 @@ const Opponents = () => {
             <DataGrid
               rows={opponents}
               columns={columns}
+              autoHeight
+              sx={{ marginBottom: 5, width: 'auto' }}
               disableRowSelectionOnClick
+              columnVisibilityModel={{
+                id: false
+              }}
             />
           </Container>
         </Box>
