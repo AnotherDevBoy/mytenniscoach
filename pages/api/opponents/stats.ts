@@ -45,6 +45,12 @@ function getOpponentsStats(
     );
 
     if (eventsForOpponent.length === 0) {
+      const stats: OpponentStatsDTO = {
+        opponentId: o.id,
+        opponentName: o.name
+      };
+  
+      opponentsStats.push(stats);
       return;
     }
 
