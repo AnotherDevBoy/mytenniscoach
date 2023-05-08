@@ -3,14 +3,11 @@ import { MyTennisCoachRepository } from '@/pages/api/lib/repository';
 import { toEventDAL } from '@/pages/api/convert';
 import { authHandler, getUser } from '@/pages/api/lib/auth';
 import { EventDTO } from '@/lib/types';
+import { extractEventId } from '@/utils/helpers';
 
 const repository = new MyTennisCoachRepository();
 
-function extractEventId(req: NextApiRequest) {
-  const url = req.url!!;
-  const tokens = url.split('/');
-  return tokens[tokens.length - 1];
-}
+
 
 export default async function handler(
   req: NextApiRequest,

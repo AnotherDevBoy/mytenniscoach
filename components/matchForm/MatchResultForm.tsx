@@ -28,6 +28,39 @@ interface MatchResultFormProps {
   onFormCompleted: (data: any) => void;
 }
 
+type AutoCompleteEntry = {
+  id: string;
+  label: string;
+}
+
+export type MatchFormData = {
+  score: string;
+  winLoss: string;
+  duration: string;
+  rainLevel: number;
+  windLevel: number;
+  courtSpeed: number;
+  surface: AutoCompleteEntry;
+  forehand: AutoCompleteEntry;
+  backhand: AutoCompleteEntry;
+  strength1: string;
+  strength2: string;
+  strength3: string;
+  weakness1: string;
+  weakness2: string;
+  weakness3: string;
+  changeForNextTime: string;
+  technical: number;
+  technicalNotes: string;
+  tactical: number;
+  tacticalNotes: string;
+  physical: number;
+  physicalNotes: string;
+  mental: number;
+  mentalNotes: string;
+  lesson: string;
+};
+
 const MatchResultForm = (props: MatchResultFormProps, ref: any) => {
   const [formSection, setFormSection] = useState(0);
 
@@ -46,15 +79,33 @@ const MatchResultForm = (props: MatchResultFormProps, ref: any) => {
     });
   }
 
-  const formContext = useForm<any>({
+  const formContext = useForm<MatchFormData>({
     defaultValues: {
+      score: '',
+      winLoss: '',
+      duration: '',
       rainLevel: 0,
       windLevel: 0,
       courtSpeed: 0,
+      surface: '',
+      forehand: '',
+      backhand: '',
+      strength1: '',
+      strength2: '',
+      strength3: '',
+      weakness1: '',
+      weakness2: '',
+      weakness3: '',
+      changeForNextTime: '',
       technical: 0,
+      technicalNotes: '',
       tactical: 0,
+      tacticalNotes: '',
       physical: 0,
-      mental: 0
+      physicalNotes: '',
+      mental: 0,
+      mentalNotes: '',
+      lesson: ''
     }
   });
 

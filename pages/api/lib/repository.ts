@@ -6,6 +6,7 @@ import {
   PostgrestResponseFailure,
   PostgrestResponseSuccess
 } from '@supabase/postgrest-js';
+import { EventData } from '@/lib/types';
 
 export enum EventTypeDAL {
   Match = 0,
@@ -23,7 +24,7 @@ export type EventDAL = {
   start: string;
   end: string;
   type: EventTypeDAL;
-  metadata?: string;
+  metadata?: EventData;
 };
 
 export type OpponentDAL = {
@@ -54,6 +55,25 @@ export class MyTennisCoachRepository {
     this.handleError(response);
 
     return response.data as EventDAL[];
+  }
+
+  async getEvent(userId: string, eventId: string): Promise<EventDAL | null> {
+    const response = await this.supabase
+      .from('Event')
+      .select()
+      .eq('id', eventId)
+      .eq('user_id', userId)
+      .is('deleted_at', null);
+
+    this.handleError(response);
+
+    const events = response.data as EventDAL[];
+
+    if (events.length != 1) {
+      return null;
+    }
+
+    return events[0];
   }
 
   async createEvent(event: EventDAL) {

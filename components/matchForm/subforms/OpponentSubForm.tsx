@@ -1,7 +1,6 @@
 import {
   AutocompleteElement,
   RadioButtonGroup,
-  SliderElement,
   TextFieldElement,
   TextareaAutosizeElement
 } from 'react-hook-form-mui';
@@ -13,7 +12,7 @@ const SummarySubForm = () => {
     <>
       <Grid container rowSpacing={2} columnSpacing={5} marginTop={1}>
         <Grid xs={6}>
-          <RadioButtonGroup
+          <AutocompleteElement
             name="forehand"
             label="Forehand"
             options={[
@@ -26,12 +25,11 @@ const SummarySubForm = () => {
                 label: 'Left-handed'
               }
             ]}
-            row
             required
           />
         </Grid>
         <Grid xs={6}>
-          <RadioButtonGroup
+          <AutocompleteElement
             name="backhand"
             label="Backhand"
             options={[

@@ -1,4 +1,4 @@
-import { EventType, OpponentDTO, EventDTO } from '@/lib/types';
+import { EventType, OpponentDTO, EventDTO, EventData } from '@/lib/types';
 import {
   EventTypeDAL,
   OpponentDAL,
@@ -54,7 +54,8 @@ export function toEventDTO(event: EventDAL): EventDTO {
     start: event.start,
     end: event.end,
     type: toEventType(event.type),
-    opponentId: event.opponent_id
+    opponentId: event.opponent_id,
+    data: event.metadata
   };
 }
 

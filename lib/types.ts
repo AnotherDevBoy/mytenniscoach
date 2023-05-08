@@ -5,13 +5,56 @@ export enum EventType {
   Gym = 'Gym'
 }
 
-export type EventDTO = {
+export type MatchSummary = {
+  score: string;
+  duration: string;
+  win: boolean;
+  rainLevel: number;
+  windLevel: number;
+  courtSpeed: number;
+  surface: string;
+};
+
+export type MatchOpponentPerformance = {
+  forehand: string;
+  backhand: string;
+  strength1: string;
+  strength2: string;
+  strength3: string;
+  weakness1: string;
+  weakness2: string;
+  weakness3: string;
+  changeForNextTime: string;
+};
+
+export type MatchPerformance = {
+  technical: number;
+  technicalNotes: string;
+  tactical: number;
+  tacticalNotes: string;
+  physical: number;
+  physicalNotes: string;
+  mental: number;
+  mentalNotes: string;
+  lesson: string;
+};
+
+export type MatchEventData = EventData & {
+  summary: MatchSummary;
+  opponentPeformance: MatchOpponentPerformance;
+  performance: MatchPerformance;
+};
+
+export type EventData = {};
+
+export interface EventDTO {
   id: string;
   start: string;
   end: string;
   type: EventType;
   opponentId?: string;
-};
+  data?: EventData;
+}
 
 export type OpponentDTO = {
   id: string;

@@ -8,15 +8,18 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid';
 import Modal from '@mui/material/Modal';
-import MatchResultForm from '@/components/matchForm/MatchResultForm';
-import { getEvents, getOpponents } from '@/lib/api';
-import { EventDTO, OpponentDTO } from '@/lib/types';
+import MatchResultForm, {
+  MatchFormData
+} from '@/components/matchForm/MatchResultForm';
+import { getEvents, getOpponents, submitEventData } from '@/lib/api';
+import { EventDTO, EventData, MatchEventData, OpponentDTO } from '@/lib/types';
 
 const Matches = () => {
   const user = useUser();
 
   const [displayOldMatches, setDisplayOldMatches] = React.useState(true);
   const [modalOpen, setModalOpen] = React.useState(false);
+  const [selectedEvent, setSelectedEvent] = React.useState('');
   const [events, setEvents] = React.useState<EventDTO[]>([]);
   const [opponents, setOpponents] = React.useState<OpponentDTO[]>([]);
 
@@ -49,9 +52,50 @@ const Matches = () => {
         id: e.id,
         date: e.start,
         opponent: opponentName,
-        played: displayOldMatches ? '✅' : '❌'
+        played: displayOldMatches && e.data ? '✅' : '❌'
       };
     }) as GridRowsProp;
+
+  async function sendMatchResult(eventId: string, data: MatchFormData) {
+    const eventData: MatchEventData = {
+      summary: {
+        score: data.score,
+        win: data.winLoss === 'Win',
+        duration: data.duration,
+        rainLevel: data.rainLevel,
+        windLevel: data.windLevel,
+        courtSpeed: data.courtSpeed,
+        surface: data.surface.label
+      },
+      opponentPeformance: {
+        forehand: data.forehand.label,
+        backhand: data.backhand.label,
+        strength1: data.strength1,
+        strength2: data.strength2,
+        strength3: data.strength3,
+        weakness1: data.weakness1,
+        weakness2: data.weakness2,
+        weakness3: data.weakness3,
+        changeForNextTime: data.changeForNextTime
+      },
+      performance: {
+        technical: data.technical,
+        technicalNotes: data.technicalNotes,
+        tactical: data.tactical,
+        tacticalNotes: data.tacticalNotes,
+        physical: data.physical,
+        physicalNotes: data.physicalNotes,
+        mental: data.mental,
+        mentalNotes: data.mentalNotes,
+        lesson: data.lesson
+      }
+    };
+
+    await submitEventData(eventId, eventData);
+
+    const refreshedEvents = await getEvents();
+    setEvents(refreshedEvents);
+  }
 
   if (user) {
     return (
@@ -87,14 +131,22 @@ const Matches = () => {
                 id: false
               }}
               disableRowSelectionOnClick={true}
-              onRowClick={() => {
-                if (displayOldMatches) {
+              onRowClick={(rowClicked) => {
+                const played = rowClicked.row.played;
+
+                if (displayOldMatches && played === '❌') {
                   setModalOpen(true);
+                  setSelectedEvent(rowClicked.id.toString());
                 }
               }}
             />
             <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-              <MatchResultForm onFormCompleted={() => setModalOpen(false)} />
+              <MatchResultForm
+                onFormCompleted={async (data) => {
+                  setModalOpen(false);
+                  await sendMatchResult(selectedEvent, data);
+                }}
+              />
             </Modal>
           </Container>
         </Box>

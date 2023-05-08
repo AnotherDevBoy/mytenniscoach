@@ -1,3 +1,5 @@
+import { NextApiRequest } from 'next';
+
 export const getURL = () => {
   let url =
     process?.env?.NEXT_PUBLIC_SITE_URL ?? // Set this to your site URL in production env.
@@ -7,4 +9,10 @@ export const getURL = () => {
   // Make sure to including trailing `/`.
   url = url.charAt(url.length - 1) === '/' ? url : `${url}/`;
   return url;
+};
+
+export const extractEventId = (req: NextApiRequest) => {
+  const url = req.url!!;
+  const tokens = url.split('/');
+  return tokens[3];
 };
