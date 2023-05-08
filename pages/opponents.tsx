@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { DataGrid } from '@mui/x-data-grid/DataGrid';
 import { GridColDef } from '@mui/x-data-grid/models';
-import { getOpponents } from '@/lib/api';
+import { getOpponents, getOpponentsStats } from '@/lib/api';
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 90 },
@@ -35,11 +35,12 @@ const Opponents = () => {
   }, [user]);
 
   React.useEffect(() => {
-    getOpponents().then((opponents) => {
+    getOpponentsStats().then((opponents) => {
+      console.log(opponents);
       const rows = opponents.map((o, i) => {
         return {
           id: i,
-          name: o.name
+          name: o.opponentName
         } as OpponentRow;
       });
 

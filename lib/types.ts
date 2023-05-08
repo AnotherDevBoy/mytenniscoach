@@ -63,6 +63,7 @@ export type OpponentDTO = {
 
 export type OpponentStatsDTO = {
   opponentId: string;
+  opponentName: string;
   winRate: string;
   forehand: string;
   backhand: string;

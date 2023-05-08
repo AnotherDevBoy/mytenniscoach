@@ -35,8 +35,8 @@ export default async function handler(
 function getOpponentsStats(
   opponentsDAL: OpponentDAL[],
   eventsDAL: EventDAL[]
-): Map<String, OpponentStatsDTO | {}> {
-  const eventsByOpponent = new Map<String, OpponentStatsDTO | {}>();
+): OpponentStatsDTO[] {
+  const opponentsStats: OpponentStatsDTO[] = [];
 
   opponentsDAL.forEach((o) => {
     const eventsForOpponent = eventsDAL.filter(
@@ -45,7 +45,6 @@ function getOpponentsStats(
     );
 
     if (eventsForOpponent.length === 0) {
-      eventsByOpponent.set(o.id, {});
       return;
     }
 
@@ -68,14 +67,15 @@ function getOpponentsStats(
 
     const stats: OpponentStatsDTO = {
       opponentId: o.id,
+      opponentName: o.name,
       winRate: winRate,
       forehand: lastMatch.opponentPeformance.forehand,
       backhand: lastMatch.opponentPeformance.backhand,
       previousMatches: matchData.map((m) => m.opponentPeformance)
     };
 
-    eventsByOpponent.set(o.id, stats);
+    opponentsStats.push(stats);
   });
 
-  return eventsByOpponent;
+  return opponentsStats;
 }

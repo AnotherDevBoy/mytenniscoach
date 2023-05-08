@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { OpponentDTO, EventDTO, EventData } from './types';
+import { OpponentDTO, EventDTO, EventData, OpponentStatsDTO } from './types';
 
 export async function getEvents(): Promise<EventDTO[]> {
   const response = await axios.get(`api/events`);
@@ -44,7 +44,7 @@ export async function getOpponents(): Promise<OpponentDTO[]> {
   return response.data;
 }
 
-export async function getOpponentsStats(): Promise<OpponentDTO[]> {
+export async function getOpponentsStats(): Promise<OpponentStatsDTO[]> {
   const response = await axios.get(`api/opponents/stats`);
   return response.data;
 }
