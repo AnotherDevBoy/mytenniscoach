@@ -38,6 +38,14 @@ export async function createOpponent(name: string): Promise<OpponentDTO> {
 
 export async function getOpponents(): Promise<OpponentDTO[]> {
   const response = await axios.get(`api/opponents`);
+
+  const stats = await getOpponentsStats();
+
+  return response.data;
+}
+
+export async function getOpponentsStats(): Promise<OpponentDTO[]> {
+  const response = await axios.get(`api/opponents/stats`);
   return response.data;
 }
 

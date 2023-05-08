@@ -1,8 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { MyTennisCoachRepository } from '@/pages/api/lib/repository';
-import { toOpponentDTO, toOpponentDAL } from '@/pages/api/convert';
+import {
+  EventDAL,
+  EventTypeDAL,
+  MyTennisCoachRepository,
+  OpponentDAL
+} from '@/pages/api/lib/repository';
 import { getUser, authHandler } from '@/pages/api/lib/auth';
-import { OpponentDTO } from '@/lib/types';
+import { MatchEventData, OpponentStatsDTO } from '@/lib/types';
+import { compareDesc } from 'date-fns';
 
 const repository = new MyTennisCoachRepository();
 
@@ -19,11 +24,58 @@ export default async function handler(
 
       const eventsDAL = await repository.getEvents(user);
 
-      // Group events by opponent ID, sort by date from more recent to less recent
-      // Return win-rate, forehand/backhand, Lastplayed, More
+      const stats = getOpponentsStats(opponentsDAL, eventsDAL);
 
-      return res.status(200).json({});
+      return res.status(200).json(stats);
     default:
       return res.status(404).json({ message: 'Not found' });
   }
+}
+
+function getOpponentsStats(
+  opponentsDAL: OpponentDAL[],
+  eventsDAL: EventDAL[]
+): Map<String, OpponentStatsDTO | {}> {
+  const eventsByOpponent = new Map<String, OpponentStatsDTO | {}>();
+
+  opponentsDAL.forEach((o) => {
+    const eventsForOpponent = eventsDAL.filter(
+      (e) =>
+        e.opponent_id === o.id && e.type === EventTypeDAL.Match && e.metadata
+    );
+
+    if (eventsForOpponent.length === 0) {
+      eventsByOpponent.set(o.id, {});
+      return;
+    }
+
+    const eventsForOpponentSorted = eventsForOpponent.sort((a, b) => {
+      const endA = new Date(a.end);
+      const endB = new Date(b.end);
+
+      return compareDesc(endA, endB);
+    });
+
+    const matchData = eventsForOpponentSorted.map(
+      (e) => e.metadata as MatchEventData
+    );
+
+    const victories = matchData.filter((m) => m.summary.win);
+
+    const winRate = (victories.length / eventsForOpponent.length).toFixed(2);
+
+    const lastMatch = matchData[0];
+
+    const stats: OpponentStatsDTO = {
+      opponentId: o.id,
+      winRate: winRate,
+      forehand: lastMatch.opponentPeformance.forehand,
+      backhand: lastMatch.opponentPeformance.backhand,
+      previousMatches: matchData.map((m) => m.opponentPeformance)
+    };
+
+    eventsByOpponent.set(o.id, stats);
+  });
+
+  return eventsByOpponent;
 }
