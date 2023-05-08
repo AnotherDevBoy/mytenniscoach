@@ -49,7 +49,7 @@ function getOpponentsStats(
         opponentId: o.id,
         opponentName: o.name
       };
-  
+
       opponentsStats.push(stats);
       return;
     }
@@ -67,7 +67,10 @@ function getOpponentsStats(
 
     const victories = matchData.filter((m) => m.summary.win);
 
-    const winRate = (victories.length / eventsForOpponent.length).toFixed(2);
+    const winRate = (
+      (victories.length / eventsForOpponent.length) *
+      100
+    ).toFixed(2);
 
     const lastMatch = matchData[0];
 
