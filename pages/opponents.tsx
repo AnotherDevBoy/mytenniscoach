@@ -6,14 +6,28 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { DataGrid } from '@mui/x-data-grid/DataGrid';
 import { GridColDef } from '@mui/x-data-grid/models';
-import { getOpponents, getOpponentsStats } from '@/lib/api';
+import { getOpponentsStats } from '@/lib/api';
 
 const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 90 },
+  { field: 'id', headerName: 'ID' },
   {
     field: 'name',
     headerName: 'Name',
-    width: 150,
+    editable: false
+  },
+  {
+    field: 'forehand',
+    headerName: 'Forehand',
+    editable: false
+  },
+  {
+    field: 'backhand',
+    headerName: 'Backhand',
+    editable: false
+  },
+  {
+    field: 'winrate',
+    headerName: 'Winrate',
     editable: false
   }
 ];
@@ -40,7 +54,10 @@ const Opponents = () => {
       const rows = opponents.map((o, i) => {
         return {
           id: i,
-          name: o.opponentName
+          name: o.opponentName,
+          forehand: o.forehand,
+          backhand: o.backhand,
+          winrate: o.winRate
         } as OpponentRow;
       });
 
