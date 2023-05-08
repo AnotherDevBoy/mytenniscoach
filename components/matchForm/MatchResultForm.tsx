@@ -31,7 +31,7 @@ interface MatchResultFormProps {
 type AutoCompleteEntry = {
   id: string;
   label: string;
-}
+};
 
 export type MatchFormData = {
   score: string;
@@ -87,9 +87,9 @@ const MatchResultForm = (props: MatchResultFormProps, ref: any) => {
       rainLevel: 0,
       windLevel: 0,
       courtSpeed: 0,
-      surface: '',
-      forehand: '',
-      backhand: '',
+      surface: { label: '' },
+      forehand: { label: '' },
+      backhand: { label: '' },
       strength1: '',
       strength2: '',
       strength3: '',
