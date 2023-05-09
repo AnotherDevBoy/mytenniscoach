@@ -6,7 +6,7 @@ import {
   OpponentDAL
 } from '@/pages/api/lib/repository';
 import { getUser, authHandler } from '@/pages/api/lib/auth';
-import { MatchEventData, OpponentStatsDTO } from '@/lib/types';
+import { MatchEventData, MatchStats, OpponentStatsDTO } from '@/lib/types';
 import { compareDesc } from 'date-fns';
 
 const repository = new MyTennisCoachRepository();
@@ -80,7 +80,14 @@ function getOpponentsStats(
       winRate: winRate,
       forehand: lastMatch.opponentPeformance.forehand,
       backhand: lastMatch.opponentPeformance.backhand,
-      previousMatches: matchData.map((m) => m.opponentPeformance)
+      matches: eventsForOpponentSorted.map((e) => {
+        const metadata = e.metadata as MatchEventData;
+
+        return {
+          date: e.end,
+          performance: metadata.opponentPeformance
+        } as MatchStats;
+      })
     };
 
     opponentsStats.push(stats);

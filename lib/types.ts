@@ -61,13 +61,18 @@ export type OpponentDTO = {
   name: string;
 };
 
+export type MatchStats = {
+  date: string;
+  performance: MatchOpponentPerformance;
+};
+
 export type OpponentStatsDTO = {
   opponentId: string;
   opponentName: string;
   winRate?: string;
   forehand?: string;
   backhand?: string;
-  previousMatches?: MatchOpponentPerformance[];
+  matches?: MatchStats[];
 };
 
 export function getEventTypeIndex(eventType: EventType): number {
