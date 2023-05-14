@@ -1,18 +1,15 @@
 import * as React from 'react';
 import { useUser } from '@supabase/auth-helpers-react';
 import Router from 'next/router';
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Typography
-} from '@mui/material';
+import { Card, CardContent, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
+import { StatsDTO } from '@/lib/types';
+import { getStats } from '@/lib/api';
 
 const Dashboard = () => {
   const user = useUser();
+
+  const [stats, setStats] = React.useState<StatsDTO | null>(null);
 
   React.useEffect(() => {
     if (!user) {
@@ -20,7 +17,11 @@ const Dashboard = () => {
     }
   }, [user]);
 
-  if (user) {
+  React.useEffect(() => {
+    getStats().then((s) => setStats(s));
+  });
+
+  if (user && stats) {
     return (
       <>
         <Grid container spacing={2}>
@@ -28,9 +29,9 @@ const Dashboard = () => {
             <Card sx={{ height: 100 }}>
               <CardContent>
                 <Typography variant="h5" component="div">
-                  Matches played this month
+                  Win-rate
                 </Typography>
-                <Typography variant="body2">3</Typography>
+                <Typography variant="body2">{stats?.winRate}%</Typography>
               </CardContent>
             </Card>
           </Grid>
@@ -38,9 +39,9 @@ const Dashboard = () => {
             <Card sx={{ height: 100 }}>
               <CardContent>
                 <Typography variant="h5" component="div">
-                  Monthly winrate
+                  Nemesis
                 </Typography>
-                <Typography variant="body2">50%</Typography>
+                <Typography variant="body2">{stats.nemesis}</Typography>
               </CardContent>
             </Card>
           </Grid>

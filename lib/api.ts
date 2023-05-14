@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { OpponentDTO, EventDTO, EventData, OpponentStatsDTO } from './types';
+import { OpponentDTO, EventDTO, EventData, OpponentStatsDTO, StatsDTO } from './types';
 
 export async function getEvents(): Promise<EventDTO[]> {
   const response = await axios.get(`api/events`);
@@ -53,4 +53,9 @@ export async function deleteOpponents(
   opponentId: string
 ): Promise<AxiosResponse> {
   return await axios.delete(`api/opponents/${opponentId}`);
+}
+
+export async function getStats(): Promise<StatsDTO> {
+  const response = await axios.get(`api/stats`);
+  return response.data;
 }
