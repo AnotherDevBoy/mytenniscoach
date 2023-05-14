@@ -1,6 +1,5 @@
 import { PropsWithChildren } from 'react';
 import Head from 'next/head';
-import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,19 +9,17 @@ import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import SportsTennisIcon from '@mui/icons-material/SportsTennis';
 import MenuIcon from '@mui/icons-material/Menu';
 import PeopleIcon from '@mui/icons-material/People';
-import {
-  Button,
-  Divider,
-  Drawer,
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Typography
-} from '@mui/material';
+import Button from '@mui/material/Button';
+import Drawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Typography from '@mui/material/Typography';
 import React from 'react';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import Router from 'next/router';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
@@ -40,12 +37,20 @@ export default function Layout({ children, window }: Props) {
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
   function onMenuItemSelected(index: number) {
     setSelectedIndex(index);
+
+    if (isMobile) {
+      setMobileOpen(!mobileOpen);
+    }
+
     Router.push(`/${sections[index].name.toLowerCase()}`);
   }
 
@@ -81,7 +86,7 @@ export default function Layout({ children, window }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main id="skip">
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex', height: '100%' }}>
           <AppBar
             position="fixed"
             sx={{
@@ -149,7 +154,7 @@ export default function Layout({ children, window }: Props) {
             <Toolbar /> {/* Invisible and unusuable toolbar for extra space */}
             {drawer}
           </Drawer>
-          <Box sx={{ flexGrow: 1, p: 3 }}>
+          <Box sx={{ width: '100%', padding: 2 }}>
             <Toolbar /> {/* Invisible and unusuable toolbar for extra space */}
             {children}
           </Box>

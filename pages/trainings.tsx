@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useUser } from '@supabase/auth-helpers-react';
 import Router from 'next/router';
-import AppNavigation from '@/components/AppNavigation';
 
 const Trainings = () => {
   const user = useUser();

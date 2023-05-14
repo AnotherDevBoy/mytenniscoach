@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useUser } from '@supabase/auth-helpers-react';
 import Router from 'next/router';
-import AppNavigation from '@/components/AppNavigation';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Tab from '@mui/material/Tab';
@@ -100,55 +99,51 @@ const Matches = () => {
   if (user) {
     return (
       <>
-        <Box sx={{ display: 'flex', height: '100%' }}>
-          <Container sx={{ paddingTop: 10 }}>
-            <Box
-              justifyContent={'center'}
-              sx={{
-                display: 'flex',
-                borderBottom: 1,
-                borderColor: 'divider',
-                marginBottom: 5
-              }}
-            >
-              <Tabs
-                value={displayOldMatches ? 0 : 1}
-                onChange={(_: React.SyntheticEvent, newValue: number) =>
-                  setDisplayOldMatches(newValue === 0)
-                }
-              >
-                <Tab label="Previous matches" />
-                <Tab label="Upcoming matches" />
-              </Tabs>
-            </Box>
-            <DataGrid
-              rows={rows}
-              columns={columns}
-              autoHeight
-              sx={{ marginBottom: 5, width: 'auto' }}
-              columnVisibilityModel={{
-                id: false
-              }}
-              disableRowSelectionOnClick={true}
-              onRowClick={(rowClicked) => {
-                const played = rowClicked.row.played;
-
-                if (displayOldMatches && played === '❌') {
-                  setModalOpen(true);
-                  setSelectedEvent(rowClicked.id.toString());
-                }
-              }}
-            />
-            <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-              <MatchResultForm
-                onFormCompleted={async (data) => {
-                  setModalOpen(false);
-                  await sendMatchResult(selectedEvent, data);
-                }}
-              />
-            </Modal>
-          </Container>
+        <Box
+          justifyContent={'center'}
+          sx={{
+            display: 'flex',
+            borderBottom: 1,
+            borderColor: 'divider',
+            marginBottom: 5
+          }}
+        >
+          <Tabs
+            value={displayOldMatches ? 0 : 1}
+            onChange={(_: React.SyntheticEvent, newValue: number) =>
+              setDisplayOldMatches(newValue === 0)
+            }
+          >
+            <Tab label="Previous matches" />
+            <Tab label="Upcoming matches" />
+          </Tabs>
         </Box>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          autoHeight
+          sx={{ marginBottom: 5, width: 'auto' }}
+          columnVisibilityModel={{
+            id: false
+          }}
+          disableRowSelectionOnClick={true}
+          onRowClick={(rowClicked) => {
+            const played = rowClicked.row.played;
+
+            if (displayOldMatches && played === '❌') {
+              setModalOpen(true);
+              setSelectedEvent(rowClicked.id.toString());
+            }
+          }}
+        />
+        <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+          <MatchResultForm
+            onFormCompleted={async (data) => {
+              setModalOpen(false);
+              await sendMatchResult(selectedEvent, data);
+            }}
+          />
+        </Modal>
       </>
     );
   }

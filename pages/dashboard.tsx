@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useUser } from '@supabase/auth-helpers-react';
 import Router from 'next/router';
-import AppNavigation from '@/components/AppNavigation';
 import {
   Box,
   Button,
@@ -10,6 +9,7 @@ import {
   CardContent,
   Typography
 } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
 
 const Dashboard = () => {
   const user = useUser();
@@ -23,17 +23,9 @@ const Dashboard = () => {
   if (user) {
     return (
       <>
-        <Box sx={{ display: 'flex', height: '100%' }}>
-          <Box
-            sx={{
-              display: 'flex',
-              height: '100%',
-              justifyContent: 'space-evenly',
-              width: '100%',
-              paddingTop: 15
-            }}
-          >
-            <Card sx={{ minWidth: 275, height: 100 }}>
+        <Grid container spacing={2}>
+          <Grid xs={12} md={6} lg={4} xl={2}>
+            <Card sx={{ height: 100 }}>
               <CardContent>
                 <Typography variant="h5" component="div">
                   Matches played this month
@@ -41,7 +33,9 @@ const Dashboard = () => {
                 <Typography variant="body2">3</Typography>
               </CardContent>
             </Card>
-            <Card sx={{ minWidth: 275, height: 100 }}>
+          </Grid>
+          <Grid xs={12} md={6} lg={4} xl={2}>
+            <Card sx={{ height: 100 }}>
               <CardContent>
                 <Typography variant="h5" component="div">
                   Monthly winrate
@@ -49,8 +43,8 @@ const Dashboard = () => {
                 <Typography variant="body2">50%</Typography>
               </CardContent>
             </Card>
-          </Box>
-        </Box>
+          </Grid>
+        </Grid>
       </>
     );
   }
