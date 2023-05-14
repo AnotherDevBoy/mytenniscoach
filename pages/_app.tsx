@@ -7,7 +7,7 @@ import { MyUserContextProvider } from '@/utils/useUser';
 import Layout from '@/layouts/layout';
 import { Database } from '@/lib/database.types';
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: any) {
   const [supabaseClient] = useState(() =>
     createBrowserSupabaseClient<Database>()
   );
