@@ -83,7 +83,10 @@ export class MyTennisCoachRepository {
   }
 
   async updateEvent(event: EventDAL) {
-    const response = await this.supabase.from('Event').upsert(event);
+    const response = await this.supabase
+      .from('Event')
+      .update(event)
+      .eq('id', event.id);
     this.handleError(response);
   }
 

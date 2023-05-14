@@ -39,9 +39,9 @@ export function toEventType(eventType: EventTypeDAL) {
 
 export function toEventDAL(event: EventDTO, userId: string): EventDAL {
   return {
-    id: uuidv4(),
+    id: event.id ? event.id : uuidv4(),
     user_id: userId,
-    opponent_id: event.opponentId,
+    opponent_id: event.type === EventType.Match ? event.opponentId : undefined,
     start: event.start,
     end: event.end,
     type: toEventTypeDAL(event.type)
