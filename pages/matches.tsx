@@ -2,16 +2,16 @@ import * as React from 'react';
 import { useUser } from '@supabase/auth-helpers-react';
 import Router from 'next/router';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid';
-import Modal from '@mui/material/Modal';
+import Dialog from '@mui/material/Dialog';
 import MatchResultForm, {
   MatchFormData
 } from '@/components/matchForm/MatchResultForm';
 import { getEvents, getOpponents, submitEventData } from '@/lib/api';
-import { EventDTO, EventData, MatchEventData, OpponentDTO } from '@/lib/types';
+import { EventDTO, MatchEventData, OpponentDTO } from '@/lib/types';
+import { useMediaQuery, useTheme } from '@mui/material';
 
 const Matches = () => {
   const user = useUser();
@@ -21,6 +21,9 @@ const Matches = () => {
   const [selectedEvent, setSelectedEvent] = React.useState('');
   const [events, setEvents] = React.useState<EventDTO[]>([]);
   const [opponents, setOpponents] = React.useState<OpponentDTO[]>([]);
+
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   React.useEffect(() => {
     if (!user) {
@@ -136,14 +139,18 @@ const Matches = () => {
             }
           }}
         />
-        <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+        <Dialog
+          open={modalOpen}
+          fullScreen={fullScreen}
+          onClose={() => setModalOpen(false)}
+        >
           <MatchResultForm
             onFormCompleted={async (data) => {
               setModalOpen(false);
               await sendMatchResult(selectedEvent, data);
             }}
           />
-        </Modal>
+        </Dialog>
       </>
     );
   }

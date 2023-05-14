@@ -9,20 +9,7 @@ import SummarySubForm from './subforms/SummarySubForm';
 import React from 'react';
 import OpponentSubForm from './subforms/OpponentSubForm';
 import PerformanceSubForm from './subforms/PerformanceSubForm';
-
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  pt: 2,
-  px: 4,
-  pb: 3,
-  borderRadius: '10px'
-};
+import { DialogContent } from '@mui/material';
 
 interface MatchResultFormProps {
   onFormCompleted: (data: any) => void;
@@ -113,54 +100,58 @@ const MatchResultForm = (props: MatchResultFormProps, ref: any) => {
 
   return (
     <>
-      <Stack sx={{ ...style }}>
-        <FormContainer
-          formContext={formContext}
-          handleSubmit={handleSubmit((data) => {
-            if (formSection < 2) {
-              setFormSection(formSection + 1);
-              return;
-            }
+      <FormContainer
+        formContext={formContext}
+        handleSubmit={handleSubmit((data) => {
+          if (formSection < 2) {
+            setFormSection(formSection + 1);
+            return;
+          }
 
-            props.onFormCompleted(data);
-          })}
-        >
-          <Breadcrumbs separator="›">{buildNavigation()}</Breadcrumbs>
-          {formSection === 0 ? (
-            <SummarySubForm />
-          ) : formSection === 1 ? (
-            <OpponentSubForm />
-          ) : (
-            <PerformanceSubForm />
-          )}
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: '10px',
-              marginTop: '15px'
-            }}
-          >
-            {formSection < 2 ? (
-              <Button
-                variant="contained"
-                onClick={() =>
-                  setFormSection(
-                    formSection === 0 ? formSection : formSection - 1
-                  )
-                }
-              >
-                BACK
-              </Button>
+          props.onFormCompleted(data);
+        })}
+      >
+        <DialogContent>
+          <Stack>
+            <Breadcrumbs separator="›">{buildNavigation()}</Breadcrumbs>
+            {formSection === 0 ? (
+              <SummarySubForm />
+            ) : formSection === 1 ? (
+              <OpponentSubForm />
             ) : (
-              <></>
+              <PerformanceSubForm />
             )}
-            <Button type={'submit'} variant="contained">
-              {formSection < 2 ? 'NEXT' : 'DONE'}
+          </Stack>
+        </DialogContent>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            position: 'absolute',
+            bottom: 10,
+            width: '100%',
+            gap: 2
+          }}
+        >
+          {formSection < 2 ? (
+            <Button
+              variant="contained"
+              onClick={() =>
+                setFormSection(
+                  formSection === 0 ? formSection : formSection - 1
+                )
+              }
+            >
+              BACK
             </Button>
-          </Box>
-        </FormContainer>
-      </Stack>
+          ) : (
+            <></>
+          )}
+          <Button type={'submit'} variant="contained">
+            {formSection < 2 ? 'NEXT' : 'DONE'}
+          </Button>
+        </Box>
+      </FormContainer>
     </>
   );
 };
