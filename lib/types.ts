@@ -75,6 +75,11 @@ export type OpponentStatsDTO = {
   matches?: MatchStats[];
 };
 
+export type StatsDTO = {
+  winRate: string;
+  nemesis?: string;
+};
+
 export function getEventTypeIndex(eventType: EventType): number {
   return Object.keys(EventType).indexOf(eventType);
 }

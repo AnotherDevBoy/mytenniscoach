@@ -111,6 +111,28 @@ export class MyTennisCoachRepository {
     return response.data as OpponentDAL[];
   }
 
+  async getOpponent(
+    userId: string,
+    opponent_id: string
+  ): Promise<OpponentDAL | null> {
+    const response = await this.supabase
+      .from('Opponent')
+      .select()
+      .eq('user_id', userId)
+      .eq('id', opponent_id)
+      .is('deleted_at', null);
+
+    this.handleError(response);
+
+    const opponents = response.data as OpponentDAL[];
+
+    if (opponents.length != 1) {
+      return null;
+    }
+
+    return opponents[0];
+  }
+
   async createOpponent(opponent: OpponentDAL) {
     const response = await this.supabase.from('Opponent').insert(opponent);
 
