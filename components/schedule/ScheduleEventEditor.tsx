@@ -70,7 +70,7 @@ const ScheduleEventEditor = ({
       type: getEventTypeIndex(event?.type || EventType.Match),
       start: event?.start || scheduler.state.start.value,
       end: event?.end || scheduler.state.end.value,
-      opponent: defaultOpponent
+      opponent: opponentName ? defaultOpponent : undefined
     }
   });
 
@@ -158,6 +158,7 @@ const ScheduleEventEditor = ({
               <AutocompleteElement
                 name="opponent"
                 label="Opponent"
+                required
                 options={opponents.map((o: OpponentDTO) => {
                   return { id: o.id, title: o.name };
                 })}
