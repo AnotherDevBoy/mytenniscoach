@@ -50,7 +50,6 @@ const Schedule = () => {
     return (
       <>
         <Box sx={{ display: 'flex' }}>
-          <AppNavigation firstSelectedItem={1} />
           <Container maxWidth="lg" sx={{ paddingTop: 10 }}>
             {loading ? (
               <CircularProgress />

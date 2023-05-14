@@ -24,7 +24,6 @@ const Dashboard = () => {
     return (
       <>
         <Box sx={{ display: 'flex', height: '100%' }}>
-          <AppNavigation firstSelectedItem={0} />
           <Box
             sx={{
               display: 'flex',

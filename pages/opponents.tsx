@@ -80,7 +80,6 @@ const Opponents = () => {
     return (
       <>
         <Box sx={{ display: 'flex' }}>
-          <AppNavigation firstSelectedItem={4} />
           <Container maxWidth="xl" sx={{ paddingTop: 10 }}>
             <DataGrid
               rows={rows}

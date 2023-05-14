@@ -101,7 +101,6 @@ const Matches = () => {
     return (
       <>
         <Box sx={{ display: 'flex', height: '100%' }}>
-          <AppNavigation firstSelectedItem={3} />
           <Container sx={{ paddingTop: 10 }}>
             <Box
               justifyContent={'center'}

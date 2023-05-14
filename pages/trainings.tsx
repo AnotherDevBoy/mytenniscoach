@@ -13,7 +13,7 @@ const Trainings = () => {
   }, [user]);
 
   if (user) {
-    return <AppNavigation firstSelectedItem={2} />;
+    return <></>;
   }
 
   return <></>;
