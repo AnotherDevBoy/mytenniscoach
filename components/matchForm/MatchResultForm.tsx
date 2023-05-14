@@ -74,9 +74,9 @@ const MatchResultForm = (props: MatchResultFormProps, ref: any) => {
       rainLevel: 0,
       windLevel: 0,
       courtSpeed: 0,
-      surface: { label: '' },
-      forehand: { label: '' },
-      backhand: { label: '' },
+      surface: undefined,
+      forehand: undefined,
+      backhand: undefined,
       strength1: '',
       strength2: '',
       strength3: '',
@@ -122,35 +122,34 @@ const MatchResultForm = (props: MatchResultFormProps, ref: any) => {
               <PerformanceSubForm />
             )}
           </Stack>
-        </DialogContent>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            position: 'absolute',
-            bottom: 10,
-            width: '100%',
-            gap: 2
-          }}
-        >
-          {formSection < 2 ? (
-            <Button
-              variant="contained"
-              onClick={() =>
-                setFormSection(
-                  formSection === 0 ? formSection : formSection - 1
-                )
-              }
-            >
-              BACK
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              width: '100%',
+              gap: 2,
+              marginTop: 1
+            }}
+          >
+            {formSection > 0 ? (
+              <Button
+                variant="contained"
+                onClick={() =>
+                  setFormSection(
+                    formSection === 0 ? formSection : formSection - 1
+                  )
+                }
+              >
+                BACK
+              </Button>
+            ) : (
+              <></>
+            )}
+            <Button type={'submit'} variant="contained">
+              {formSection < 2 ? 'NEXT' : 'DONE'}
             </Button>
-          ) : (
-            <></>
-          )}
-          <Button type={'submit'} variant="contained">
-            {formSection < 2 ? 'NEXT' : 'DONE'}
-          </Button>
-        </Box>
+          </Box>
+        </DialogContent>
       </FormContainer>
     </>
   );

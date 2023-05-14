@@ -115,8 +115,6 @@ const Opponents = () => {
                 <Tabs
                   value={selectedMatch}
                   onChange={(e, v) => {
-                    console.log(e);
-                    console.log(v);
                     setSelectedMatch(v);
                   }}
                 >

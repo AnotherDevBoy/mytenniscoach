@@ -10,7 +10,7 @@ import MatchResultForm, {
   MatchFormData
 } from '@/components/matchForm/MatchResultForm';
 import { getEvents, getOpponents, submitEventData } from '@/lib/api';
-import { EventDTO, MatchEventData, OpponentDTO } from '@/lib/types';
+import { EventDTO, EventType, MatchEventData, OpponentDTO } from '@/lib/types';
 import { useMediaQuery, useTheme } from '@mui/material';
 
 const Matches = () => {
@@ -43,6 +43,7 @@ const Matches = () => {
   const now = new Date();
 
   const rows = events
+    .filter((e) => e.type === EventType.Match)
     .filter((e: EventDTO) =>
       displayOldMatches ? new Date(e.start) < now : new Date(e.start) >= now
     )
@@ -62,7 +63,7 @@ const Matches = () => {
     const eventData: MatchEventData = {
       summary: {
         score: data.score,
-        win: data.winLoss === 'Win',
+        win: data.winLoss === '1',
         duration: data.duration,
         rainLevel: data.rainLevel,
         windLevel: data.windLevel,
