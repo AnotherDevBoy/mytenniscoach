@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { useUser } from '@supabase/auth-helpers-react';
 import Router from 'next/router';
-import AppNavigation from '@/components/AppNavigation';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import { DataGrid } from '@mui/x-data-grid/DataGrid';
 import { GridColDef } from '@mui/x-data-grid/models';
 import { getOpponentsStats } from '@/lib/api';
@@ -79,145 +77,140 @@ const Opponents = () => {
   if (user) {
     return (
       <>
-        <Box sx={{ display: 'flex' }}>
-          <AppNavigation firstSelectedItem={4} />
-          <Container maxWidth="xl" sx={{ paddingTop: 10 }}>
-            <DataGrid
-              rows={rows}
-              columns={columns}
-              autoHeight
-              sx={{ marginBottom: 5, width: 'auto' }}
-              disableRowSelectionOnClick
-              columnVisibilityModel={{
-                id: false
-              }}
-              onRowClick={(a) => {
-                const opponent = a.id.valueOf() as number;
-                setSelectedOpponent(opponent);
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          autoHeight
+          sx={{ marginBottom: 5, width: 'auto' }}
+          disableRowSelectionOnClick
+          columnVisibilityModel={{
+            id: false
+          }}
+          onRowClick={(a) => {
+            const opponent = a.id.valueOf() as number;
+            setSelectedOpponent(opponent);
 
-                if (
-                  opponents[opponent].matches &&
-                  opponents[opponent].matches!.length > 0
-                ) {
-                  setDialogOpen(true);
-                }
-              }}
-            />
-          </Container>
-          <Dialog
-            open={dialogOpen}
-            onClose={() => {
-              setSelectedMatch(0);
-              setSelectedOpponent(0);
-              setDialogOpen(false);
-            }}
-          >
-            <Box sx={{ margin: 2 }}>
-              {opponents &&
-              opponents.length > 0 &&
-              opponents[selectedOpponent].matches &&
-              opponents[selectedOpponent].matches!.length > 0 ? (
-                <Stack sx={{ alignItems: 'center' }}>
-                  <Tabs
-                    value={selectedMatch}
-                    onChange={(e, v) => {
-                      console.log(e);
-                      console.log(v);
-                      setSelectedMatch(v);
-                    }}
-                  >
-                    {opponents[selectedOpponent].matches!.map((m, i) => (
-                      <Tab
-                        key={`${opponents[selectedOpponent].opponentId}-${i}`}
-                        label={m.date}
-                      />
-                    ))}
-                  </Tabs>
-                  <Grid container spacing={2}>
-                    <Grid item xs={6}>
-                      <TextField
-                        label="Strength #1"
-                        contentEditable={false}
-                        value={stringOrNA(
-                          opponents[selectedOpponent].matches![selectedMatch]
-                            .performance.strength1
-                        )}
-                        margin="normal"
-                        fullWidth={true}
-                      />
-                      <TextField
-                        label="Strength #2"
-                        contentEditable={false}
-                        value={stringOrNA(
-                          opponents[selectedOpponent].matches![selectedMatch]
-                            .performance.strength2
-                        )}
-                        margin="normal"
-                        fullWidth={true}
-                      />
-                      <TextField
-                        label="Strength #3"
-                        contentEditable={false}
-                        value={stringOrNA(
-                          opponents[selectedOpponent].matches![selectedMatch]
-                            .performance.strength3
-                        )}
-                        margin="normal"
-                        fullWidth={true}
-                      />
-                    </Grid>
-                    <Grid item xs={6}>
-                      <TextField
-                        label="Weakness #1"
-                        contentEditable={false}
-                        value={stringOrNA(
-                          opponents[selectedOpponent].matches![selectedMatch]
-                            .performance.weakness1
-                        )}
-                        margin="normal"
-                        fullWidth={true}
-                      />
-                      <TextField
-                        label="Weakness #2"
-                        contentEditable={false}
-                        value={stringOrNA(
-                          opponents[selectedOpponent].matches![selectedMatch]
-                            .performance.weakness2
-                        )}
-                        margin="normal"
-                        fullWidth={true}
-                      />
-                      <TextField
-                        label="Weakness #3"
-                        contentEditable={false}
-                        value={stringOrNA(
-                          opponents[selectedOpponent].matches![selectedMatch]
-                            .performance.weakness3
-                        )}
-                        margin="normal"
-                        fullWidth={true}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        label="How to beat"
-                        contentEditable={false}
-                        value={stringOrNA(
-                          opponents[selectedOpponent].matches![selectedMatch]
-                            .performance.changeForNextTime
-                        )}
-                        margin="normal"
-                        fullWidth={true}
-                      />
-                    </Grid>
+            if (
+              opponents[opponent].matches &&
+              opponents[opponent].matches!.length > 0
+            ) {
+              setDialogOpen(true);
+            }
+          }}
+        />
+        <Dialog
+          open={dialogOpen}
+          onClose={() => {
+            setSelectedMatch(0);
+            setSelectedOpponent(0);
+            setDialogOpen(false);
+          }}
+        >
+          <Box sx={{ margin: 2 }}>
+            {opponents &&
+            opponents.length > 0 &&
+            opponents[selectedOpponent].matches &&
+            opponents[selectedOpponent].matches!.length > 0 ? (
+              <Stack sx={{ alignItems: 'center' }}>
+                <Tabs
+                  value={selectedMatch}
+                  onChange={(e, v) => {
+                    console.log(e);
+                    console.log(v);
+                    setSelectedMatch(v);
+                  }}
+                >
+                  {opponents[selectedOpponent].matches!.map((m, i) => (
+                    <Tab
+                      key={`${opponents[selectedOpponent].opponentId}-${i}`}
+                      label={m.date}
+                    />
+                  ))}
+                </Tabs>
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
+                    <TextField
+                      label="Strength #1"
+                      contentEditable={false}
+                      value={stringOrNA(
+                        opponents[selectedOpponent].matches![selectedMatch]
+                          .performance.strength1
+                      )}
+                      margin="normal"
+                      fullWidth={true}
+                    />
+                    <TextField
+                      label="Strength #2"
+                      contentEditable={false}
+                      value={stringOrNA(
+                        opponents[selectedOpponent].matches![selectedMatch]
+                          .performance.strength2
+                      )}
+                      margin="normal"
+                      fullWidth={true}
+                    />
+                    <TextField
+                      label="Strength #3"
+                      contentEditable={false}
+                      value={stringOrNA(
+                        opponents[selectedOpponent].matches![selectedMatch]
+                          .performance.strength3
+                      )}
+                      margin="normal"
+                      fullWidth={true}
+                    />
                   </Grid>
-                </Stack>
-              ) : (
-                <></>
-              )}
-            </Box>
-          </Dialog>
-        </Box>
+                  <Grid item xs={6}>
+                    <TextField
+                      label="Weakness #1"
+                      contentEditable={false}
+                      value={stringOrNA(
+                        opponents[selectedOpponent].matches![selectedMatch]
+                          .performance.weakness1
+                      )}
+                      margin="normal"
+                      fullWidth={true}
+                    />
+                    <TextField
+                      label="Weakness #2"
+                      contentEditable={false}
+                      value={stringOrNA(
+                        opponents[selectedOpponent].matches![selectedMatch]
+                          .performance.weakness2
+                      )}
+                      margin="normal"
+                      fullWidth={true}
+                    />
+                    <TextField
+                      label="Weakness #3"
+                      contentEditable={false}
+                      value={stringOrNA(
+                        opponents[selectedOpponent].matches![selectedMatch]
+                          .performance.weakness3
+                      )}
+                      margin="normal"
+                      fullWidth={true}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      label="How to beat"
+                      contentEditable={false}
+                      value={stringOrNA(
+                        opponents[selectedOpponent].matches![selectedMatch]
+                          .performance.changeForNextTime
+                      )}
+                      margin="normal"
+                      fullWidth={true}
+                    />
+                  </Grid>
+                </Grid>
+              </Stack>
+            ) : (
+              <></>
+            )}
+          </Box>
+        </Dialog>
       </>
     );
   }

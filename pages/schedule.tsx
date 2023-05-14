@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useUser } from '@supabase/auth-helpers-react';
 import Router from 'next/router';
-import AppNavigation from '@/components/AppNavigation';
 import { Scheduler } from '@aldabil/react-scheduler';
 import { Box, CircularProgress, Container } from '@mui/material';
 import { ProcessedEvent, ViewEvent } from '@aldabil/react-scheduler/types';
@@ -49,30 +48,25 @@ const Schedule = () => {
   if (user) {
     return (
       <>
-        <Box sx={{ display: 'flex' }}>
-          <AppNavigation firstSelectedItem={1} />
-          <Container maxWidth="lg" sx={{ paddingTop: 10 }}>
-            {loading ? (
-              <CircularProgress />
-            ) : (
-              <Scheduler
-                view="month"
-                onDelete={onDeleteEvent}
-                getRemoteEvents={getScheduledEvents}
-                customEditor={(scheduler) => (
-                  <ScheduleEventEditor
-                    scheduler={scheduler}
-                    opponents={opponents}
-                    onComplete={async () => {
-                      setLoading(true);
-                      await refreshOpponents();
-                    }}
-                  />
-                )}
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <Scheduler
+            view="month"
+            onDelete={onDeleteEvent}
+            getRemoteEvents={getScheduledEvents}
+            customEditor={(scheduler) => (
+              <ScheduleEventEditor
+                scheduler={scheduler}
+                opponents={opponents}
+                onComplete={async () => {
+                  setLoading(true);
+                  await refreshOpponents();
+                }}
               />
             )}
-          </Container>
-        </Box>
+          />
+        )}
       </>
     );
   }

@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 import Router from 'next/router';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import Navbar from '@/components/Navbar';
+import LandingLayout from '@/layouts/landingLayout';
 
 export default function Landing() {
   let resolution = 'w_1600';
@@ -35,9 +35,6 @@ export default function Landing() {
           width: '100%'
         }}
       >
-        <Grid xs={1} sx={{ width: '100%' }}>
-          <Navbar />
-        </Grid>
         <Grid
           xs={1}
           sx={{
@@ -65,3 +62,7 @@ export default function Landing() {
     </>
   );
 }
+
+Landing.getLayout = function getLayout(page: any) {
+  return <LandingLayout>{page}</LandingLayout>;
+};
