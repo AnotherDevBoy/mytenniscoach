@@ -7,6 +7,7 @@ import { getURL } from '@/utils/helpers';
 import { Copyright } from '@mui/icons-material';
 import { Container, CssBaseline, Box, Avatar, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import LandingLayout from '@/layouts/landingLayout';
 
 const SignUp = () => {
   const user = useUser();
@@ -60,6 +61,10 @@ const SignUp = () => {
   }
 
   return <div>Loading</div>;
+};
+
+SignUp.getLayout = function getLayout(page: any) {
+  return <LandingLayout>{page}</LandingLayout>;
 };
 
 export default SignUp;

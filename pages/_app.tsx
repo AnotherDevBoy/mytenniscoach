@@ -6,22 +6,23 @@ import { useState } from 'react';
 import { MyUserContextProvider } from '@/utils/useUser';
 import Layout from '@/layouts/layout';
 import { Database } from '@/lib/database.types';
-import { useRouter } from 'next/router';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [supabaseClient] = useState(() =>
     createBrowserSupabaseClient<Database>()
   );
 
-  const currentPage = useRouter().asPath;
+  function getDefaultLayout(page: any) {
+    return <Layout>{page}</Layout>;
+  }
+
+  const getLayout = Component.getLayout || getDefaultLayout;
 
   return (
     <>
       <SessionContextProvider supabaseClient={supabaseClient}>
         <MyUserContextProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          {getLayout(<Component {...pageProps} />)}
         </MyUserContextProvider>
       </SessionContextProvider>
     </>
