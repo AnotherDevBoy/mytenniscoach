@@ -11,7 +11,7 @@ const repository = new MyTennisCoachRepository();
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<StatsDTO>
+  res: NextApiResponse<StatsDTO | {}>
 ) {
   await authHandler(req, res);
   const user = getUser(req.cookies);
@@ -23,6 +23,13 @@ export default async function handler(
       const completedMatches = eventsDAL.filter(
         (e) => e.type === EventTypeDAL.Match && e.metadata
       );
+
+      if (!completedMatches || completedMatches.length === 0) {
+        return res.status(200).json({
+          winRate: 100,
+          nemesis: 'N/A'
+        });
+      }
 
       const matchResults = completedMatches.map(
         (e) => e.metadata as MatchEventData

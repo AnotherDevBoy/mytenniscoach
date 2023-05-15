@@ -19,7 +19,7 @@ const Dashboard = () => {
 
   React.useEffect(() => {
     getStats().then((s) => setStats(s));
-  });
+  }, []);
 
   if (user && stats) {
     return (

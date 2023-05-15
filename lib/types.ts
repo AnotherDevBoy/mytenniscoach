@@ -77,7 +77,7 @@ export type OpponentStatsDTO = {
 
 export type StatsDTO = {
   winRate: string;
-  nemesis?: string;
+  nemesis: string;
 };
 
 export function getEventTypeIndex(eventType: EventType): number {
