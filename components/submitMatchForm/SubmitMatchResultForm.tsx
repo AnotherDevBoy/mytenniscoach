@@ -11,7 +11,7 @@ import OpponentSubForm from './subforms/OpponentSubForm';
 import PerformanceSubForm from './subforms/PerformanceSubForm';
 import { DialogContent } from '@mui/material';
 
-interface MatchResultFormProps {
+interface SubmitMatchResultFormProps {
   onFormCompleted: (data: any) => void;
 }
 
@@ -20,7 +20,7 @@ type AutoCompleteEntry = {
   label: string;
 };
 
-export type MatchFormData = {
+export type SubmitMatchResultFormData = {
   score: string;
   winLoss: string;
   duration: string;
@@ -48,7 +48,7 @@ export type MatchFormData = {
   lesson: string;
 };
 
-const MatchResultForm = (props: MatchResultFormProps, ref: any) => {
+const SubmitMatchResultForm = (props: SubmitMatchResultFormProps, ref: any) => {
   const [formSection, setFormSection] = useState(0);
 
   function buildNavigation(): JSX.Element[] {
@@ -66,7 +66,7 @@ const MatchResultForm = (props: MatchResultFormProps, ref: any) => {
     });
   }
 
-  const formContext = useForm<MatchFormData>({
+  const formContext = useForm<SubmitMatchResultFormData>({
     defaultValues: {
       score: '',
       winLoss: '',
@@ -155,4 +155,4 @@ const MatchResultForm = (props: MatchResultFormProps, ref: any) => {
   );
 };
 
-export default React.forwardRef(MatchResultForm);
+export default React.forwardRef(SubmitMatchResultForm);

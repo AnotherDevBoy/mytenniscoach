@@ -6,9 +6,10 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid';
 import Dialog from '@mui/material/Dialog';
-import MatchResultForm, {
-  MatchFormData
-} from '@/components/matchForm/MatchResultForm';
+import SubmitMatchResultForm, {
+  SubmitMatchResultFormData
+} from '@/components/submitMatchForm/SubmitMatchResultForm';
+import MatchResult from '@/components/matchResult/MatchResult';
 import { getEvents, getOpponents, submitEventData } from '@/lib/api';
 import { EventDTO, EventType, MatchEventData, OpponentDTO } from '@/lib/types';
 import { useMediaQuery, useTheme } from '@mui/material';
@@ -17,7 +18,9 @@ const Matches = () => {
   const user = useUser();
 
   const [displayOldMatches, setDisplayOldMatches] = React.useState(true);
-  const [modalOpen, setModalOpen] = React.useState(false);
+  const [submitMatchResultModalOpen, setSubmitMatchResultModalOpen] =
+    React.useState(false);
+  const [matchModalOpen, setMatchModalOpen] = React.useState(false);
   const [selectedEvent, setSelectedEvent] = React.useState('');
   const [events, setEvents] = React.useState<EventDTO[]>([]);
   const [opponents, setOpponents] = React.useState<OpponentDTO[]>([]);
@@ -59,7 +62,10 @@ const Matches = () => {
       };
     }) as GridRowsProp;
 
-  async function sendMatchResult(eventId: string, data: MatchFormData) {
+  async function sendMatchResult(
+    eventId: string,
+    data: SubmitMatchResultFormData
+  ) {
     const eventData: MatchEventData = {
       summary: {
         score: data.score,
@@ -135,22 +141,32 @@ const Matches = () => {
             const played = rowClicked.row.played;
 
             if (displayOldMatches && played === '❌') {
-              setModalOpen(true);
+              setSubmitMatchResultModalOpen(true);
+              setSelectedEvent(rowClicked.id.toString());
+            } else if (displayOldMatches && played === '✅') {
+              setMatchModalOpen(true);
               setSelectedEvent(rowClicked.id.toString());
             }
           }}
         />
         <Dialog
-          open={modalOpen}
+          open={submitMatchResultModalOpen}
           fullScreen={fullScreen}
-          onClose={() => setModalOpen(false)}
+          onClose={() => setSubmitMatchResultModalOpen(false)}
         >
-          <MatchResultForm
+          <SubmitMatchResultForm
             onFormCompleted={async (data) => {
-              setModalOpen(false);
+              setSubmitMatchResultModalOpen(false);
               await sendMatchResult(selectedEvent, data);
             }}
           />
+        </Dialog>
+        <Dialog
+          open={matchModalOpen}
+          fullScreen={fullScreen}
+          onClose={() => setMatchModalOpen(false)}
+        >
+          <MatchResult handleClose={() => setMatchModalOpen(false)} />
         </Dialog>
       </>
     );
