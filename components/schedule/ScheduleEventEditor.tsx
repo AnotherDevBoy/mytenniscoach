@@ -88,7 +88,7 @@ const ScheduleEventEditor = ({
         try {
           scheduler.loading(true);
 
-          let opponentId = data.opponent.id;
+          let opponentId = data.opponent?.id;
 
           if (
             getEventTypeFromIndex(data.type) === EventType.Match &&
