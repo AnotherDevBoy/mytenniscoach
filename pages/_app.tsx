@@ -14,11 +14,7 @@ if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
   console.log('Initializing PostHog');
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
-    persistence: 'memory',
-    // Enable debug mode in development
-    loaded: (posthog) => {
-      if (process.env.NODE_ENV === 'development') posthog.debug();
-    }
+    persistence: 'memory'
   });
 }
 
