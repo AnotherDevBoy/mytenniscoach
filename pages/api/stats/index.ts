@@ -49,19 +49,23 @@ export default async function handler(
           lossesPerOpponent.set(m.opponent_id!, losses ? losses + 1 : 1);
         });
 
-      const max = [...lossesPerOpponent.entries()].reduce(
-        (accumulator, element) => {
-          return element[1] > accumulator[1] ? element : accumulator;
-        }
-      );
+      let opponent = undefined;
 
-      const opponent = await repository.getOpponent(user, max[0]);
+      if (lossesPerOpponent.size > 0) {
+        const max = [...lossesPerOpponent.entries()].reduce(
+          (accumulator, element) => {
+            return element[1] > accumulator[1] ? element : accumulator;
+          }
+        );
+
+        opponent = await repository.getOpponent(user, max[0]);
+      }
 
       return res.status(200).json({
         winRate: ((victories.length / completedMatches.length) * 100).toFixed(
           2
         ),
-        nemesis: opponent ? opponent.name : undefined
+        nemesis: opponent ? opponent.name : 'N/A'
       });
   }
 }
