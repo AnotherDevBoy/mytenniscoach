@@ -3,9 +3,8 @@ import {
   EventTypeDAL,
   MyTennisCoachRepository
 } from '@/pages/api/lib/repository';
-import { toEventDTO, toEventDAL } from '@/pages/api/convert';
 import { getUser, authHandler } from '@/pages/api/lib/auth';
-import { EventDTO, MatchEventData, StatsDTO } from '@/lib/types';
+import {  MatchEventData, StatsDTO } from '@/lib/types';
 
 const repository = new MyTennisCoachRepository();
 

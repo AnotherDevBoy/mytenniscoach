@@ -166,7 +166,10 @@ const Matches = () => {
           fullScreen={fullScreen}
           onClose={() => setMatchModalOpen(false)}
         >
-          <MatchResult handleClose={() => setMatchModalOpen(false)} />
+          <MatchResult
+            handleClose={() => setMatchModalOpen(false)}
+            eventDTO={events.find((e) => e.id === selectedEvent)!}
+          />
         </Dialog>
       </>
     );

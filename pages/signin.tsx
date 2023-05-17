@@ -2,12 +2,12 @@ import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useEffect } from 'react';
-import Router from 'next/router';
 import { getURL } from '@/utils/helpers';
 import { Copyright } from '@mui/icons-material';
 import { Container, CssBaseline, Box, Avatar, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import LandingLayout from '@/layouts/landingLayout';
+import Router from 'next/router';
 
 const SignUp = () => {
   const user = useUser();

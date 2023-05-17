@@ -64,10 +64,7 @@ export default function Layout({ children, window }: Props) {
             onClick={() => onMenuItemSelected(index)}
           >
             <ListItemIcon>{element.icon}</ListItemIcon>
-            <ListItemText
-              primary={selectedIndex == index ? element.name : null}
-              secondary={selectedIndex != index ? element.name : null}
-            />
+            <ListItemText primary={element.name} />
           </ListItemButton>
         );
       })}
