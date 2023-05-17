@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { useUser } from '@supabase/auth-helpers-react';
 import Router from 'next/router';
 import { Scheduler } from '@aldabil/react-scheduler';
-import { Box, CircularProgress, Container } from '@mui/material';
 import { ProcessedEvent, ViewEvent } from '@aldabil/react-scheduler/types';
 
 import { EventDTO, OpponentDTO } from '@/lib/types';
 import ScheduleEventEditor from '@/components/schedule/ScheduleEventEditor';
 import { toProcessedEvent } from '@/lib/convert';
 import { getEvents, deleteEvent, getOpponents } from '@/lib/api';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import { useUser } from '@/utils/useUser';
 
 const Schedule = () => {
   const [loading, setLoading] = React.useState(true);
@@ -27,7 +27,7 @@ const Schedule = () => {
   const user = useUser();
 
   React.useEffect(() => {
-    if (!user) {
+    if (!user.isLoading && !user.user) {
       Router.push('/signin');
     }
   }, [user]);
@@ -45,33 +45,29 @@ const Schedule = () => {
     return id;
   }
 
-  if (user) {
+  if (user.user && !loading) {
     return (
       <>
-        {loading ? (
-          <CircularProgress />
-        ) : (
-          <Scheduler
-            view="month"
-            onDelete={onDeleteEvent}
-            getRemoteEvents={getScheduledEvents}
-            customEditor={(scheduler) => (
-              <ScheduleEventEditor
-                scheduler={scheduler}
-                opponents={opponents}
-                onComplete={async () => {
-                  setLoading(true);
-                  await refreshOpponents();
-                }}
-              />
-            )}
-          />
-        )}
+        <Scheduler
+          view="month"
+          onDelete={onDeleteEvent}
+          getRemoteEvents={getScheduledEvents}
+          customEditor={(scheduler) => (
+            <ScheduleEventEditor
+              scheduler={scheduler}
+              opponents={opponents}
+              onComplete={async () => {
+                setLoading(true);
+                await refreshOpponents();
+              }}
+            />
+          )}
+        />
       </>
     );
   }
 
-  return <></>;
+  return <LoadingSpinner />;
 };
 
 export default Schedule;

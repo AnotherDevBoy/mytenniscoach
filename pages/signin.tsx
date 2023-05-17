@@ -1,25 +1,27 @@
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
-import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
-import { useEffect } from 'react';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { getURL } from '@/utils/helpers';
 import { Copyright } from '@mui/icons-material';
 import { Container, CssBaseline, Box, Avatar, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import LandingLayout from '@/layouts/landingLayout';
+import { useUser } from '@/utils/useUser';
+import React from 'react';
+import LoadingSpinner from '@/components/LoadingSpinner';
 import Router from 'next/router';
 
 const SignUp = () => {
   const user = useUser();
   const supabaseClient = useSupabaseClient();
 
-  useEffect(() => {
-    if (user) {
+  React.useEffect(() => {
+    if (!user.isLoading && user.user) {
       Router.push('/dashboard');
     }
   }, [user]);
 
-  if (!user) {
+  if (!user.isLoading && !user.user) {
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -60,7 +62,7 @@ const SignUp = () => {
     );
   }
 
-  return <div>Loading</div>;
+  return <LoadingSpinner />;
 };
 
 SignUp.getLayout = function getLayout(page: any) {

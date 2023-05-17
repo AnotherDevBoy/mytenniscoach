@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useUser } from '@supabase/auth-helpers-react';
 import Router from 'next/router';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid/DataGrid';
@@ -13,6 +12,8 @@ import { OpponentStatsDTO } from '@/lib/types';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import { useUser } from '@/utils/useUser';
 
 function stringOrNA(value: string) {
   return value ? value : 'N/A';
@@ -52,7 +53,7 @@ const Opponents = () => {
   const [rows, setRows] = React.useState<any[]>([]);
 
   React.useEffect(() => {
-    if (!user) {
+    if (!user.isLoading && !user.user) {
       Router.push('/signin');
     }
   }, [user]);
@@ -74,7 +75,7 @@ const Opponents = () => {
     });
   }, [user]);
 
-  if (user) {
+  if (user.user && opponents.length !== 0) {
     return (
       <>
         <DataGrid
@@ -213,7 +214,7 @@ const Opponents = () => {
     );
   }
 
-  return <></>;
+  return <LoadingSpinner />;
 };
 
 export default Opponents;

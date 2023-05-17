@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useUser } from '@supabase/auth-helpers-react';
 import Router from 'next/router';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
@@ -13,6 +12,8 @@ import MatchResult from '@/components/matchResult/MatchResult';
 import { getEvents, getOpponents, submitEventData } from '@/lib/api';
 import { EventDTO, EventType, MatchEventData, OpponentDTO } from '@/lib/types';
 import { useMediaQuery, useTheme } from '@mui/material';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import { useUser } from '@/utils/useUser';
 
 const Matches = () => {
   const user = useUser();
@@ -29,7 +30,7 @@ const Matches = () => {
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   React.useEffect(() => {
-    if (!user) {
+    if (!user.isLoading && !user.user) {
       Router.push('/signin');
     }
 
@@ -106,7 +107,7 @@ const Matches = () => {
     setEvents(refreshedEvents);
   }
 
-  if (user) {
+  if (user.user && opponents.length > 0 && events.length > 0) {
     return (
       <>
         <Box
@@ -175,7 +176,7 @@ const Matches = () => {
     );
   }
 
-  return <></>;
+  return <LoadingSpinner />;
 };
 
 const columns: GridColDef[] = [

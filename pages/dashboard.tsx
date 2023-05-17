@@ -1,16 +1,11 @@
 import * as React from 'react';
-import { useUser } from '@supabase/auth-helpers-react';
 import Router from 'next/router';
-import {
-  Box,
-  Card,
-  CardContent,
-  CircularProgress,
-  Typography
-} from '@mui/material';
+import { Card, CardContent, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { StatsDTO } from '@/lib/types';
 import { getStats } from '@/lib/api';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import { useUser } from '@/utils/useUser';
 
 const Dashboard = () => {
   const user = useUser();
@@ -18,7 +13,7 @@ const Dashboard = () => {
   const [stats, setStats] = React.useState<StatsDTO | null>(null);
 
   React.useEffect(() => {
-    if (!user) {
+    if (!user.isLoading && !user.user) {
       Router.push('/signin');
     }
   }, [user]);
@@ -29,7 +24,7 @@ const Dashboard = () => {
     }
   }, [user]);
 
-  if (user && stats) {
+  if (user.user && stats) {
     return (
       <Grid container spacing={2}>
         <Grid xs={12} md={6} lg={4} xl={2}>
@@ -56,19 +51,7 @@ const Dashboard = () => {
     );
   }
 
-  return (
-    <Box
-      sx={{
-        width: '100%',
-        height: '90%', // TODO: Is there a better way?
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}
-    >
-      <CircularProgress />
-    </Box>
-  );
+  return <LoadingSpinner />;
 };
 
 export default Dashboard;

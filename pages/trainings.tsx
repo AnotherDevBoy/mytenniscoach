@@ -1,20 +1,16 @@
 import * as React from 'react';
-import { useUser } from '@supabase/auth-helpers-react';
 import Router from 'next/router';
 import { Typography } from '@mui/material';
+import { useUser } from '@/utils/useUser';
 
 const Trainings = () => {
   const user = useUser();
 
   React.useEffect(() => {
-    if (!user) {
+    if (!user.isLoading && !user.user) {
       Router.push('/signin');
     }
   }, [user]);
-
-  if (!user) {
-    return <></>;
-  }
 
   return (
     <>
