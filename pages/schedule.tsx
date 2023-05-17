@@ -9,8 +9,11 @@ import { toProcessedEvent } from '@/lib/convert';
 import { getEvents, deleteEvent, getOpponents } from '@/lib/api';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { useUser } from '@/utils/useUser';
+import { useSnackbar } from 'notistack';
 
 const Schedule = () => {
+  const { enqueueSnackbar } = useSnackbar();
+
   const [loading, setLoading] = React.useState(true);
   const [opponents, setOpponents] = React.useState<OpponentDTO[]>([]);
 
@@ -42,6 +45,10 @@ const Schedule = () => {
 
   async function onDeleteEvent(id: string | number): Promise<string | number> {
     await deleteEvent(id as string);
+    enqueueSnackbar('Event Deleted', {
+      variant: 'success',
+      anchorOrigin: { horizontal: 'center', vertical: 'bottom' }
+    });
     return id;
   }
 
@@ -58,6 +65,10 @@ const Schedule = () => {
               opponents={opponents}
               onComplete={async () => {
                 setLoading(true);
+                enqueueSnackbar('Event Created', {
+                  variant: 'success',
+                  anchorOrigin: { horizontal: 'center', vertical: 'bottom' }
+                });
                 await refreshOpponents();
               }}
             />

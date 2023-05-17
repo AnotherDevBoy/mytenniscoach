@@ -14,8 +14,11 @@ import { EventDTO, EventType, MatchEventData, OpponentDTO } from '@/lib/types';
 import { useMediaQuery, useTheme } from '@mui/material';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { useUser } from '@/utils/useUser';
+import { useSnackbar } from 'notistack';
 
 const Matches = () => {
+  const { enqueueSnackbar } = useSnackbar();
+
   const user = useUser();
 
   const [displayOldMatches, setDisplayOldMatches] = React.useState(true);
@@ -159,6 +162,10 @@ const Matches = () => {
             onFormCompleted={async (data) => {
               setSubmitMatchResultModalOpen(false);
               await sendMatchResult(selectedEvent, data);
+              enqueueSnackbar('Match result saved', {
+                variant: 'success',
+                anchorOrigin: { horizontal: 'center', vertical: 'bottom' }
+              });
             }}
           />
         </Dialog>

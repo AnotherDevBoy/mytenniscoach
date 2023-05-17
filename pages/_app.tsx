@@ -8,6 +8,7 @@ import { Database } from '@/lib/database.types';
 import posthog from 'posthog-js';
 import { PostHogProvider } from 'posthog-js/react';
 import { useRouter } from 'next/router';
+import { SnackbarProvider, useSnackbar } from 'notistack';
 
 // Check that PostHog is client-side (used to handle Next.js SSR)
 if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
@@ -43,13 +44,15 @@ export default function App({ Component, pageProps }: any) {
 
   return (
     <>
-      <PostHogProvider client={posthog}>
-        <SessionContextProvider supabaseClient={supabaseClient}>
-          <MyUserContextProvider>
-            {getLayout(<Component {...pageProps} />)}
-          </MyUserContextProvider>
-        </SessionContextProvider>
-      </PostHogProvider>
+      <SnackbarProvider>
+        <PostHogProvider client={posthog}>
+          <SessionContextProvider supabaseClient={supabaseClient}>
+            <MyUserContextProvider>
+              {getLayout(<Component {...pageProps} />)}
+            </MyUserContextProvider>
+          </SessionContextProvider>
+        </PostHogProvider>
+      </SnackbarProvider>
     </>
   );
 }
