@@ -9,6 +9,7 @@ import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import SportsTennisIcon from '@mui/icons-material/SportsTennis';
 import MenuIcon from '@mui/icons-material/Menu';
 import PeopleIcon from '@mui/icons-material/People';
+import SettingsIcon from '@mui/icons-material/Settings';
 import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
@@ -202,5 +203,10 @@ const sections = [
     name: 'Opponents',
     icon: <PeopleIcon />,
     route: '/opponents'
+  },
+  {
+    name: 'Settings',
+    icon: <SettingsIcon />,
+    route: '/settings'
   }
 ];
