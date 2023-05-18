@@ -9,6 +9,7 @@ import posthog from 'posthog-js';
 import { PostHogProvider } from 'posthog-js/react';
 import { useRouter } from 'next/router';
 import { SnackbarProvider, useSnackbar } from 'notistack';
+import CssBaseline from '@mui/material/CssBaseline';
 
 // Check that PostHog is client-side (used to handle Next.js SSR)
 if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
@@ -44,6 +45,7 @@ export default function App({ Component, pageProps }: any) {
 
   return (
     <>
+      <CssBaseline />
       <SnackbarProvider>
         <PostHogProvider client={posthog}>
           <SessionContextProvider supabaseClient={supabaseClient}>

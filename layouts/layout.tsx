@@ -21,7 +21,7 @@ import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 interface Props extends PropsWithChildren {
@@ -33,7 +33,14 @@ const drawerWidth = 240;
 export default function Layout({ children, window }: Props) {
   const supabaseClient = useSupabaseClient();
 
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const router = useRouter();
+
+  const selectedSectionIndex = sections.findIndex(
+    (s) => s.route === router.asPath
+  );
+  const defaultSection = selectedSectionIndex === -1 ? 0 : selectedSectionIndex;
+
+  const [selectedIndex, setSelectedIndex] = React.useState(defaultSection);
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -173,22 +180,27 @@ export default function Layout({ children, window }: Props) {
 const sections = [
   {
     name: 'Dashboard',
-    icon: <DashboardIcon />
+    icon: <DashboardIcon />,
+    route: '/dashboard'
   },
   {
     name: 'Schedule',
-    icon: <CalendarMonthIcon />
+    icon: <CalendarMonthIcon />,
+    route: '/schedule'
   },
   {
     name: 'Trainings',
-    icon: <FitnessCenterIcon />
+    icon: <FitnessCenterIcon />,
+    route: '/trainings'
   },
   {
     name: 'Matches',
-    icon: <SportsTennisIcon />
+    icon: <SportsTennisIcon />,
+    route: '/matches'
   },
   {
     name: 'Opponents',
-    icon: <PeopleIcon />
+    icon: <PeopleIcon />,
+    route: '/opponents'
   }
 ];
