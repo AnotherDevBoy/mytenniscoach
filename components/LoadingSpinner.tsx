@@ -6,7 +6,7 @@ const LoadingSpinner = () => {
     <Box
       sx={{
         width: '100%',
-        height: '90%', // TODO: Is there a better way?
+        height: '100%', // TODO: Is there a better way?
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'

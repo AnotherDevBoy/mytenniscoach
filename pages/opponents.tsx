@@ -14,6 +14,7 @@ import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { useUser } from '@/utils/useUser';
+import { format, parseISO } from 'date-fns';
 
 function stringOrNA(value: string) {
   return value ? value : 'N/A';
@@ -102,8 +103,6 @@ const Opponents = () => {
         <Dialog
           open={dialogOpen}
           onClose={() => {
-            setSelectedMatch(0);
-            setSelectedOpponent(0);
             setDialogOpen(false);
           }}
         >
@@ -119,12 +118,16 @@ const Opponents = () => {
                     setSelectedMatch(v);
                   }}
                 >
-                  {opponents[selectedOpponent].matches!.map((m, i) => (
-                    <Tab
-                      key={`${opponents[selectedOpponent].opponentId}-${i}`}
-                      label={m.date}
-                    />
-                  ))}
+                  {opponents[selectedOpponent].matches!.map((m, i) => {
+                    const parsedDate = parseISO(m.date);
+                    const formattedDate = format(parsedDate, 'd/M/yy');
+                    return (
+                      <Tab
+                        key={`${opponents[selectedOpponent].opponentId}-${i}`}
+                        label={formattedDate}
+                      />
+                    );
+                  })}
                 </Tabs>
                 <Grid container spacing={2}>
                   <Grid item xs={6}>
