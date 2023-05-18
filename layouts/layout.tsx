@@ -163,10 +163,10 @@ export default function Layout({ children, window }: Props) {
             <Toolbar /> {/* Invisible and unusuable toolbar for extra space */}
             <Box
               sx={{
-                width: '100%',
                 height: '90%', // TODO: check with Alejandro why this needs to be 90%
                 marginTop: '1em',
-                marginLeft: '0.5em'
+                marginLeft: '0.5em',
+                marginRight: '0.5em'
               }}
             >
               {children}

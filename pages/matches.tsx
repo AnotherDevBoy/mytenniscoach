@@ -136,7 +136,7 @@ const Matches = () => {
           rows={rows}
           columns={columns}
           autoHeight
-          sx={{ marginBottom: 5, width: 'auto' }}
+          sx={{ marginBottom: 5 }}
           columnVisibilityModel={{
             id: false
           }}
