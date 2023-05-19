@@ -16,10 +16,12 @@ const SignUp = () => {
   const supabaseClient = useSupabaseClient();
 
   React.useEffect(() => {
-    if (!user.isLoading && user.user) {
+    if (user.user) {
       Router.push('/dashboard');
     }
   }, [user]);
+
+  console.log(user);
 
   if (!user.isLoading && !user.user) {
     return (
