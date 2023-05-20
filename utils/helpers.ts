@@ -1,9 +1,7 @@
 import { NextApiRequest } from 'next';
 
 export const getURL = () => {
-  let url =
-    process?.env?.NEXT_PUBLIC_SITE_URL ?? // Set this to your site URL in production env.
-    'http://localhost:3000/';
+  let url = 'https://mytenniscoach.io';
   // Make sure to include `https://` when not localhost.
   url = url.includes('http') ? url : `https://${url}`;
   // Make sure to including trailing `/`.
