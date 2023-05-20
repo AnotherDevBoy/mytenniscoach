@@ -43,7 +43,6 @@ const SignUp = () => {
           </Typography>
           <Auth
             supabaseClient={supabaseClient}
-            redirectTo={getURL() + '/dashboard'}
             providers={['google']}
             appearance={{
               theme: ThemeSupa,
