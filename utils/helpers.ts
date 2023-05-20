@@ -1,8 +1,11 @@
 import { NextApiRequest } from 'next';
 
 export const getURL = () => {
-  let url = 'https://mytenniscoach.io';
-  // Make sure to include `https://` when not localhost.
+  const env = process.env.NODE_ENV;
+  let url =
+    env === 'development'
+      ? 'http://localhost:3000'
+      : 'https://mytenniscoach.io';
   url = url.includes('http') ? url : `https://${url}`;
   // Make sure to including trailing `/`.
   url = url.charAt(url.length - 1) === '/' ? url : `${url}/`;
