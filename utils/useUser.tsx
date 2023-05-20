@@ -20,25 +20,14 @@ export interface Props {
 }
 
 export const MyUserContextProvider = (props: Props) => {
-  const {
-    session,
-    isLoading: isLoadingUser,
-    supabaseClient: supabase
-  } = useSessionContext();
+  const { session, isLoading: isLoadingUser } = useSessionContext();
   const user = useSupaUser();
   const accessToken = session?.access_token ?? null;
-  const [isLoadingData, setIsloadingData] = useState(false);
-
-  useEffect(() => {
-    if (user && !isLoadingData) {
-      setIsloadingData(true);
-    }
-  }, [user, isLoadingUser]);
 
   const value = {
     accessToken,
     user,
-    isLoading: isLoadingUser || isLoadingData
+    isLoading: isLoadingUser
   };
 
   return <UserContext.Provider value={value} {...props} />;

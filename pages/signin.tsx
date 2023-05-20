@@ -21,6 +21,8 @@ const SignUp = () => {
     }
   }, [user]);
 
+  console.log(user);
+
   if (!user.isLoading && !user.user) {
     return (
       <Container component="main" maxWidth="xs">
@@ -41,8 +43,8 @@ const SignUp = () => {
           </Typography>
           <Auth
             supabaseClient={supabaseClient}
-            redirectTo={getURL()}
-            providers={[]}
+            redirectTo={getURL() + '/dashboard'}
+            providers={['google']}
             appearance={{
               theme: ThemeSupa,
               variables: {

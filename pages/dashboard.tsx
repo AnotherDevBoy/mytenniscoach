@@ -19,7 +19,7 @@ const Dashboard = () => {
   }, [user]);
 
   React.useEffect(() => {
-    if (user) {
+    if (user.user) {
       getStats().then((s) => setStats(s));
     }
   }, [user]);

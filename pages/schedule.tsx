@@ -4,7 +4,7 @@ import { Scheduler } from '@aldabil/react-scheduler';
 import { ProcessedEvent, ViewEvent } from '@aldabil/react-scheduler/types';
 
 import { EventDTO, OpponentDTO } from '@/lib/types';
-import ScheduleEventEditor from '@/components/schedule/ScheduleEventEditor';
+import ScheduleEventEditor from '@/components/ScheduleEventEditor';
 import { toProcessedEvent } from '@/lib/convert';
 import { getEvents, deleteEvent, getOpponents } from '@/lib/api';
 import LoadingSpinner from '@/components/LoadingSpinner';
