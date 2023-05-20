@@ -8,7 +8,6 @@ import Dialog from '@mui/material/Dialog';
 import SubmitMatchResultForm, {
   SubmitMatchResultFormData
 } from '@/components/SubmitMatchResultForm';
-import MatchResultDialog from '@/components/MatchResultDialog';
 import { getEvents, getOpponents, submitEventData } from '@/lib/api';
 import { EventDTO, EventType, MatchEventData, OpponentDTO } from '@/lib/types';
 import { useMediaQuery, useTheme } from '@mui/material';
