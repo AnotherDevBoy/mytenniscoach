@@ -4,7 +4,7 @@ import {
   MyTennisCoachRepository
 } from '@/pages/api/lib/repository';
 import { getUser, authHandler } from '@/pages/api/lib/auth';
-import {  MatchEventData, StatsDTO } from '@/lib/types';
+import { MatchEventData, StatsDTO } from '@/lib/types';
 
 const repository = new MyTennisCoachRepository();
 

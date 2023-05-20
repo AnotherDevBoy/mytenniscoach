@@ -10,9 +10,11 @@ import React from 'react';
 import OpponentSubForm from './subforms/OpponentSubForm';
 import PerformanceSubForm from './subforms/PerformanceSubForm';
 import { DialogContent } from '@mui/material';
+import { EventDTO, MatchEventData } from '@/lib/types';
 
 interface SubmitMatchResultFormProps {
   onFormCompleted: (data: any) => void;
+  event: EventDTO;
 }
 
 type AutoCompleteEntry = {
@@ -66,35 +68,69 @@ const SubmitMatchResultForm = (props: SubmitMatchResultFormProps, ref: any) => {
     });
   }
 
-  const formContext = useForm<SubmitMatchResultFormData>({
-    defaultValues: {
-      score: '',
-      winLoss: '',
-      duration: '',
-      rainLevel: 0,
-      windLevel: 0,
-      courtSpeed: 0,
-      surface: undefined,
-      forehand: undefined,
-      backhand: undefined,
-      strength1: '',
-      strength2: '',
-      strength3: '',
-      weakness1: '',
-      weakness2: '',
-      weakness3: '',
-      changeForNextTime: '',
-      technical: 0,
-      technicalNotes: '',
-      tactical: 0,
-      tacticalNotes: '',
-      physical: 0,
-      physicalNotes: '',
-      mental: 0,
-      mentalNotes: '',
-      lesson: ''
-    }
-  });
+  const matchData = props.event.data
+    ? (props.event.data as MatchEventData)
+    : undefined;
+
+  const formContext = matchData
+    ? useForm<SubmitMatchResultFormData>({
+        defaultValues: {
+          score: matchData.summary.score,
+          winLoss: matchData.summary.win ? '1' : '2',
+          duration: matchData.summary.duration,
+          rainLevel: matchData.summary.rainLevel,
+          windLevel: matchData.summary.windLevel,
+          courtSpeed: matchData.summary.courtSpeed,
+          surface: { label: matchData.summary.surface },
+          forehand: { label: matchData.opponentPeformance.forehand },
+          backhand: { label: matchData.opponentPeformance.backhand },
+          strength1: matchData.opponentPeformance.strength1,
+          strength2: matchData.opponentPeformance.strength2,
+          strength3: matchData.opponentPeformance.strength3,
+          weakness1: matchData.opponentPeformance.weakness1,
+          weakness2: matchData.opponentPeformance.weakness2,
+          weakness3: matchData.opponentPeformance.weakness3,
+          changeForNextTime: matchData.opponentPeformance.changeForNextTime,
+          technical: matchData.performance.technical,
+          technicalNotes: matchData.performance.technicalNotes,
+          tactical: matchData.performance.tactical,
+          tacticalNotes: matchData.performance.tacticalNotes,
+          physical: matchData.performance.physical,
+          physicalNotes: matchData.performance.physicalNotes,
+          mental: matchData.performance.mental,
+          mentalNotes: matchData.performance.mentalNotes,
+          lesson: matchData.performance.lesson
+        }
+      })
+    : useForm<SubmitMatchResultFormData>({
+        defaultValues: {
+          score: '',
+          winLoss: '',
+          duration: '',
+          rainLevel: 0,
+          windLevel: 0,
+          courtSpeed: 0,
+          surface: { label: '' },
+          forehand: { label: '' },
+          backhand: { label: '' },
+          strength1: '',
+          strength2: '',
+          strength3: '',
+          weakness1: '',
+          weakness2: '',
+          weakness3: '',
+          changeForNextTime: '',
+          technical: 0,
+          technicalNotes: '',
+          tactical: 0,
+          tacticalNotes: '',
+          physical: 0,
+          physicalNotes: '',
+          mental: 0,
+          mentalNotes: '',
+          lesson: ''
+        }
+      });
 
   const { handleSubmit } = formContext;
 

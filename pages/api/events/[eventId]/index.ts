@@ -7,8 +7,6 @@ import { extractEventId } from '@/utils/helpers';
 
 const repository = new MyTennisCoachRepository();
 
-
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>

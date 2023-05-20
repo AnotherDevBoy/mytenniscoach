@@ -7,8 +7,8 @@ import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid';
 import Dialog from '@mui/material/Dialog';
 import SubmitMatchResultForm, {
   SubmitMatchResultFormData
-} from '@/components/submitMatchForm/SubmitMatchResultForm';
-import MatchResult from '@/components/matchResult/MatchResult';
+} from '@/components/SubmitMatchResultForm';
+import MatchResultDialog from '@/components/MatchResultDialog';
 import { getEvents, getOpponents, submitEventData } from '@/lib/api';
 import { EventDTO, EventType, MatchEventData, OpponentDTO } from '@/lib/types';
 import { useMediaQuery, useTheme } from '@mui/material';
@@ -24,8 +24,9 @@ const Matches = () => {
   const [displayOldMatches, setDisplayOldMatches] = React.useState(true);
   const [submitMatchResultModalOpen, setSubmitMatchResultModalOpen] =
     React.useState(false);
-  const [matchModalOpen, setMatchModalOpen] = React.useState(false);
-  const [selectedEvent, setSelectedEvent] = React.useState('');
+  const [selectedEvent, setSelectedEvent] = React.useState<
+    EventDTO | undefined
+  >(undefined);
   const [events, setEvents] = React.useState<EventDTO[]>([]);
   const [opponents, setOpponents] = React.useState<OpponentDTO[]>([]);
 
@@ -67,7 +68,7 @@ const Matches = () => {
     }) as GridRowsProp;
 
   async function sendMatchResult(
-    eventId: string,
+    event: EventDTO,
     data: SubmitMatchResultFormData
   ) {
     const eventData: MatchEventData = {
@@ -104,7 +105,7 @@ const Matches = () => {
       }
     };
 
-    await submitEventData(eventId, eventData);
+    await submitEventData(event.id, eventData);
 
     const refreshedEvents = await getEvents();
     setEvents(refreshedEvents);
@@ -142,14 +143,13 @@ const Matches = () => {
           }}
           disableRowSelectionOnClick={true}
           onRowClick={(rowClicked) => {
-            const played = rowClicked.row.played;
-
-            if (displayOldMatches && played === '❌') {
+            if (displayOldMatches) {
               setSubmitMatchResultModalOpen(true);
-              setSelectedEvent(rowClicked.id.toString());
-            } else if (displayOldMatches && played === '✅') {
-              setMatchModalOpen(true);
-              setSelectedEvent(rowClicked.id.toString());
+
+              const maybeEvent = events.find(
+                (e) => e.id === rowClicked.id.toString()
+              )!;
+              setSelectedEvent(maybeEvent);
             }
           }}
         />
@@ -159,24 +159,15 @@ const Matches = () => {
           onClose={() => setSubmitMatchResultModalOpen(false)}
         >
           <SubmitMatchResultForm
+            event={selectedEvent!}
             onFormCompleted={async (data) => {
               setSubmitMatchResultModalOpen(false);
-              await sendMatchResult(selectedEvent, data);
+              await sendMatchResult(selectedEvent!, data);
               enqueueSnackbar('Match result saved', {
                 variant: 'success',
                 anchorOrigin: { horizontal: 'center', vertical: 'bottom' }
               });
             }}
-          />
-        </Dialog>
-        <Dialog
-          open={matchModalOpen}
-          fullScreen={fullScreen}
-          onClose={() => setMatchModalOpen(false)}
-        >
-          <MatchResult
-            handleClose={() => setMatchModalOpen(false)}
-            eventDTO={events.find((e) => e.id === selectedEvent)!}
           />
         </Dialog>
       </>

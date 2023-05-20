@@ -25,6 +25,10 @@ const SummarySubForm = () => {
                 label: 'Left-handed'
               }
             ]}
+            autocompleteProps={{
+              isOptionEqualToValue: (option, value) =>
+                option.label === value.label
+            }}
             required
           />
         </Grid>
@@ -42,6 +46,10 @@ const SummarySubForm = () => {
                 label: 'Two-handed'
               }
             ]}
+            autocompleteProps={{
+              isOptionEqualToValue: (option, value) =>
+                option.label === value.label
+            }}
             required
           />
         </Grid>
