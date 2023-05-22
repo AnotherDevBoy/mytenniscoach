@@ -24,6 +24,9 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 import Router, { useRouter } from 'next/router';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import { Menu, MenuItem } from '@mui/material';
+import { AccountCircle } from '@mui/icons-material';
+import { useUser } from '@/utils/useUser';
 
 interface Props extends PropsWithChildren {
   window?: () => Window;
@@ -32,6 +35,7 @@ interface Props extends PropsWithChildren {
 const drawerWidth = 240;
 
 export default function Layout({ children, window }: Props) {
+  const user = useUser();
   const supabaseClient = useSupabaseClient();
 
   const router = useRouter();
@@ -47,6 +51,16 @@ export default function Layout({ children, window }: Props) {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -115,15 +129,36 @@ export default function Layout({ children, window }: Props) {
                 My Tennis Coach
               </Typography>
             </Toolbar>
-            <Button
-              color="inherit"
-              onClick={async () => {
-                await supabaseClient.auth.signOut();
-                Router.push('/');
+            <IconButton size="large" onClick={handleMenu} color="inherit">
+              <AccountCircle />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right'
               }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right'
+              }}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
             >
-              Sign-out
-            </Button>
+              <MenuItem disabled divider>
+                {user.user?.email}
+              </MenuItem>
+              <MenuItem
+                onClick={async () => {
+                  await supabaseClient.auth.signOut();
+                  Router.push('/');
+                }}
+              >
+                Sign-out
+              </MenuItem>
+            </Menu>
           </AppBar>
           <Drawer
             variant="permanent"
