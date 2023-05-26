@@ -10,7 +10,7 @@ import SubmitMatchResultForm, {
 } from '@/components/SubmitMatchResultForm';
 import { getEvents, getOpponents, submitEventData } from '@/lib/api';
 import { EventDTO, EventType, MatchEventData, OpponentDTO } from '@/lib/types';
-import useTheme from '@mui/material/useTheme';
+import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { useUser } from '@/utils/useUser';
