@@ -18,6 +18,7 @@ export const getUser = (
 };
 
 export const authHandler = (req: NextApiRequest, res: NextApiResponse) => {
+  console.log('Auth handler');
   const user = getUser(req.cookies);
 
   if (!user) {
