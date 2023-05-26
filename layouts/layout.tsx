@@ -10,7 +10,6 @@ import SportsTennisIcon from '@mui/icons-material/SportsTennis';
 import MenuIcon from '@mui/icons-material/Menu';
 import PeopleIcon from '@mui/icons-material/People';
 import SettingsIcon from '@mui/icons-material/Settings';
-import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
@@ -24,8 +23,9 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 import Router, { useRouter } from 'next/router';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
-import { Menu, MenuItem } from '@mui/material';
-import { AccountCircle } from '@mui/icons-material';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useUser } from '@/utils/useUser';
 
 interface Props extends PropsWithChildren {

@@ -9,7 +9,7 @@ import SummarySubForm from './subforms/SummarySubForm';
 import React from 'react';
 import OpponentSubForm from './subforms/OpponentSubForm';
 import PerformanceSubForm from './subforms/PerformanceSubForm';
-import { DialogContent } from '@mui/material';
+import DialogContent from '@mui/material/DialogContent';
 import { EventDTO, MatchEventData } from '@/lib/types';
 
 interface SubmitMatchResultFormProps {

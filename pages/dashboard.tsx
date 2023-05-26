@@ -1,6 +1,8 @@
 import * as React from 'react';
 import Router from 'next/router';
-import { Card, CardContent, Typography } from '@mui/material';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Unstable_Grid2';
 import { StatsDTO } from '@/lib/types';
 import { getStats } from '@/lib/api';

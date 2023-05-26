@@ -1,10 +1,6 @@
-import { useEffect, useState } from 'react';
-import {
-  Button,
-  DialogActions,
-  DialogTitle,
-  createFilterOptions
-} from '@mui/material';
+import Button from '@mui/material/Button';
+import DialogActions from '@mui/material/DialogActions';
+import { createFilterOptions } from '@mui/material';
 import type {
   ProcessedEvent,
   SchedulerHelpers

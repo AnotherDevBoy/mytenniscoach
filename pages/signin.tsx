@@ -2,7 +2,7 @@ import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { getURL } from '@/utils/helpers';
-import { Copyright } from '@mui/icons-material';
+import Copyright from '@mui/icons-material/Copyright';
 import { Container, CssBaseline, Box, Avatar, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import LandingLayout from '@/layouts/landingLayout';
