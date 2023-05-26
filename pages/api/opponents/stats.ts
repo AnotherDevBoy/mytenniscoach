@@ -15,6 +15,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
+  console.log('Starting execution of /opponents/stats');
   await authHandler(req, res);
   const user = getUser(req.cookies);
 

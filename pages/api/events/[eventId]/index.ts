@@ -11,6 +11,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
+  console.log('Starting execution of /events/[id]');
   await authHandler(req, res);
   const user = getUser(req.cookies);
 

@@ -12,6 +12,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<StatsDTO | {}>
 ) {
+  console.log('Starting execution of /stats');
   await authHandler(req, res);
   const user = getUser(req.cookies);
 
