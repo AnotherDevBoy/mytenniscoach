@@ -23,9 +23,13 @@ export default async function handler(
     case 'GET':
       const opponentsDAL = await repository.getOpponents(user);
 
-      const eventsDAL = await repository.getEvents(user);
+      console.log('Oppoonents', opponentsDAL);
 
-      const stats = getOpponentsStats(opponentsDAL, eventsDAL);
+      const matchesDAL = await repository.getCompletedMatches(user);
+
+      console.log('matchesDAL', opponentsDAL);
+
+      const stats = getOpponentsStats(opponentsDAL, matchesDAL);
 
       return res.status(200).json(stats);
     default:
@@ -40,58 +44,65 @@ function getOpponentsStats(
   const opponentsStats: OpponentStatsDTO[] = [];
 
   opponentsDAL.forEach((o) => {
-    const eventsForOpponent = eventsDAL.filter(
-      (e) =>
-        e.opponent_id === o.id && e.type === EventTypeDAL.Match && e.metadata
-    );
+    try {
+      const eventsForOpponent = eventsDAL.filter((e) => e.opponent_id === o.id);
 
-    if (eventsForOpponent.length === 0) {
+      if (eventsForOpponent.length === 0) {
+        const stats: OpponentStatsDTO = {
+          opponentId: o.id,
+          opponentName: o.name
+        };
+
+        opponentsStats.push(stats);
+        return;
+      }
+
+      const eventsForOpponentSorted = eventsForOpponent.sort((a, b) => {
+        const endA = new Date(a.end);
+        const endB = new Date(b.end);
+
+        return compareDesc(endA, endB);
+      });
+
+      const matchData = eventsForOpponentSorted.map(
+        (e) => e.metadata as MatchEventData
+      );
+
+      const victories = matchData.filter((m) => m.summary.win);
+
+      const winRate = (
+        (victories.length / eventsForOpponent.length) *
+        100
+      ).toFixed(2);
+
+      const lastMatch = matchData[0];
+
+      const stats: OpponentStatsDTO = {
+        opponentId: o.id,
+        opponentName: o.name,
+        winRate: winRate,
+        forehand: lastMatch.opponentPeformance.forehand,
+        backhand: lastMatch.opponentPeformance.backhand,
+        matches: eventsForOpponentSorted.map((e) => {
+          const metadata = e.metadata as MatchEventData;
+
+          return {
+            date: e.end,
+            performance: metadata.opponentPeformance
+          } as MatchStats;
+        })
+      };
+
+      opponentsStats.push(stats);
+    } catch (e) {
+      console.log('An error ocurred', e);
       const stats: OpponentStatsDTO = {
         opponentId: o.id,
         opponentName: o.name
       };
 
       opponentsStats.push(stats);
-      return;
     }
-
-    const eventsForOpponentSorted = eventsForOpponent.sort((a, b) => {
-      const endA = new Date(a.end);
-      const endB = new Date(b.end);
-
-      return compareDesc(endA, endB);
-    });
-
-    const matchData = eventsForOpponentSorted.map(
-      (e) => e.metadata as MatchEventData
-    );
-
-    const victories = matchData.filter((m) => m.summary.win);
-
-    const winRate = (
-      (victories.length / eventsForOpponent.length) *
-      100
-    ).toFixed(2);
-
-    const lastMatch = matchData[0];
-
-    const stats: OpponentStatsDTO = {
-      opponentId: o.id,
-      opponentName: o.name,
-      winRate: winRate,
-      forehand: lastMatch.opponentPeformance.forehand,
-      backhand: lastMatch.opponentPeformance.backhand,
-      matches: eventsForOpponentSorted.map((e) => {
-        const metadata = e.metadata as MatchEventData;
-
-        return {
-          date: e.end,
-          performance: metadata.opponentPeformance
-        } as MatchStats;
-      })
-    };
-
-    opponentsStats.push(stats);
   });
 
   return opponentsStats;
