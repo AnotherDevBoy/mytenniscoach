@@ -13,11 +13,7 @@ export default async function handler(
 ) {
   console.log('Starting execution of /events/[id]');
   await authHandler(req, res);
-  const user = getUser(req.cookies);
-
-  if (!user) {
-    return res.status(401).json({ message: 'Unauthorized' });
-  }
+  const user = getUser(req.cookies)!;
 
   const eventId = extractEventId(req);
 

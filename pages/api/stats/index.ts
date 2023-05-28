@@ -14,7 +14,7 @@ export default async function handler(
 ) {
   console.log('Starting execution of /stats');
   await authHandler(req, res);
-  const user = getUser(req.cookies);
+  const user = getUser(req.cookies)!;
 
   switch (req.method) {
     case 'GET':

@@ -16,11 +16,6 @@ export default async function handler(
 ) {
   console.log('Starting execution of /opponents/[id]');
   await authHandler(req, res);
-  const user = getUser(req.cookies);
-
-  if (!user) {
-    return res.status(401).json({ message: 'Unauthorized' });
-  }
 
   const opponentId = getOpponentId(req);
 

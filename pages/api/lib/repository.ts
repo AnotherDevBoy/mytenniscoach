@@ -58,14 +58,14 @@ export class MyTennisCoachRepository {
   }
 
   async getCompletedMatches(userId: string): Promise<EventDAL[]> {
+    console.log('getCompletedMatches', userId);
     const response = await this.supabase
       .from('Event')
       .select()
       .eq('user_id', userId)
       .eq('type', EventTypeDAL.Match)
-      .is('deleted_at', null)
-      .not('metadata', 'eq', null);
-
+      .not('metadata', 'is', null)
+      .is('deleted_at', null);
     this.handleError(response);
 
     return response.data as EventDAL[];

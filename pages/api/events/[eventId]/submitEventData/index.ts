@@ -15,7 +15,7 @@ export default async function handler(
   res: NextApiResponse<any>
 ) {
   await authHandler(req, res);
-  const user = getUser(req.cookies);
+  const user = getUser(req.cookies)!;
 
   switch (req.method) {
     case 'POST':
