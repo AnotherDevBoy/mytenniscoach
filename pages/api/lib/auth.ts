@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import Configuration from './configuration';
 import jwt from 'jsonwebtoken';
 
 export const getUser = (
@@ -15,15 +14,11 @@ export const getUser = (
   }
 
   const parsedToken = JSON.parse(token);
-
-  console.log('Encoded token', parsedToken);
   var decodedToken = jwt.decode(parsedToken[0]);
-  console.log('Decoded token', decodedToken);
   return decodedToken!.sub as string;
 };
 
 export const authHandler = (req: NextApiRequest, res: NextApiResponse) => {
-  console.log('Auth handler');
   const user = getUser(req.cookies);
 
   if (!user) {
