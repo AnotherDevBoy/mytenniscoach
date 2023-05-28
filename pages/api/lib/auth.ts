@@ -11,7 +11,9 @@ export const getUser = (
     return '';
   }
 
-  const encodedAuthToken = cookies['supabase-auth-token'];
+  const encodedAuthToken =
+    cookies['supabase-auth-token'] ??
+    cookies['sb-dmvvvaxstbfcdrxwfraw-auth-token'];
   const authToken = JSON.parse(decodeURI(encodedAuthToken));
   var decodedToken = jwt.verify(authToken[0], Configuration.jwtSecret);
   return decodedToken.sub as string;
