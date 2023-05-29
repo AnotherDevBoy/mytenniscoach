@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { MyTennisCoachRepository } from '@/pages/api/lib/repository';
-import { authHandler, getUser } from '@/pages/api/lib/auth';
+import { authHandler } from '@/pages/api/lib/auth';
+import { createLogger, logger } from '../lib/logger';
+import { extractRequestId } from '../lib/headers';
 
 const repository = new MyTennisCoachRepository();
 
@@ -14,7 +16,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  console.log('Starting execution of /opponents/[id]');
+  createLogger(extractRequestId(req));
+  logger.info('Starting execution of /opponents/[id]');
   await authHandler(req, res);
 
   const opponentId = getOpponentId(req);

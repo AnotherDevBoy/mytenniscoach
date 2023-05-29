@@ -1,12 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import jwt from 'jsonwebtoken';
+import { logger } from '../lib/logger';
 
 export const getUser = (
   cookies: Partial<{
     [key: string]: string;
   }>
 ): string | null => {
-  console.log(cookies);
   const token = getToken(cookies);
 
   if (!token) {

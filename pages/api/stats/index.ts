@@ -1,10 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import {
-  EventTypeDAL,
-  MyTennisCoachRepository
-} from '@/pages/api/lib/repository';
+import { MyTennisCoachRepository } from '@/pages/api/lib/repository';
 import { getUser, authHandler } from '@/pages/api/lib/auth';
 import { MatchEventData, StatsDTO } from '@/lib/types';
+import { createLogger, logger } from '../lib/logger';
+import { extractRequestId } from '../lib/headers';
 
 const repository = new MyTennisCoachRepository();
 
@@ -12,7 +11,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<StatsDTO | {}>
 ) {
-  console.log('Starting execution of /stats');
+  createLogger(extractRequestId(req));
+  logger.info('Starting execution of /stats');
   await authHandler(req, res);
   const user = getUser(req.cookies)!;
 
@@ -63,7 +63,7 @@ export default async function handler(
           nemesis: opponent ? opponent.name : 'N/A'
         });
       } catch (e) {
-        console.log('An error ocurred', e);
+        logger.error('An error ocurred', e);
         return res.status(200).json({
           winRate: 100,
           nemesis: 'N/A'

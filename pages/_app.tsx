@@ -1,6 +1,6 @@
 import '@/styles/globals.css';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
-import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { createPagesBrowserClient } from '@supabase/auth-helpers-nextjs';
 import { useEffect, useState } from 'react';
 import { MyUserContextProvider } from '@/utils/useUser';
 import Layout from '@/layouts/layout';
@@ -21,9 +21,7 @@ if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
 }
 
 export default function App({ Component, pageProps }: any) {
-  const [supabaseClient] = useState(() =>
-    createBrowserSupabaseClient<Database>()
-  );
+  const [supabaseClient] = useState(() => createPagesBrowserClient<Database>());
 
   function getDefaultLayout(page: any) {
     return <Layout>{page}</Layout>;

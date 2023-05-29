@@ -1,13 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import {
   EventDAL,
-  EventTypeDAL,
   MyTennisCoachRepository,
   OpponentDAL
 } from '@/pages/api/lib/repository';
 import { getUser, authHandler } from '@/pages/api/lib/auth';
 import { MatchEventData, MatchStats, OpponentStatsDTO } from '@/lib/types';
 import { compareDesc } from 'date-fns';
+import { createLogger, logger } from '../lib/logger';
+import { extractRequestId } from '../lib/headers';
 
 const repository = new MyTennisCoachRepository();
 
@@ -15,7 +16,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  console.log('Starting execution of /opponents/stats');
+  createLogger(extractRequestId(req));
+  logger.info('Starting execution of /opponents/stats');
   await authHandler(req, res);
   const user = getUser(req.cookies)!;
 
@@ -23,11 +25,11 @@ export default async function handler(
     case 'GET':
       const opponentsDAL = await repository.getOpponents(user);
 
-      console.log('Oppoonents', opponentsDAL);
+      logger.info('Oppoonents', opponentsDAL);
 
       const matchesDAL = await repository.getCompletedMatches(user);
 
-      console.log('matchesDAL', opponentsDAL);
+      logger.info('matchesDAL', opponentsDAL);
 
       const stats = getOpponentsStats(opponentsDAL, matchesDAL);
 
@@ -95,7 +97,7 @@ function getOpponentsStats(
 
       opponentsStats.push(stats);
     } catch (e) {
-      console.log('An error ocurred', e);
+      logger.error('An error ocurred', e);
       const stats: OpponentStatsDTO = {
         opponentId: o.id,
         opponentName: o.name

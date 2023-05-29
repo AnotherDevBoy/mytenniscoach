@@ -4,6 +4,8 @@ import { toEventDAL } from '@/pages/api/convert';
 import { authHandler, getUser } from '@/pages/api/lib/auth';
 import { EventDTO } from '@/lib/types';
 import { extractEventId } from '@/utils/helpers';
+import { createLogger, logger } from '../../lib/logger';
+import { extractRequestId } from '../../lib/headers';
 
 const repository = new MyTennisCoachRepository();
 
@@ -11,7 +13,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  console.log('Starting execution of /events/[id]');
+  createLogger(extractRequestId(req));
+  logger.info('Starting execution of /events/[id]');
   await authHandler(req, res);
   const user = getUser(req.cookies)!;
 
