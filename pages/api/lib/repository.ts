@@ -58,7 +58,6 @@ export class MyTennisCoachRepository {
   }
 
   async getCompletedMatches(userId: string): Promise<EventDAL[]> {
-    console.log('getCompletedMatches', userId);
     const response = await this.supabase
       .from('Event')
       .select()

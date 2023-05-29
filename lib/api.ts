@@ -131,7 +131,8 @@ export async function getStats(): Promise<StatsDTO> {
   const requestId = uuidv4();
 
   const response = await axios.get(`api/stats`, {
-    headers: { 'X-Request-ID': requestId }
+    headers: { 'X-Request-ID': requestId },
+    validateStatus: (status) => true
   });
 
   handleResponseErrors(requestId, response);

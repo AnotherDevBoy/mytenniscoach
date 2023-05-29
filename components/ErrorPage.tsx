@@ -1,12 +1,23 @@
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Image, { ImageLoaderProps } from 'next/image';
+import { useSnackbar } from 'notistack';
+import { FallbackProps } from 'react-error-boundary';
 
-const customLoader = ({ src, width, quality }: ImageLoaderProps) => {
+const customLoader = ({ src }: ImageLoaderProps) => {
   return `${src}`;
 };
 
-const ErrorPage = () => {
+const ErrorPage = ({ error }: FallbackProps) => {
+  const { enqueueSnackbar } = useSnackbar();
+
+  const e = error as Error;
+
+  enqueueSnackbar(e.message, {
+    variant: 'error',
+    anchorOrigin: { horizontal: 'center', vertical: 'bottom' }
+  });
+
   return (
     <Stack
       height={'100%'}
