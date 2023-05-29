@@ -45,7 +45,7 @@ const Schedule = () => {
         toProcessedEvent(e, opponents)
       ) as ProcessedEvent[];
     } catch (e) {
-      throwError(e);
+      throwError(e as Error);
     }
   };
 
