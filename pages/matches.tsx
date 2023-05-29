@@ -15,9 +15,12 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { useUser } from '@/utils/useUser';
 import { useSnackbar } from 'notistack';
+import useAsyncError from '@/lib/errorHandling';
 
 const Matches = () => {
   const { enqueueSnackbar } = useSnackbar();
+
+  const throwError = useAsyncError();
 
   const user = useUser();
 
@@ -45,6 +48,9 @@ const Matches = () => {
       })
       .then((existingEvents) => {
         setEvents(existingEvents);
+      })
+      .catch((e) => {
+        throwError(e);
       });
   }, [user]);
 
@@ -107,8 +113,12 @@ const Matches = () => {
 
     await submitEventData(event.id, eventData);
 
-    const refreshedEvents = await getEvents();
-    setEvents(refreshedEvents);
+    try {
+      const refreshedEvents = await getEvents();
+      setEvents(refreshedEvents);
+    } catch (e) {
+      throwError(e as Error);
+    }
   }
 
   if (user.user && opponents.length > 0 && events.length > 0) {

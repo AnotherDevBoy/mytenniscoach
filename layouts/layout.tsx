@@ -1,4 +1,5 @@
 import { PropsWithChildren } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import Head from 'next/head';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
@@ -27,6 +28,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useUser } from '@/utils/useUser';
+import ErrorPage from '@/components/ErrorPage';
 
 interface Props extends PropsWithChildren {
   window?: () => Window;
@@ -204,7 +206,9 @@ export default function Layout({ children, window }: Props) {
                 marginRight: '0.5em'
               }}
             >
-              {children}
+              <ErrorBoundary FallbackComponent={ErrorPage}>
+                {children}
+              </ErrorBoundary>
             </Box>
           </Box>
         </Box>

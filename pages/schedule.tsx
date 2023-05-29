@@ -10,8 +10,10 @@ import { getEvents, deleteEvent, getOpponents } from '@/lib/api';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { useUser } from '@/utils/useUser';
 import { useSnackbar } from 'notistack';
+import useAsyncError from '@/lib/errorHandling';
 
 const Schedule = () => {
+  const throwError = useAsyncError();
   const { enqueueSnackbar } = useSnackbar();
 
   const [loading, setLoading] = React.useState(true);
@@ -38,9 +40,13 @@ const Schedule = () => {
   const getScheduledEvents = async (
     _: ViewEvent
   ): Promise<ProcessedEvent[] | void> => {
-    return (await getEvents()).map((e: EventDTO) =>
-      toProcessedEvent(e, opponents)
-    ) as ProcessedEvent[];
+    try {
+      return (await getEvents()).map((e: EventDTO) =>
+        toProcessedEvent(e, opponents)
+      ) as ProcessedEvent[];
+    } catch (e) {
+      throwError(e);
+    }
   };
 
   async function onDeleteEvent(id: string | number): Promise<string | number> {

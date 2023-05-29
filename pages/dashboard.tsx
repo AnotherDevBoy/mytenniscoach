@@ -8,9 +8,11 @@ import { StatsDTO } from '@/lib/types';
 import { getStats } from '@/lib/api';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { useUser } from '@/utils/useUser';
+import useAsyncError from '@/lib/errorHandling';
 
 const Dashboard = () => {
   const user = useUser();
+  const throwError = useAsyncError();
 
   const [stats, setStats] = React.useState<StatsDTO | null>(null);
 
@@ -22,7 +24,11 @@ const Dashboard = () => {
 
   React.useEffect(() => {
     if (user.user) {
-      getStats().then((s) => setStats(s));
+      getStats()
+        .then((s) => setStats(s))
+        .catch((e) => {
+          throwError(e);
+        });
     }
   }, [user]);
 
