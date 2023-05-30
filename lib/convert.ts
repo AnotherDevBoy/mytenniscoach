@@ -19,13 +19,18 @@ function generateTitle(e: EventDTO, opponents: OpponentDTO[]) {
 }
 
 export function toProcessedEvent(e: EventDTO, opponents: OpponentDTO[]) {
-  return {
+  const event = {
     event_id: e.id,
     start: new Date(e.start),
     end: new Date(e.end),
     type: e.type,
     color: colorsPerEventType.get(e.type),
     opponent: e.opponentId,
-    title: generateTitle(e, opponents)
+    title: generateTitle(e, opponents),
+    editable: e.data ? false : true
   } as ProcessedEvent;
+
+  console.log(event);
+
+  return event;
 }
