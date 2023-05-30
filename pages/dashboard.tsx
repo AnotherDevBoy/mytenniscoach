@@ -9,6 +9,7 @@ import { getStats } from '@/lib/api';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { useUser } from '@/utils/useUser';
 import useAsyncError from '@/lib/errorHandling';
+import { BarChart, XAxis, YAxis, Bar } from 'recharts';
 
 const Dashboard = () => {
   const user = useUser();
@@ -35,7 +36,7 @@ const Dashboard = () => {
   if (user.user && stats) {
     return (
       <Grid container spacing={2}>
-        <Grid xs={12} md={6} lg={4} xl={2}>
+        <Grid xs={'auto'} md={'auto'} lg={'auto'} xl={'auto'}>
           <Card sx={{ height: 100 }}>
             <CardContent>
               <Typography variant="h5" component="div">
@@ -45,13 +46,35 @@ const Dashboard = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid xs={12} md={6} lg={4} xl={2}>
+        <Grid xs={'auto'} md={'auto'} lg={'auto'} xl={'auto'}>
           <Card sx={{ height: 100 }}>
             <CardContent>
               <Typography variant="h5" component="div">
                 Nemesis
               </Typography>
               <Typography variant="body2">{stats.nemesis}</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid xs={'auto'} md={'auto'} lg={'auto'} xl={'auto'}>
+          <Card sx={{ height: 350 }}>
+            <CardContent>
+              <Typography variant="h5" component="div" align={'center'}>
+                Minutes on court
+              </Typography>
+              <BarChart
+                width={400}
+                height={300}
+                data={Object.entries(stats.minutesOnCourt).map(
+                  ([key, value]) => {
+                    return { date: key, value: value };
+                  }
+                )}
+              >
+                <XAxis dataKey="date" />
+                <YAxis />
+                <Bar dataKey="value" fill="#1c9e68" />
+              </BarChart>
             </CardContent>
           </Card>
         </Grid>
