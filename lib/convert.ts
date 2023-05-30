@@ -30,7 +30,5 @@ export function toProcessedEvent(e: EventDTO, opponents: OpponentDTO[]) {
     editable: e.data ? false : true
   } as ProcessedEvent;
 
-  console.log(event);
-
   return event;
 }

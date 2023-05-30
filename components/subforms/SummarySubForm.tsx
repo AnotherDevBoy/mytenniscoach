@@ -10,6 +10,7 @@ import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
 import AirIcon from '@mui/icons-material/Air';
 import TornadoIcon from '@mui/icons-material/Tornado';
+import parse from 'parse-duration';
 
 const SummarySubForm = () => {
   return (
@@ -36,7 +37,19 @@ const SummarySubForm = () => {
           />
         </Grid>
         <Grid xs={6}>
-          <TextFieldElement name="duration" label="Duration" required />
+          <TextFieldElement
+            name="duration"
+            label="Duration"
+            required
+            validation={{
+              validate: (value: string) => {
+                return (
+                  parse(value) !== null ||
+                  'Invalid date format. Example: 1h 30m'
+                );
+              }
+            }}
+          />
         </Grid>
         <Grid xs={12}>
           <Divider />

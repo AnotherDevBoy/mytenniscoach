@@ -21,8 +21,6 @@ const SignUp = () => {
     }
   }, [user]);
 
-  console.log(user);
-
   if (!user.isLoading && !user.user) {
     return (
       <Container component="main" maxWidth="xs">
