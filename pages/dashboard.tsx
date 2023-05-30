@@ -37,33 +37,33 @@ const Dashboard = () => {
     return (
       <Grid container spacing={2}>
         <Grid xs={'auto'} md={'auto'} lg={'auto'} xl={'auto'}>
-          <Card sx={{ height: 100 }}>
+          <Card sx={{ height: 350, width: 350 }}>
             <CardContent>
               <Typography variant="h5" component="div">
                 Win-rate
               </Typography>
-              <Typography variant="body2">{stats?.winRate}%</Typography>
+              <Typography variant="h1">{stats?.winRate}%</Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid xs={'auto'} md={'auto'} lg={'auto'} xl={'auto'}>
-          <Card sx={{ height: 100 }}>
+          <Card sx={{ height: 350, width: 350 }}>
             <CardContent>
               <Typography variant="h5" component="div">
                 Nemesis
               </Typography>
-              <Typography variant="body2">{stats.nemesis}</Typography>
+              <Typography variant="h1">{stats.nemesis}</Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid xs={'auto'} md={'auto'} lg={'auto'} xl={'auto'}>
-          <Card sx={{ height: 350 }}>
+          <Card sx={{ height: 350, width: 350 }}>
             <CardContent>
               <Typography variant="h5" component="div" align={'center'}>
                 Minutes on court
               </Typography>
               <BarChart
-                width={400}
+                width={300}
                 height={300}
                 data={Object.entries(stats.minutesOnCourt).map(
                   ([key, value]) => {
