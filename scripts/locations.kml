@@ -1,0 +1,2080 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Affiliated Club Locations</name>
+    <description/>
+    <Style id="icon-157-normal">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/157-yellow-dot.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-157-highlight">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/157-yellow-dot.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1.1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-157">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-157-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-157-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-22-normal">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/22-blue-dot.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-22-highlight">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/22-blue-dot.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1.1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-22">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-22-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-22-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-22-nodesc-normal">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/22-blue-dot.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-22-nodesc-highlight">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/22-blue-dot.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1.1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-22-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-22-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-22-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Folder>
+      <name>Untitled layer</name>
+      <Placemark>
+        <name>Tennis Ireland</name>
+        <description><![CDATA[Dublin City University<br>Glasnevin<br>Dublin 9<br><br>01 8844 010<br>info@tennisireland.ie]]></description>
+        <styleUrl>#icon-157</styleUrl>
+        <Point>
+          <coordinates>
+            -6.258506,53.384531,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>National Tennis Centre</name>
+        <description><![CDATA[Albert College Park<br>Dublin City University<br>Glasnevin <br>Dublin 9<br><br>01 700 7407<br>courtbookings@tennisireland.ie]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.260979,53.384029,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Glasnevin LTC</name>
+        <description><![CDATA[Ballymun Road<br>Glasnevin <br>Dublin 9<br><br>01 837 1042]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.266955,53.382068,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Limerick Lawn TC</name>
+        <description><![CDATA[Ennis Road<br>Limerick<br><br>061 452 316 <br>lltc@eircom.net]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.643515,52.667248,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Castlebar LTC</name>
+        <description><![CDATA[Pavillion Road<br>Castlebar<br>Co. Mayo<br><br>094 90 23644<br>info@castlebartennisclub.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -9.296966,53.853134,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Abbeyliex TC</name>
+        <description><![CDATA[Fr. Breen Park,<br>Abbeyliex<br>Co. Laois<br>abbeyleixtennis@eircom.net]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -7.338878,52.919124,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ballymena LTC</name>
+        <description><![CDATA[People's Park<br>Doury Road<br>Ballymena<br>BT43 6JA <br>Antrim<br><br>028 2564 5447 <br>secretary@ballymenatennis.co.uk]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.281519,54.876409,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ballynafeigh TC</name>
+        <description><![CDATA[35A Wynechutch Park<br>Belfast<br>BT6 0JL<br>Antrim<br><br>028 90 693 532]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -5.902684,54.569835,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Belfast Boat Club</name>
+        <description><![CDATA[12 Lockview Road<br>Belfast<br>Co. Down<br>BT09 5FJ<br>Antrim<br><br>028 9066 5012 <br>info@belfastboatclub.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -5.926673,54.56949,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Cavehill TC</name>
+        <description><![CDATA[20 North Circular Road<br>Belfast<br>BT15 5HB<br>Antrim]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -5.941935,54.633536,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Civil Service of Northern Ireland</name>
+        <description><![CDATA[The Pavillion<br>Stormont Estate<br>Upper Newtownards Road<br>Belfast, BT4 3TA<br>Antrim<br><br>028 9058 6499<br>info@civilservicetennis.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -5.851067,54.602587,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>CIYMS</name>
+        <description><![CDATA[91/93 Circular Road<br>Belfast<br>BT4 2GD<br>Antrim<br><br>028 9042 5966]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -5.859758,54.604715,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>David Lloyd Belfast</name>
+        <description><![CDATA[115 Old Dundonald Road<br>Belfast<br>BT16 1DL <br>Antrim<br><br>sport.belfast@whitbread.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -5.822057,54.586314,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Forthriver TC</name>
+        <description><![CDATA[104A Woodvale Road <br>Belfast <br>BT13<br>Antrim]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -5.964428,54.610684,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Hawarden TC</name>
+        <description><![CDATA[3 Clonee Drive<br>Belfast<br>BT4 3DA<br>Antrim<br><br>028 9065 2806<br>info@hawardentennisclub.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -5.87635,54.597127,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Jordanstown TC</name>
+        <description><![CDATA[University of Ulster at Jordanstown<br>Shore Road<br>Newtownabbey<br>BT37 0QB<br>Antrim<br><br>028 9267 1944 <br>brian@tennisfundametals.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -5.882771,54.689669,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Malone TC</name>
+        <description><![CDATA[Paton Memorial Hall<br>Lisburn Road<br>Belfast<br>BT9<br>Antrim<br><br>028 9066 9372]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -5.964683,54.568936,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Muckamore TC</name>
+        <description><![CDATA[5a Nursery Park<br>Muckamore<br>Co. Antrim<br>BT41 1QS<br>Antrim<br><br>028 9446 6684]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.200248,54.703248,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Windsor TC</name>
+        <description><![CDATA[37 Windsor Avenue<br>Belfast<br>BT9 6EJ<br>Antrim<br><br>028 9066 5188 <br>info@windsortennis.co.uk]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -5.942616,54.579076,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Portadown TC</name>
+        <description><![CDATA[Eden Villa Park<br>Batchelors Walk<br>Portadown<br>BT63 5BQ<br>Armagh<br><br>028 3833 3806 <br>info@portadowntennisclub.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.428719,54.428717,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Carlow LTC</name>
+        <description><![CDATA[OakPark Road<br>Carlow<br><br>059 914 3775 <br>info@carlowltc.ie]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.917734,52.845844,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Cavan LTC</name>
+        <description><![CDATA[Farnham Street<br>Cavan<br>Co. Cavan]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -7.361913,53.992886,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ennis LTC</name>
+        <description><![CDATA[Mill Road<br>Ennis<br>Co. Clare<br><br>065 682 1430 <br>ennistennis@eircom.net]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.986623,52.846185,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>City of Derry TC</name>
+        <description><![CDATA[St. Columb's Park<br>Derry<br>BT4 76JY<br>Derry<br><br>info@cityofderrytennis.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -7.310489,55.000758,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Coleraine TC</name>
+        <description><![CDATA[Anderson Park<br>Milburn Road<br>Coleraine<br>Co. Londonderry]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.670868,55.134942,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Limavady TC</name>
+        <description><![CDATA[Killane Road<br>Limavady<br>Co. Londonderry]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.941535,55.054764,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Letterkenny TC</name>
+        <description>letterkennytenniscentre@eircom.net</description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -7.737379,54.948541,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Banbridge Tc</name>
+        <description><![CDATA[King George V Playing Fields<br>Linenhall St.<br>Banbridge<br>BT32<br>Down<br><br>028 4062 3240 <br>info@banbridgetennisclub.co.uk]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.272657,54.347258,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Bangor LTC</name>
+        <description><![CDATA[Farnham Park<br>Bangor<br>BT20 3SR<br>Down<br><br>info@bangortennis.org.uk]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -5.682303,54.661782,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Comber TC</name>
+        <description><![CDATA[Comber Leisure Centre<br>Castle St. <br>Comber<br>Newtownards, BT23 5SJ<br>Down]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -5.751901,54.551782,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Donaghdee TC</name>
+        <description><![CDATA[The Commons<br>Millisle Road<br>Donaghdee<br>Co. Down<br><br>028 9188 4776<br>donaghadeetennisclub@hotmail.co.uk]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -5.534449,54.628692,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Downpatrick TC</name>
+        <description>info@downpatricktennisclub.co.uk</description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -5.721474,54.329726,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Downshire Hillsborough TC</name>
+        <description><![CDATA[18 Park St.<br>Hillsborough<br>Co. Down<br>BT26 6AL]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.084044,54.459686,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Helen's Bay TC]]></name>
+        <description><![CDATA[15a Fort Road<br>Helen's Bay <br>Co. Down<br>BT19 1LA<br><br>028 9185 3339 <br>helenstennis@btinternet.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -5.745399,54.673074,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Newcastle TC</name>
+        <description><![CDATA[Bryansford Road<br>Newcastle<br>Co. Down<br><br>028 4372 5423]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -5.910473,54.219783,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Newry TC</name>
+        <description><![CDATA[Old Warrenpoint Road<br>Newry<br>BT34<br>Down<br><br>028 3026 0892]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.333017,54.166755,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[St. Patrick's Racquets]]></name>
+        <description><![CDATA[The Orchard<br>70 Victoria Avenue<br>Newtownards<br>BT23 7ED<br>Down<br><br>028 9181 5051]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -5.693407,54.597727,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ward Park TC</name>
+        <description><![CDATA[Gransha Road<br>Bangor<br>BT20 7JW<br>Down]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -5.65996,54.656925,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Warrenpoint TC</name>
+        <description><![CDATA[Milltown Amenity Centre<br>Upper Dromore Rd<br>Warrenpoint<br>BT34<br>Down<br><br>028 4177 2346]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.253281,54.106314,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Aer Lingus LTC</name>
+        <description><![CDATA[ALSAA<br>Old Airport Road,<br>Cloghran<br>Co. Dublin<br><br>01 886 3332]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.231775,53.42069,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ashbrook TC</name>
+        <description><![CDATA[Bushes Lane<br>Grosvenor Road<br>Rathgar<br>Dublin 6<br><br>01 496 4421 <br>info@ashbrooktennisclub.ie]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.273118,53.318957,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Balrothery TC</name>
+        <description><![CDATA[Glebe South<br>Balrothery<br>Balbriggan<br>Co. Dublin<br><br>balrotherytennis@gmail.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.191257,53.586455,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>David Lloyd Riverview</name>
+        <description><![CDATA[Beech Hill,<br>Clonskeagh<br>Dublin 4<br><br>01 218 9600]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.234977,53.314826,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Leinster Tennis</name>
+        <description><![CDATA[David Lloyd Riverview<br>Beech Hill<br>Clonskeagh<br>Dublin 4<br><br>01 269 6024<br>info@leinstertennis.ie]]></description>
+        <styleUrl>#icon-157</styleUrl>
+        <Point>
+          <coordinates>
+            -6.234441,53.314801,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Donnybrook LTC</name>
+        <description><![CDATA[Brookvale Road<br>Donnybrook<br>Dublin 4<br><br>01 269 2838<br>dltcinfo@eircom.net]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.235047,53.319938,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Bective LTC</name>
+        <description><![CDATA[Main Street<br>Donnybrook<br>Dublin 4<br><br>01 269 3894 <br>info@bective-tennis.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.232703,53.321457,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Blackrock Bowling &TC]]></name>
+        <description><![CDATA[Green Road<br>Blackrock<br>Co. Dublin<br><br>01 288 1933 <br>info@blackrockbtc.ie]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.186773,53.298578,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Leinster Cricket Club</name>
+        <description><![CDATA[Observatory Lane<br>Lower Rathmines Road<br>Rathmines<br>Dublin 6<br><br>01 497 2428 <br>lccsports@eircom.net<br>www.lcctennis.net]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.263355,53.326298,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Mountplesant LTC</name>
+        <description><![CDATA[The Square<br>Ranelagh<br>Dublin 6<br><br>01 497 3733 <br>info@mountpleasantltc.ie]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.259815,53.327503,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Brookfield LTC</name>
+        <description><![CDATA[Palmerston Park<br>Rathmines<br>Dublin 6<br><br>01 497 4168 <br>tennis@brookfieldtennis.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.262057,53.313666,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Carraig LTC</name>
+        <description><![CDATA[Newtown Park Lands<br>Blackrock<br>Co. Dublin<br><br>info@carraigtc.ie]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.176162,53.296709,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Carrickmines LTCC</name>
+        <description><![CDATA[Glenamuck Road<br>Carrickmines<br>Dublin 18<br><br>01 289 4631 <br>info@carrickmines.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.172723,53.255593,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Castleknock LTC</name>
+        <description><![CDATA[Old Navan Road<br>Castleknock<br>Dublin 15<br><br>01 821 0423<br>office@cltc.ie]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.362801,53.380641,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Charleville LTC</name>
+        <description><![CDATA[Whitworth Road<br>Glasnevin<br>Dublin 9<br><br>01 830 4149 <br>charlevilleltc@eircom.net]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.270039,53.364536,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Cherryfield TC</name>
+        <description><![CDATA[C/o 118 Cherryfield Road<br>Walkinstown<br>Dublin 12]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.325518,53.31564,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Claremont Railway Union LTC</name>
+        <description><![CDATA[Willow Lodge,<br>Park Avenue<br>Sandymount<br>Dublin 4<br><br>01 269 1783 <br>tennis-sec@railwayunion.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.209604,53.325901,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Clontarf LTC</name>
+        <description><![CDATA[Oulton Road<br>Clontarf<br>Dublin 3<br><br>01 833 9782]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.204282,53.361636,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>CYM LTC</name>
+        <description><![CDATA[54 Terenure Road North<br>Dublin 6W]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.284137,53.31275,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>DCU Tennis Club</name>
+        <description><![CDATA[Clubs & Socs Office,<br>The Hub, DCU<br>Glasnevin<br>Dublin 9<br><br>dcutennis@yahoo.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.258806,53.38521,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Deerpark TC</name>
+        <description><![CDATA[Deerpark<br>Mount Merrion<br>Co. Dublin<br><br>01 278 1466 <br>webmaster@deerparkltc.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.215311,53.294516,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Elm Park (Tennis Club)</name>
+        <description><![CDATA[Nutley House<br>Donnybrook<br>Dublin 4<br><br>01 269 3438 <br>office@elmparkgolfclub.ie]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.217554,53.313743,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Fitzwilliam LTC</name>
+        <description><![CDATA[Winton Road<br>Appian Way<br>Dublin 4<br><br>01 660 3988 <br>rdignam@fltc.ie]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.249182,53.327836,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Glenageary LTC</name>
+        <description><![CDATA[Silchester Road<br>Glenageary<br>Co. Dublin<br><br>01 280 8565]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.129062,53.281544,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Glenalbyn LTC</name>
+        <description><![CDATA[Glenalbyn House<br>Stillorgan<br>Co. Dublin<br><br>01 288 0857 <br>info@glenalbyn.ie]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.199594,53.286371,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Grove LTC</name>
+        <description><![CDATA[Grove Avenue<br>Malahide<br>Co. Dublin]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.148213,53.447075,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kilternan Parish LTC</name>
+        <description><![CDATA[Grove Avenue<br>Malahide<br>Co. Dublin]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.200742,53.243097,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Lansdowne LTC</name>
+        <description><![CDATA[Londonbridge Road<br>Dublin 4<br><br>01 668 0219 <br>info@lansdowneltc.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.225171,53.33703,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Leopardstown LTC</name>
+        <description><![CDATA[Leopardstown Grove<br>Blackrock<br>Co. Dublin]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.194025,53.279411,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Malahide LTC</name>
+        <description><![CDATA[The Square<br>Malahide<br>Co. Dublin<br><br>01 845 2480 <br>mltcc@oceanfree.net]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.15052,53.451324,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Newtownpark TC</name>
+        <description><![CDATA[Blackrock<br>Co. Dublin]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.174692,53.285075,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Portmarnock TC</name>
+        <description><![CDATA[Portmarnock Leisure Centre<br>Blackwood Lane<br>Portmarnock<br>Co. Dublin<br><br>01 846 2122]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.139405,53.433329,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Rathgar TC</name>
+        <description><![CDATA[Herzog Park<br>Orwell Road<br>Rathgar<br>Dublin 6<br><br>rathgartennis@eircom.net]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.276197,53.31025,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Riversdale TC</name>
+        <description><![CDATA[C/o 44 Glasnevin Avenue<br>Dublin 11]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.266021,53.390236,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Rockfield TC</name>
+        <description><![CDATA[Rockfield Park<br>Artane<br>Dublin 5]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.219184,53.381607,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Sandycove TC</name>
+        <description><![CDATA[Elton Park<br>Sandycove<br>Co. Dublin<br><br>01 280 8769 / 01 280 9645 <br>sandycovetsc@eircom.net]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.116917,53.285204,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Shankill TC</name>
+        <description><![CDATA[Quinns Road<br>Shankill<br>Co. Dublin<br><br>01 282 5400 <br>info@shankilltennisclub.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.113387,53.231738,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Skerries TC</name>
+        <description><![CDATA[Community Centre<br>Dublin Road<br>Skerries<br>Co. Dublin<br><br>01 849 0888 <br>enquiries@skerriesltc.net]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.116885,53.573254,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Swords TC</name>
+        <description><![CDATA[Castle Grounds<br>Swords<br>Co. Dublin<br><br>01 840 0160]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.219914,53.461494,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Templeogue TC</name>
+        <description><![CDATA[Templeogue Village<br>Templeogue<br>Dublin 6W<br><br>01 490 2760 <br>info@templeoguetennis.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.30332,53.297671,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Trackside TC</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -6.173759,53.393684,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Sutton LTC</name>
+        <description><![CDATA[Sutton Cross<br>Sutton<br>Dublin 13<br><br>01 832 3035 <br>admin@suttonltc.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.105695,53.388947,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Stratford LTC</name>
+        <description><![CDATA[Grosvenor Square<br>Rathmines<br>Dublin 6<br><br>stratfordltc@gmail.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.273172,53.324363,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[St. Mary's LTC]]></name>
+        <description><![CDATA[Belmont Villas<br>Donnybrook<br>Dublin 4]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.24017,53.32021,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Westwood Clontarf</name>
+        <description><![CDATA[Clontarf Road<br>Clontarf<br>Dublin 3<br><br>01 853 0353 <br>clontarftennis@westwood.ie]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.228819,53.363294,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Westwood Leopardstown</name>
+        <description><![CDATA[Leopardstown Racecourse<br>Foxrock<br>Dublin 18<br><br>01 289 3208]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.194744,53.263891,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Argideen Vale TC</name>
+        <description><![CDATA[Ummera<br>Timoleague<br>Co. Cork<br><br>021 477 8441]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.758507,51.654134,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ballinlough TC</name>
+        <description><![CDATA[Ballinlough Road<br>Ballinlough<br>Co. Cork<br><br>021 429 1433]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.445504,51.890173,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ballyhooley TC</name>
+        <description><![CDATA[Ballyhooly<br>Co. Cork<br><br>025 39 117]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.397766,52.144152,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Bandon TC</name>
+        <description><![CDATA[Castle Bernard<br>Bandon<br>Co. Cork<br><br>bandonltc@yahoo.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.755417,51.742257,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Bishopstown TC</name>
+        <description><![CDATA[Murphy's Farm<br>Uam Var Estate<br>Bishopstown<br>Cork<br><br>021 434 3113]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.535047,51.879445,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Carrigaline TC</name>
+        <description><![CDATA[Crosshaven Road<br>Carrigaline<br>Co. Cork<br><br>021 437 1856]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.37855,51.810983,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Douglas LTC</name>
+        <description><![CDATA[Douglas Hall Lawn<br>Well Road<br>Co. Cork<br><br>021 429 4037]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.436062,51.880544,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Dromohane TC</name>
+        <description><![CDATA[Dromahane<br>Mallow<br>Co. Cork]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.688641,52.105135,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kanturk TC</name>
+        <description><![CDATA[Upper Blue Pool<br>Kanturk<br>Co. Cork<br><br>029 50 169]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.90605,52.174142,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kilworth TC</name>
+        <description><![CDATA[Sports Complex<br>Kilworth<br>Co. Cork<br><br>025 24 411]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.250625,52.175333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kinsale TC</name>
+        <description><![CDATA[Snugmore<br>Kinsale<br>Co. Cork]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.492807,51.707912,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Lakewood TC</name>
+        <description><![CDATA[John A Wood Social Club<br>Barnagore<br>Ovens<br>Cork<br><br>021 487 2410]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.644524,51.880915,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Lower Aghada T&SC]]></name>
+        <description><![CDATA[Lower Aghada<br>Midleton<br>Co. Cork<br><br>021 466 1200]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.215435,51.843103,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Mallow TC</name>
+        <description><![CDATA[Ballyellis<br>Mallow<br>Co. Cork<br><br>022 211 45]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.627239,52.12789,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Monkstown LT&CC]]></name>
+        <description><![CDATA[Monkstown<br>Cork]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.336279,51.847083,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Rushbrooke LTCC</name>
+        <description><![CDATA[Rushbrooke<br>Cobh<br>Co.Cork<br><br>021 481 1451]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.314542,51.848117,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>St. Michaels TC</name>
+        <description><![CDATA[Church Road<br>Blackrock<br>Cork<br><br>021 435 7910]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.421004,51.895391,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Sunday's Well B&TC]]></name>
+        <description><![CDATA[Mardyke<br>Cork<br><br>021 427 2733 <br>tennis@indigo.ie]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.492931,51.896801,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Youghal TC</name>
+        <description><![CDATA[Kilcoran Road<br>Youghal<br>Co. Cork]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -7.855868,51.942373,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Enniskillen LTC</name>
+        <description><![CDATA[Hollyhill Road<br>Enniskillen<br>BT74<br><br>chairman@tenniskillen.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -7.628417,54.346452,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Irvinestown TC</name>
+        <description><![CDATA[Banacree Centre<br>Irvinestown<br>BT94 2EE<br><br>info@irvinestownlawntennisclub.co.uk]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -7.636356,54.470636,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Galway LTC</name>
+        <description><![CDATA[Threadneedle Road<br>Salthill<br>Co. Galway<br><br>091 522 353]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -9.089684,53.263362,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Killarney TC</name>
+        <description><![CDATA[Castleross & Gleneagle Hotel<br>Fossa<br>Killarney<br>Co. Kerry]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -9.491158,52.057557,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Bagenalstown TC</name>
+        <description><![CDATA[c/o 24 The Meadows<br>Cavan<br>Co.Kilkenny]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -7.021637,52.681482,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Caherconlish TC</name>
+        <description><![CDATA[Ballyneety Road<br>Caherconlish<br>Co. Limerick<br><br>061 384 162]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.472369,52.595032,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Catholic Institute TC</name>
+        <description><![CDATA[Greenfields<br>Rosbrien<br>Co. Limerick<br><br>061 227 974 <br>tennis@ciac-limerick.org]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.63247,52.645176,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Killaloe/Ballina TC</name>
+        <description><![CDATA[Murroe<br>Co. Limerick<br><br>096 78 984]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.439474,52.804578,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Monaleen GAA&TC]]></name>
+        <description><![CDATA[Old Schoolhouse Road<br>Monaleen<br>Castletroy<br>Limerick<br><br>061 338 354]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.553506,52.656654,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Longford TC</name>
+        <description><![CDATA[Demesne Lane<br>Longford<br><br>043 47 379 <br>longtenn@yahoo.ie]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -7.805808,53.733825,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Collon & District TC]]></name>
+        <description><![CDATA[Ardee Street<br>Collon<br>Louth]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.486896,53.781777,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Dundalk TC</name>
+        <description><![CDATA[The Ramparts<br>Dundalk<br>Co. Louth<br><br>042 933 5327]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.391318,54.003863,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Termonfeckin TC</name>
+        <description><![CDATA[Mullary House<br>Monasterboice<br>Co.Louth]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.276476,53.759596,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ballina TC</name>
+        <description><![CDATA[Abbeyhals Quarter<br>Catherdal Road<br>Ballina<br>Co. Mayo<br><br>096 789 84]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -9.151204,54.112849,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Claremorris TC</name>
+        <description><![CDATA[Dalton St<br>Claremorris<br>Co. Mayo]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.995914,53.722018,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Dunshaughlin TC</name>
+        <description><![CDATA[Main Street<br>Dunshaughlin<br>Co. Meath]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.539397,53.508391,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kells TC</name>
+        <description><![CDATA[Rockfield Road<br>Kells<br>Co. Meath<br><br>046 924 0793]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.880596,53.715136,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Laytown Bettystown LTC</name>
+        <description><![CDATA[Golf Links Road<br>Bettystown<br>Co.Meath<br><br>041 982 7713 <br>info@laytownbettystownltc.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.247423,53.704297,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Moynalty TC</name>
+        <description><![CDATA[Moynalty<br>Kells<br>Co. Meath]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.888213,53.788255,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Navan TC</name>
+        <description><![CDATA[Balreask Old<br>Navan<br>Co. Meath<br><br>navantc@hotmail.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.670445,53.638529,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Clonee TC</name>
+        <description><![CDATA[Old Kilbride Road<br>Clonee<br>Meath]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.441164,53.409839,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Stackallen TC</name>
+        <description><![CDATA[Pighill<br>Slane<br>Co. Meath<br><br>041 982 4279]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.595573,53.697316,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Trim TC</name>
+        <description><![CDATA[Newhaggard Road<br>Trim<br>Co. Meath]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.789722,53.563305,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Tullamore TC</name>
+        <description><![CDATA[Arden Raod<br>Tullamore<br>Co.Offaly]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -7.491388,53.294978,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Sligo TC</name>
+        <description><![CDATA[Old Bundoran Road <br>Sligo<br><br>071 916 2580 <br>sligotennisclub@eircom.net]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.469611,54.289579,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ballypatrick TC</name>
+        <description><![CDATA[Ballynoran<br>Kilsheelan<br>Clonmel<br>Co. Tipperary]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -7.548809,52.393987,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Canon Hayes TC</name>
+        <description><![CDATA[Tipperary Town<br>Co Tipperary<br><br>062 52 022]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.150117,52.4729,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Castleview TC</name>
+        <description><![CDATA[Chapel St.<br>Carrick-on-Suir<br>Co. Tipperary<br><br>051 643 915]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -7.415643,52.346404,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Hillview Sports Club</name>
+        <description><![CDATA[Mountain Road<br>Clonmel<br>Co. Tipperary<br><br>052 218 05]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -7.696695,52.350336,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Kilfeacle Community & TC]]></name>
+        <description><![CDATA[Kilfeacle<br>Golden<br>Co. Tipperary]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.059545,52.488007,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Larkspur Park TC</name>
+        <description><![CDATA[The Green<br>Cashel<br>Co. Tipperary]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -7.889063,52.513061,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Lattin LTC</name>
+        <description><![CDATA[Lattin<br>Co. Tipperary<br><br>admin@lattinltc.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.273392,52.466782,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Nenagh TC</name>
+        <description><![CDATA[Limerick Road<br>Nenagh<br>Co. Tipperary<br><br>067 33 103]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.216014,52.861642,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Rosanna TC</name>
+        <description><![CDATA[Rosanna Road<br>Tipperary Town<br>Co. Tipperary]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.158164,52.479605,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Tipperary Co. LTC</name>
+        <description><![CDATA[St. Michael's Street<br>Tipperary Town<br>Co. Tipperary<br><br>062 51 224 <br>tipptennis@eircom.net]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.158979,52.476978,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Omagh TC</name>
+        <description><![CDATA[1 Crevenagh Road<br>Omagh<br>BT79 0EQ<br><br>028 8224 3275 <br>secretary@omaghltc.org]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -7.290201,54.599542,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Causeway TC</name>
+        <description><![CDATA[Dungarvan<br>Co. Waterford<br><br>058 428 13<br>causewaytennisclub@hotmail.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -7.617645,52.092375,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[St. Anne's TC]]></name>
+        <description><![CDATA[John's Hill<br>Waterford<br><br>051 874 350<br>stannestennis@eircom.net]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -7.100644,52.244147,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Tramore TC</name>
+        <description><![CDATA[Doneraile Drive<br>Tramore<br>Co. Waterford<br><br>051 381 426]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -7.156734,52.156545,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Mullingar TC</name>
+        <description><![CDATA[Austin Friar Street<br>Mullingar<br>Co. Westmeath<br><br>044 9340 272]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -7.343588,53.526993,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Hillbrook LTC</name>
+        <description><![CDATA[Munster Hill<br>Enniscorthy<br>Co. Wexford<br><br>054 34 206 <br>hillbrookltc@eircom.net]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.570221,52.494801,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Wexford Harbour B&TC]]></name>
+        <description><![CDATA[Redmond Road<br>Wexford<br><br>053 22039]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.473265,52.345984,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Arklow LTC</name>
+        <description><![CDATA[Coolgreaney Road<br>Arklow<br>Co. Wicklow<br><br>0402 33 330]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.172814,52.796327,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Co. Wicklow LTC</name>
+        <description><![CDATA[Vevay Road<br>Bray<br>Co. Wicklow<br><br>01 286 3786 <br>info@cowicklowltc.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.10445,53.190196,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Enniskerry LTC</name>
+        <description><![CDATA[Winton Grove<br>Ballybawn<br>Enniskerry<br>Co.Wicklow]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.168137,53.191945,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Greystones LTC</name>
+        <description><![CDATA[Mill Road<br>Killincarrig<br>Greystones<br>Co. Wicklow<br><br>01 287 2383<br>admin@greystonesltc.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.062994,53.138198,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Wicklow Town TC</name>
+        <description><![CDATA[P.O. Box 62<br>The Sorting Office<br>The Murrough<br>Wicklow Town<br>Co. Wicklow<br><br>0404 68 666<br>info@wicklowtennisclub.com]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.039133,52.977951,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ulster Tennis</name>
+        <description><![CDATA[House of Sport<br>Upper Malone Road<br>Belfast<br>BT9 5LA]]></description>
+        <styleUrl>#icon-157</styleUrl>
+        <Point>
+          <coordinates>
+            -5.966778,54.555279,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Athy LTC</name>
+        <description><![CDATA[Country Show Grounds<br>Athy<br>Co. Kildare<br><br>059 863 3645]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.985674,52.993349,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Celbridge LTC</name>
+        <description><![CDATA[Hazelhatch Road<br>Celbridge<br>Co. Kildare<br><br>01 627 0303]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.528068,53.336101,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Clane LTC</name>
+        <description><![CDATA[Dublin Road<br>Clane<br>Co. Kildare<br><br>claneltc@eircom.net]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.682745,53.293214,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Leixlip TC</name>
+        <description><![CDATA[C/o Leixlip Amenities Centre<br>Collintown<br>Lexilip<br>Co. Kildare<br><br>01 624 3050]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.525536,53.374112,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Naas LTC</name>
+        <description><![CDATA[Oldtown<br>Naas<br>Co. Kildare<br><br>045 879 766 <br>naasltc@eircom.net]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.656771,53.233938,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>North Kildare TC</name>
+        <description><![CDATA[The Maws<br>Kilcock<br>Co. Kildare<br><br>01 628 7243 <br>info@northkildare.ie]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.644669,53.391416,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Rathangan TC</name>
+        <description><![CDATA[Kilmoney<br>Rathangan<br>Co. Kildare<br><br>045 524 354]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.951942,53.215388,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ardfield/Rathbarry TC</name>
+        <description><![CDATA[Ardfield<br>Clonakilty<br>Co. Cork]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.909225,51.567467,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ratoath Tennis Club</name>
+        <description><![CDATA[Ratoath Tennis Club<br>Address: Jamestown Sports Campus, The Avenue, Ratoath, Co. Meath<br>Website: http://www.ratoathtennisclub.ie]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.457987,53.501245,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Athenry Tennis Club</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -8.75018939999995,53.3043378,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ballinasloe Tennis Club</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -8.31423169999994,53.2902768,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ballycastle Tennis Club</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -6.23861890000001,55.2035842,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Bushy Park Tennis And Padel Club</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -6.28935999999999,53.3026654,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Butt Hall Tennis Club</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -7.76466260000007,54.7891725,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Clonakilty Sports Centre</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -8.8809023,51.6256361,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Clontarf Parish Tennis Club</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -6.20367540000007,53.3646056,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Cloughey & District Tennis Club]]></name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -5.46930739999993,54.4384158,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Crosshaven Tennis Club</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -8.29453990000002,51.7997434,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>De Vesci tennis club</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -6.14710850000006,53.2939389,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Donabate Portrane Tennis Club</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -6.13013599999999,53.481054,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Dunboyne Tennis Club</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -6.44450489999997,53.4125035,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Garryduff Sports Centre</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -8.39745249999999,51.8688443,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Gilnahirk Tennis Club </name>
+        <description>Astoria Gardens, Knockhill Park, Belfast </description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -5.8645642,54.594504,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Hazelwood Sports Club</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -0.0870099999999638,51.637563,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Hilden Tennis Club</name>
+        <description><![CDATA[36 Belfast Road (81.43 mi)<br>Lisburn BT27 4AS]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.0331705,54.517412,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Kilkenny County & City Lawn Tennis Club]]></name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -7.24177259999999,52.6461239,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[LARNE BOWLING & LAWN TENNIS CLUB]]></name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -5.80908490000002,54.8583034,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Loughrea Tennis Club</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -8.58001620000005,53.1977335,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Lurgan Tennis Club</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -6.32616770000004,54.4628677,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Manorhamilton Tennis Club</name>
+        <description>Bee Park, New Line, Manorhamilton, Leitrim </description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.1745631,54.3059987,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Maree Tennis Club</name>
+        <description>Maree, Garraun Upper, Oranmore, Co. Galway</description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -8.9498878,53.2323547,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Meadowvale Tennis Club</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -6.15675699999997,53.2723898,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Mitchelstown Tennis Club</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -8.27454499999999,52.2679053,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Monaghan Tennis Club</name>
+        <description><![CDATA[Monaghan Leisure Complex <br>Clones Road <br>Monaghan<br>047 81734 / 086 734 7005]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.979081,54.2462212,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Monkstown Lawn Tennis Club</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -6.14817930000004,53.2888993,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>New Inn Tennis Club</name>
+        <description><![CDATA[Newinn Community Centre <br>Loughkent East, Co. Tipperary]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -7.8797185,52.4403812,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Parks Tennis </name>
+        <description>142 Vernon Ave, Clontarf, Dublin 3</description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -6.1951196,53.3690939,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Royal Belfast Golf Club</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -5.78537400000005,54.659957,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Saint Annes Park</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -6.17983860000004,53.3712996,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Terenure Sports Club</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -6.28411670000003,53.3134902,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Tralee Tennis Club</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -9.70625919999998,52.2635908,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Tullow & South Leinster Tennis & Sports Clubs]]></name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -6.72400630000004,52.8039798,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Westport Tennis Club</name>
+        <description><![CDATA[Newport Road<br>Westport, Ireland<br>086 833 7805]]></description>
+        <styleUrl>#icon-22</styleUrl>
+        <Point>
+          <coordinates>
+            -9.5225662,53.8048675,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Whitechurch & Waterloo Tennis Club]]></name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -8.53326449999997,51.9806263,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Whitehead Tennis Club</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -5.70857060000003,54.7558788,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>A TEAM TENNIS</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -6.26929329999996,54.808221,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Indoor Tennis Arena and Ozone Complex</name>
+        <styleUrl>#icon-22-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -5.91451800000004,54.589607,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Untitled layer</name>
+    </Folder>
+  </Document>
+</kml>
