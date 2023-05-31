@@ -2,6 +2,7 @@ import * as React from 'react';
 import Router from 'next/router';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Unstable_Grid2';
 import { StatsDTO } from '@/lib/types';
@@ -38,33 +39,27 @@ const Dashboard = () => {
       <Grid container spacing={2}>
         <Grid xs={'auto'} md={'auto'} lg={'auto'} xl={'auto'}>
           <Card sx={{ height: 350, width: 350 }}>
+            <CardHeader title="Win-rate" />
             <CardContent>
-              <Typography variant="h5" component="div">
-                Win-rate
-              </Typography>
               <Typography variant="h1">{stats?.winRate}%</Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid xs={'auto'} md={'auto'} lg={'auto'} xl={'auto'}>
           <Card sx={{ height: 350, width: 350 }}>
+            <CardHeader title="Nemesis" />
             <CardContent>
-              <Typography variant="h5" component="div">
-                Nemesis
-              </Typography>
               <Typography variant="h1">{stats.nemesis}</Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid xs={'auto'} md={'auto'} lg={'auto'} xl={'auto'}>
           <Card sx={{ height: 350, width: 350 }}>
+            <CardHeader title="Minutes on court" />
             <CardContent>
-              <Typography variant="h5" component="div" align={'center'}>
-                Minutes on court
-              </Typography>
               <BarChart
                 width={300}
-                height={300}
+                height={250}
                 data={Object.entries(stats.minutesOnCourt).map(
                   ([key, value]) => {
                     return { date: key, value: value };

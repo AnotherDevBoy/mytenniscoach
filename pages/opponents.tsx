@@ -96,6 +96,7 @@ const Opponents = () => {
               opponents[opponent].matches &&
               opponents[opponent].matches!.length > 0
             ) {
+              setSelectedMatch(0);
               setDialogOpen(true);
             }
           }}
