@@ -28,17 +28,20 @@ const columns: GridColDef[] = [
   {
     field: 'name',
     headerName: 'Name',
-    editable: false
+    editable: false,
+    width: 200
   },
   {
     field: 'forehand',
     headerName: 'Forehand',
-    editable: false
+    editable: false,
+    width: 120
   },
   {
     field: 'backhand',
     headerName: 'Backhand',
-    editable: false
+    editable: false,
+    width: 120
   },
   {
     field: 'winrate',
