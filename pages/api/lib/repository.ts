@@ -20,7 +20,6 @@ export type EventDAL = {
   user_id: string;
   opponent_id?: string;
   created_at?: string;
-  deleted_at?: string;
   start: string;
   location?: string;
   type: EventTypeDAL;
@@ -32,7 +31,6 @@ export type OpponentDAL = {
   user_id: string;
   name: string;
   created_at?: string;
-  deleted_at?: string;
 };
 
 export class MyTennisCoachRepository {
@@ -49,8 +47,7 @@ export class MyTennisCoachRepository {
     const response = await this.supabase
       .from('Event')
       .select()
-      .eq('user_id', userId)
-      .is('deleted_at', null);
+      .eq('user_id', userId);
 
     this.handleError(response);
 
@@ -63,8 +60,7 @@ export class MyTennisCoachRepository {
       .select()
       .eq('user_id', userId)
       .eq('type', EventTypeDAL.Match)
-      .not('metadata', 'is', null)
-      .is('deleted_at', null);
+      .not('metadata', 'is', null);
     this.handleError(response);
 
     return response.data as EventDAL[];
@@ -75,8 +71,7 @@ export class MyTennisCoachRepository {
       .from('Event')
       .select()
       .eq('id', eventId)
-      .eq('user_id', userId)
-      .is('deleted_at', null);
+      .eq('user_id', userId);
 
     this.handleError(response);
 
@@ -106,7 +101,7 @@ export class MyTennisCoachRepository {
   async deleteEvent(eventId: string) {
     const response = await this.supabase
       .from('Event')
-      .update({ deleted_at: formatRFC3339(new Date()) })
+      .delete()
       .eq('id', eventId);
 
     this.handleError(response);
@@ -116,8 +111,7 @@ export class MyTennisCoachRepository {
     const response = await this.supabase
       .from('Opponent')
       .select()
-      .eq('user_id', userId)
-      .is('deleted_at', null);
+      .eq('user_id', userId);
 
     this.handleError(response);
 
@@ -132,8 +126,7 @@ export class MyTennisCoachRepository {
       .from('Opponent')
       .select()
       .eq('user_id', userId)
-      .eq('id', opponent_id)
-      .is('deleted_at', null);
+      .eq('id', opponent_id);
 
     this.handleError(response);
 
@@ -155,7 +148,7 @@ export class MyTennisCoachRepository {
   async deleteOpponent(opponentId: string) {
     const response = await this.supabase
       .from('Opponent')
-      .update({ deleted_at: formatRFC3339(new Date()) })
+      .delete()
       .eq('id', opponentId);
 
     this.handleError(response);
