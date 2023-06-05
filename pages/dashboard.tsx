@@ -13,6 +13,7 @@ import { useStats } from '@/hooks/useStats';
 
 const Dashboard = () => {
   const user = useUser();
+  const { isLoading, data } = useStats();
 
   if (user.isLoading) {
     return <LoadingSpinner />;
@@ -21,8 +22,6 @@ const Dashboard = () => {
   if (!user.user) {
     Router.push('/signin');
   }
-
-  const { isLoading, data } = useStats();
 
   if (isLoading) {
     return <LoadingSpinner />;

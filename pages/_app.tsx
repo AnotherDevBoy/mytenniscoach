@@ -44,7 +44,7 @@ export default function App({ Component, pageProps }: any) {
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, []);
+  });
 
   return (
     <>

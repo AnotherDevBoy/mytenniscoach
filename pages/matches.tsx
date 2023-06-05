@@ -21,6 +21,18 @@ import { useQueryClient } from 'react-query';
 
 const Matches = () => {
   const user = useUser();
+  const { enqueueSnackbar } = useSnackbar();
+  const queryClient = useQueryClient();
+  const eventsHook = useEvents();
+  const opponentsHook = useOpponents();
+  const [displayOldMatches, setDisplayOldMatches] = React.useState(true);
+  const [submitMatchResultModalOpen, setSubmitMatchResultModalOpen] =
+    React.useState(false);
+  const [selectedEvent, setSelectedEvent] = React.useState<
+    EventDTO | undefined
+  >(undefined);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   if (user.isLoading) {
     return <LoadingSpinner />;
@@ -30,25 +42,8 @@ const Matches = () => {
     Router.push('/signin');
   }
 
-  const { enqueueSnackbar } = useSnackbar();
-
-  const queryClient = useQueryClient();
-
-  const eventsHook = useEvents();
-  const opponentsHook = useOpponents();
-
   const opponents = opponentsHook.data as OpponentDTO[];
   const events = eventsHook.data as EventDTO[];
-
-  const [displayOldMatches, setDisplayOldMatches] = React.useState(true);
-  const [submitMatchResultModalOpen, setSubmitMatchResultModalOpen] =
-    React.useState(false);
-  const [selectedEvent, setSelectedEvent] = React.useState<
-    EventDTO | undefined
-  >(undefined);
-
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   const now = new Date();
 

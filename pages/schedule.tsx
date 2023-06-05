@@ -16,6 +16,12 @@ import { invalidateEvents, useEvents } from '@/hooks/useEvents';
 
 const Schedule = () => {
   const user = useUser();
+  const { enqueueSnackbar } = useSnackbar();
+  const queryClient = useQueryClient();
+
+  const eventsHook = useEvents();
+  const opponentsHook = useOpponents();
+  const locationsHook = useLocations();
 
   if (user.isLoading) {
     return <LoadingSpinner />;
@@ -24,13 +30,6 @@ const Schedule = () => {
   if (!user.user) {
     Router.push('/signin');
   }
-
-  const { enqueueSnackbar } = useSnackbar();
-  const queryClient = useQueryClient();
-
-  const eventsHook = useEvents();
-  const opponentsHook = useOpponents();
-  const locationsHook = useLocations();
 
   const opponents = opponentsHook.data as OpponentDTO[];
   const locations = locationsHook.data as string[];

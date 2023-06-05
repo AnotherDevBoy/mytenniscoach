@@ -47,6 +47,10 @@ const columns: GridColDef[] = [
 
 const Opponents = () => {
   const user = useUser();
+  const { isLoading, data } = useOpponentsStats();
+  const [selectedOpponent, setSelectedOpponent] = React.useState<number>(0);
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [selectedMatch, setSelectedMatch] = React.useState<number>(0);
 
   if (user.isLoading) {
     return <LoadingSpinner />;
@@ -55,12 +59,6 @@ const Opponents = () => {
   if (!user.user) {
     Router.push('/signin');
   }
-
-  const { isLoading, data } = useOpponentsStats();
-
-  const [selectedOpponent, setSelectedOpponent] = React.useState<number>(0);
-  const [dialogOpen, setDialogOpen] = React.useState(false);
-  const [selectedMatch, setSelectedMatch] = React.useState<number>(0);
 
   if (isLoading) {
     return <LoadingSpinner />;
