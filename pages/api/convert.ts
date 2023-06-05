@@ -43,7 +43,6 @@ export function toEventDAL(event: EventDTO, userId: string): EventDAL {
     user_id: userId,
     opponent_id: event.type === EventType.Match ? event.opponentId : undefined,
     start: event.start,
-    end: event.end,
     type: toEventTypeDAL(event.type)
   };
 }
@@ -52,7 +51,6 @@ export function toEventDTO(event: EventDAL): EventDTO {
   return {
     id: event.id,
     start: event.start,
-    end: event.end,
     type: toEventType(event.type),
     opponentId: event.opponent_id,
     data: event.metadata

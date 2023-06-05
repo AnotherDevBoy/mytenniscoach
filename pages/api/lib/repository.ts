@@ -22,7 +22,6 @@ export type EventDAL = {
   created_at?: string;
   deleted_at?: string;
   start: string;
-  end: string;
   type: EventTypeDAL;
   metadata?: EventData;
 };

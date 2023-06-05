@@ -50,7 +50,6 @@ export type EventData = {};
 export interface EventDTO {
   id: string;
   start: string;
-  end: string;
   type: EventType;
   opponentId?: string;
   data?: EventData;

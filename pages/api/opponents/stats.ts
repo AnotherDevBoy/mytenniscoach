@@ -60,10 +60,10 @@ function getOpponentsStats(
       }
 
       const eventsForOpponentSorted = eventsForOpponent.sort((a, b) => {
-        const endA = new Date(a.end);
-        const endB = new Date(b.end);
+        const startA = new Date(a.start);
+        const startB = new Date(b.start);
 
-        return compareDesc(endA, endB);
+        return compareDesc(startA, startB);
       });
 
       const matchData = eventsForOpponentSorted.map(
@@ -89,7 +89,7 @@ function getOpponentsStats(
           const metadata = e.metadata as MatchEventData;
 
           return {
-            date: e.end,
+            date: e.start,
             performance: metadata.opponentPeformance
           } as MatchStats;
         })
