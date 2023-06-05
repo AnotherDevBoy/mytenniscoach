@@ -64,7 +64,7 @@ const Opponents = () => {
     return <LoadingSpinner />;
   }
 
-  const opponents = data as OpponentStatsDTO[];
+  const opponents = data ? (data as OpponentStatsDTO[]) : [];
 
   const rows = opponents.map((o, i) => {
     return {

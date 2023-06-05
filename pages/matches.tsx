@@ -42,8 +42,10 @@ const Matches = () => {
     Router.push('/signin');
   }
 
-  const opponents = opponentsHook.data as OpponentDTO[];
-  const events = eventsHook.data as EventDTO[];
+  const opponents = opponentsHook.data
+    ? (opponentsHook.data as OpponentDTO[])
+    : [];
+  const events = eventsHook.data ? (eventsHook.data as EventDTO[]) : [];
 
   const now = new Date();
 

@@ -31,8 +31,10 @@ const Schedule = () => {
     Router.push('/signin');
   }
 
-  const opponents = opponentsHook.data as OpponentDTO[];
-  const locations = locationsHook.data as string[];
+  const opponents = opponentsHook.data
+    ? (opponentsHook.data as OpponentDTO[])
+    : [];
+  const locations = locationsHook.data ? (locationsHook.data as string[]) : [];
 
   const events = eventsHook.data as EventDTO[];
   const processedEvents =
