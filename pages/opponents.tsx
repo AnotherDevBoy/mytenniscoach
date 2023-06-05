@@ -3,7 +3,8 @@ import Router from 'next/router';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid/DataGrid';
 import { GridColDef } from '@mui/x-data-grid/models';
-import { getOpponentsStats } from '@/lib/api';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Dialog from '@mui/material/Dialog';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
@@ -16,6 +17,7 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 import { useUser } from '@/utils/useUser';
 import { format, parseISO } from 'date-fns';
 import { useOpponentsStats } from '@/hooks/useOpponentsStats';
+import Button from '@mui/material/Button';
 
 function stringOrNA(value: string) {
   return value ? value : 'N/A';
@@ -51,6 +53,8 @@ const Opponents = () => {
   const [selectedOpponent, setSelectedOpponent] = React.useState<number>(0);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [selectedMatch, setSelectedMatch] = React.useState<number>(0);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   if (user.isLoading) {
     return <LoadingSpinner />;
@@ -102,6 +106,7 @@ const Opponents = () => {
       />
       <Dialog
         open={dialogOpen}
+        fullScreen={fullScreen}
         onClose={() => {
           setDialogOpen(false);
         }}
@@ -204,9 +209,12 @@ const Opponents = () => {
                     )}
                     margin="normal"
                     fullWidth={true}
+                    multiline
+                    rows={7}
                   />
                 </Grid>
               </Grid>
+              <Button onClick={() => setDialogOpen(false)}>Close</Button>
             </Stack>
           ) : (
             <></>
