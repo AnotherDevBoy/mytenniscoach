@@ -14,6 +14,7 @@ import useAsyncError from '@/lib/errorHandling';
 import { useOpponents, invalidateOpponents } from '@/hooks/useOpponents';
 import { useQueryClient } from 'react-query';
 import { useLocations } from '@/hooks/useLocations';
+import { invalidateEvents, useEvents } from '@/hooks/useEvents';
 
 const Schedule = () => {
   const throwError = useAsyncError();
@@ -22,29 +23,26 @@ const Schedule = () => {
 
   const user = useUser();
 
+  const eventsHook = useEvents();
   const opponentsHook = useOpponents();
   const locationsHook = useLocations();
 
   const opponents = opponentsHook.data as OpponentDTO[];
   const locations = locationsHook.data as string[];
 
+  const events = eventsHook.data as EventDTO[];
+  const processedEvents =
+    events && events.length > 0
+      ? (events.map((e: EventDTO) =>
+          toProcessedEvent(e, opponents)
+        ) as ProcessedEvent[])
+      : [];
+
   React.useEffect(() => {
     if (!user.isLoading && !user.user) {
       Router.push('/signin');
     }
   }, [user]);
-
-  const getScheduledEvents = async (
-    _: ViewEvent
-  ): Promise<ProcessedEvent[] | void> => {
-    try {
-      return (await getEvents()).map((e: EventDTO) =>
-        toProcessedEvent(e, opponents)
-      ) as ProcessedEvent[];
-    } catch (e) {
-      throwError(e as Error);
-    }
-  };
 
   async function onDeleteEvent(id: string | number): Promise<string | number> {
     await deleteEvent(id as string);
@@ -55,7 +53,12 @@ const Schedule = () => {
     return id;
   }
 
-  if (!user.user || opponentsHook.isLoading || locationsHook.isLoading) {
+  if (
+    !user.user ||
+    opponentsHook.isLoading ||
+    locationsHook.isLoading ||
+    eventsHook.isLoading
+  ) {
     return <LoadingSpinner />;
   }
 
@@ -64,7 +67,7 @@ const Schedule = () => {
       <Scheduler
         view="month"
         onDelete={onDeleteEvent}
-        getRemoteEvents={getScheduledEvents}
+        events={processedEvents}
         customEditor={(scheduler) => (
           <ScheduleEventEditor
             scheduler={scheduler}
@@ -75,6 +78,7 @@ const Schedule = () => {
                 variant: 'success',
                 anchorOrigin: { horizontal: 'center', vertical: 'bottom' }
               });
+              invalidateEvents(queryClient);
               invalidateOpponents(queryClient);
             }}
           />
