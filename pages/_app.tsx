@@ -10,10 +10,7 @@ import { PostHogProvider } from 'posthog-js/react';
 import { useRouter } from 'next/router';
 import { SnackbarProvider } from 'notistack';
 import CssBaseline from '@mui/material/CssBaseline';
-import {
-  QueryClient,
-  QueryClientProvider
-} from 'react-query';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 // Check that PostHog is client-side (used to handle Next.js SSR)
 if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
@@ -23,6 +20,10 @@ if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
     persistence: 'memory'
   });
 }
+
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { staleTime: 10000 } }
+});
 
 export default function App({ Component, pageProps }: any) {
   const [supabaseClient] = useState(() => createPagesBrowserClient<Database>());
@@ -44,8 +45,6 @@ export default function App({ Component, pageProps }: any) {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, []);
-
-  const queryClient = new QueryClient();
 
   return (
     <>
