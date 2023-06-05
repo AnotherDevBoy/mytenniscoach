@@ -1,23 +1,20 @@
 import * as React from 'react';
 import Router from 'next/router';
 import { Scheduler } from '@aldabil/react-scheduler';
-import { ProcessedEvent, ViewEvent } from '@aldabil/react-scheduler/types';
-
+import { ProcessedEvent } from '@aldabil/react-scheduler/types';
 import { EventDTO, OpponentDTO } from '@/lib/types';
 import ScheduleEventEditor from '@/components/ScheduleEventEditor';
 import { toProcessedEvent } from '@/lib/convert';
-import { getEvents, deleteEvent, getOpponents } from '@/lib/api';
+import { deleteEvent } from '@/lib/api';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { useUser } from '@/utils/useUser';
 import { useSnackbar } from 'notistack';
-import useAsyncError from '@/lib/errorHandling';
 import { useOpponents, invalidateOpponents } from '@/hooks/useOpponents';
 import { useQueryClient } from 'react-query';
 import { useLocations } from '@/hooks/useLocations';
 import { invalidateEvents, useEvents } from '@/hooks/useEvents';
 
 const Schedule = () => {
-  const throwError = useAsyncError();
   const { enqueueSnackbar } = useSnackbar();
   const queryClient = useQueryClient();
 
