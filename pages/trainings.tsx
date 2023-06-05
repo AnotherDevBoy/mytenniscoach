@@ -2,15 +2,18 @@ import * as React from 'react';
 import Router from 'next/router';
 import { Typography } from '@mui/material';
 import { useUser } from '@/utils/useUser';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 const Trainings = () => {
   const user = useUser();
 
-  React.useEffect(() => {
-    if (!user.isLoading && !user.user) {
-      Router.push('/signin');
-    }
-  }, [user]);
+  if (user.isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (!user.user) {
+    Router.push('/signin');
+  }
 
   return (
     <>

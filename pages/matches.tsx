@@ -8,21 +8,37 @@ import Dialog from '@mui/material/Dialog';
 import SubmitMatchResultForm, {
   SubmitMatchResultFormData
 } from '@/components/SubmitMatchResultForm';
-import { getEvents, getOpponents, submitEventData } from '@/lib/api';
+import { submitEventData } from '@/lib/api';
 import { EventDTO, EventType, MatchEventData, OpponentDTO } from '@/lib/types';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { useUser } from '@/utils/useUser';
 import { useSnackbar } from 'notistack';
-import useAsyncError from '@/lib/errorHandling';
+import { useEvents, invalidateEvents } from '@/hooks/useEvents';
+import { useOpponents } from '@/hooks/useOpponents';
+import { useQueryClient } from 'react-query';
 
 const Matches = () => {
+  const user = useUser();
+
+  if (user.isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (!user.user) {
+    Router.push('/signin');
+  }
+
   const { enqueueSnackbar } = useSnackbar();
 
-  const throwError = useAsyncError();
+  const queryClient = useQueryClient();
 
-  const user = useUser();
+  const eventsHook = useEvents();
+  const opponentsHook = useOpponents();
+
+  const opponents = opponentsHook.data as OpponentDTO[];
+  const events = eventsHook.data as EventDTO[];
 
   const [displayOldMatches, setDisplayOldMatches] = React.useState(true);
   const [submitMatchResultModalOpen, setSubmitMatchResultModalOpen] =
@@ -30,29 +46,9 @@ const Matches = () => {
   const [selectedEvent, setSelectedEvent] = React.useState<
     EventDTO | undefined
   >(undefined);
-  const [events, setEvents] = React.useState<EventDTO[]>([]);
-  const [opponents, setOpponents] = React.useState<OpponentDTO[]>([]);
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-
-  React.useEffect(() => {
-    if (!user.isLoading && !user.user) {
-      Router.push('/signin');
-    }
-
-    getOpponents()
-      .then((existingOpponents) => {
-        setOpponents(existingOpponents);
-        return getEvents();
-      })
-      .then((existingEvents) => {
-        setEvents(existingEvents);
-      })
-      .catch((e) => {
-        throwError(e);
-      });
-  }, [user]);
 
   const now = new Date();
 
@@ -113,78 +109,73 @@ const Matches = () => {
 
     await submitEventData(event.id, eventData);
 
-    try {
-      const refreshedEvents = await getEvents();
-      setEvents(refreshedEvents);
-    } catch (e) {
-      throwError(e as Error);
-    }
+    invalidateEvents(queryClient);
   }
 
-  if (user.user && opponents.length > 0 && events.length > 0) {
-    return (
-      <>
-        <Box
-          justifyContent={'center'}
-          sx={{
-            display: 'flex',
-            borderBottom: 1,
-            borderColor: 'divider',
-            marginBottom: 5
-          }}
-        >
-          <Tabs
-            value={displayOldMatches ? 0 : 1}
-            onChange={(_: React.SyntheticEvent, newValue: number) =>
-              setDisplayOldMatches(newValue === 0)
-            }
-          >
-            <Tab label="Previous matches" />
-            <Tab label="Upcoming matches" />
-          </Tabs>
-        </Box>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          autoHeight
-          sx={{ marginBottom: 5 }}
-          columnVisibilityModel={{
-            id: false
-          }}
-          disableRowSelectionOnClick={true}
-          onRowClick={(rowClicked) => {
-            if (displayOldMatches) {
-              setSubmitMatchResultModalOpen(true);
+  if (opponentsHook.isLoading || eventsHook.isLoading) {
+    return <LoadingSpinner />;
+  }
 
-              const maybeEvent = events.find(
-                (e) => e.id === rowClicked.id.toString()
-              )!;
-              setSelectedEvent(maybeEvent);
-            }
+  return (
+    <>
+      <Box
+        justifyContent={'center'}
+        sx={{
+          display: 'flex',
+          borderBottom: 1,
+          borderColor: 'divider',
+          marginBottom: 5
+        }}
+      >
+        <Tabs
+          value={displayOldMatches ? 0 : 1}
+          onChange={(_: React.SyntheticEvent, newValue: number) =>
+            setDisplayOldMatches(newValue === 0)
+          }
+        >
+          <Tab label="Previous matches" />
+          <Tab label="Upcoming matches" />
+        </Tabs>
+      </Box>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        autoHeight
+        sx={{ marginBottom: 5 }}
+        columnVisibilityModel={{
+          id: false
+        }}
+        disableRowSelectionOnClick={true}
+        onRowClick={(rowClicked) => {
+          if (displayOldMatches) {
+            setSubmitMatchResultModalOpen(true);
+
+            const maybeEvent = events.find(
+              (e) => e.id === rowClicked.id.toString()
+            )!;
+            setSelectedEvent(maybeEvent);
+          }
+        }}
+      />
+      <Dialog
+        open={submitMatchResultModalOpen}
+        fullScreen={fullScreen}
+        onClose={() => setSubmitMatchResultModalOpen(false)}
+      >
+        <SubmitMatchResultForm
+          event={selectedEvent!}
+          onFormCompleted={async (data) => {
+            setSubmitMatchResultModalOpen(false);
+            await sendMatchResult(selectedEvent!, data);
+            enqueueSnackbar('Match result saved', {
+              variant: 'success',
+              anchorOrigin: { horizontal: 'center', vertical: 'bottom' }
+            });
           }}
         />
-        <Dialog
-          open={submitMatchResultModalOpen}
-          fullScreen={fullScreen}
-          onClose={() => setSubmitMatchResultModalOpen(false)}
-        >
-          <SubmitMatchResultForm
-            event={selectedEvent!}
-            onFormCompleted={async (data) => {
-              setSubmitMatchResultModalOpen(false);
-              await sendMatchResult(selectedEvent!, data);
-              enqueueSnackbar('Match result saved', {
-                variant: 'success',
-                anchorOrigin: { horizontal: 'center', vertical: 'bottom' }
-              });
-            }}
-          />
-        </Dialog>
-      </>
-    );
-  }
-
-  return <LoadingSpinner />;
+      </Dialog>
+    </>
+  );
 };
 
 const columns: GridColDef[] = [

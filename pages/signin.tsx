@@ -13,56 +13,55 @@ import Router from 'next/router';
 
 const SignUp = () => {
   const user = useUser();
+
   const supabaseClient = useSupabaseClient();
 
-  React.useEffect(() => {
-    if (user.user) {
-      Router.push('/dashboard');
-    }
-  }, [user]);
-
-  if (!user.isLoading && !user.user) {
-    return (
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center'
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Auth
-            supabaseClient={supabaseClient}
-            redirectTo={getURL() + '/dashboard'}
-            providers={['google']}
-            appearance={{
-              theme: ThemeSupa,
-              variables: {
-                default: {
-                  colors: {
-                    brand: '#404040',
-                    brandAccent: '#52525b'
-                  }
-                }
-              }
-            }}
-            theme="light"
-          />
-          <Copyright sx={{ mt: 8, mb: 4 }} />
-        </Box>
-      </Container>
-    );
+  if (user.isLoading) {
+    return <LoadingSpinner />;
   }
 
-  return <LoadingSpinner />;
+  if (user.user) {
+    Router.push('/dashboard');
+  }
+
+  return (
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
+        <Auth
+          supabaseClient={supabaseClient}
+          redirectTo={getURL() + '/dashboard'}
+          providers={['google']}
+          appearance={{
+            theme: ThemeSupa,
+            variables: {
+              default: {
+                colors: {
+                  brand: '#404040',
+                  brandAccent: '#52525b'
+                }
+              }
+            }
+          }}
+          theme="light"
+        />
+        <Copyright sx={{ mt: 8, mb: 4 }} />
+      </Box>
+    </Container>
+  );
 };
 
 SignUp.getLayout = function getLayout(page: any) {

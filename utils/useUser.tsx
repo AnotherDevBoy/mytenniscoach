@@ -1,4 +1,4 @@
-import { useEffect, useState, createContext, useContext } from 'react';
+import { useEffect, createContext, useContext } from 'react';
 import {
   useUser as useSupaUser,
   useSessionContext,

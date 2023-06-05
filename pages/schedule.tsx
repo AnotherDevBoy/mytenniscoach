@@ -15,10 +15,18 @@ import { useLocations } from '@/hooks/useLocations';
 import { invalidateEvents, useEvents } from '@/hooks/useEvents';
 
 const Schedule = () => {
+  const user = useUser();
+
+  if (user.isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (!user.user) {
+    Router.push('/signin');
+  }
+
   const { enqueueSnackbar } = useSnackbar();
   const queryClient = useQueryClient();
-
-  const user = useUser();
 
   const eventsHook = useEvents();
   const opponentsHook = useOpponents();
@@ -35,12 +43,6 @@ const Schedule = () => {
         ) as ProcessedEvent[])
       : [];
 
-  React.useEffect(() => {
-    if (!user.isLoading && !user.user) {
-      Router.push('/signin');
-    }
-  }, [user]);
-
   async function onDeleteEvent(id: string | number): Promise<string | number> {
     await deleteEvent(id as string);
     enqueueSnackbar('Event Deleted', {
@@ -51,7 +53,6 @@ const Schedule = () => {
   }
 
   if (
-    !user.user ||
     opponentsHook.isLoading ||
     locationsHook.isLoading ||
     eventsHook.isLoading
