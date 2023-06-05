@@ -42,12 +42,14 @@ const filter = createFilterOptions<SelectedOpponent>();
 interface ScheduleEventEditorProps {
   scheduler: SchedulerHelpers;
   opponents: OpponentDTO[];
+  locations: string[];
   onComplete: Function;
 }
 
 const ScheduleEventEditor = ({
   scheduler,
   opponents,
+  locations,
   onComplete
 }: ScheduleEventEditorProps) => {
   const event: ProcessedEvent | undefined = scheduler.edited;
@@ -65,7 +67,7 @@ const ScheduleEventEditor = ({
     defaultValues: {
       type: getEventTypeIndex(event?.type || EventType.Match),
       start: event?.start || scheduler.state.start.value,
-      end: event?.end || scheduler.state.end.value,
+      location: event?.location || '',
       opponent: opponentName ? defaultOpponent : undefined
     }
   });
@@ -97,8 +99,8 @@ const ScheduleEventEditor = ({
           const scheduleEvent: EventDTO = {
             id: String(event ? event.event_id : uuidv4()),
             start: data.start.toISOString(),
-            end: data.end.toISOString(),
             type: Object.values(EventType)[data.type],
+            location: data.location,
             opponentId: opponentId
           };
 
@@ -131,11 +133,11 @@ const ScheduleEventEditor = ({
             />
           </Grid>
           <Grid xs={6}>
-            <DateTimePickerElement
-              label="End"
-              name="end"
+            <AutocompleteElement
+              name="location"
+              label="Location"
               required
-              sx={{ width: '100%' }}
+              options={locations}
             />
           </Grid>
           <Grid xs={12}>

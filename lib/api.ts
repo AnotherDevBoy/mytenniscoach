@@ -140,6 +140,18 @@ export async function getStats(): Promise<StatsDTO> {
   return response.data;
 }
 
+export async function getLocations(): Promise<string[]> {
+  const requestId = uuidv4();
+
+  const response = await axios.get(`api/locations`, {
+    headers: { 'X-Request-ID': requestId }
+  });
+
+  handleResponseErrors(requestId, response);
+
+  return response.data;
+}
+
 function handleResponseErrors(requestId: string, response: AxiosResponse) {
   if (response.status >= 400) {
     throw new Error(

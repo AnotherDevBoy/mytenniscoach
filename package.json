@@ -37,6 +37,7 @@
     "react-error-boundary": "^4.0.7",
     "react-hook-form": "^7.43.9",
     "react-hook-form-mui": "^6.1.1",
+    "react-query": "^3.39.3",
     "recharts": "^2.6.2",
     "typescript": "5.0.4",
     "uuid": "^9.0.0",

@@ -52,6 +52,7 @@ export interface EventDTO {
   start: string;
   type: EventType;
   opponentId?: string;
+  location?: string;
   data?: EventData;
 }
 

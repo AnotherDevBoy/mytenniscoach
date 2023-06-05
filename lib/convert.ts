@@ -25,6 +25,7 @@ export function toProcessedEvent(e: EventDTO, opponents: OpponentDTO[]) {
     start: new Date(e.start),
     end: addHours(new Date(e.start), 1),
     type: e.type,
+    location: e.location,
     color: colorsPerEventType.get(e.type),
     opponent: e.opponentId,
     title: generateTitle(e, opponents),

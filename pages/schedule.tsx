@@ -11,25 +11,22 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 import { useUser } from '@/utils/useUser';
 import { useSnackbar } from 'notistack';
 import useAsyncError from '@/lib/errorHandling';
+import { useOpponents, invalidateOpponents } from '@/hooks/useOpponents';
+import { useQueryClient } from 'react-query';
+import { useLocations } from '@/hooks/useLocations';
 
 const Schedule = () => {
   const throwError = useAsyncError();
   const { enqueueSnackbar } = useSnackbar();
-
-  const [loading, setLoading] = React.useState(true);
-  const [opponents, setOpponents] = React.useState<OpponentDTO[]>([]);
-
-  const refreshOpponents = async (): Promise<void> => {
-    const receivedOpponents = await getOpponents();
-    setOpponents(receivedOpponents);
-    setLoading(false);
-  };
-
-  React.useEffect(() => {
-    refreshOpponents();
-  }, []);
+  const queryClient = useQueryClient();
 
   const user = useUser();
+
+  const opponentsHook = useOpponents();
+  const locationsHook = useLocations();
+
+  const opponents = opponentsHook.data as OpponentDTO[];
+  const locations = locationsHook.data as string[];
 
   React.useEffect(() => {
     if (!user.isLoading && !user.user) {
@@ -58,33 +55,33 @@ const Schedule = () => {
     return id;
   }
 
-  if (user.user && !loading) {
-    return (
-      <>
-        <Scheduler
-          view="month"
-          onDelete={onDeleteEvent}
-          getRemoteEvents={getScheduledEvents}
-          customEditor={(scheduler) => (
-            <ScheduleEventEditor
-              scheduler={scheduler}
-              opponents={opponents}
-              onComplete={async () => {
-                setLoading(true);
-                enqueueSnackbar('Event Created', {
-                  variant: 'success',
-                  anchorOrigin: { horizontal: 'center', vertical: 'bottom' }
-                });
-                await refreshOpponents();
-              }}
-            />
-          )}
-        />
-      </>
-    );
+  if (!user.user || opponentsHook.isLoading || locationsHook.isLoading) {
+    return <LoadingSpinner />;
   }
 
-  return <LoadingSpinner />;
+  return (
+    <>
+      <Scheduler
+        view="month"
+        onDelete={onDeleteEvent}
+        getRemoteEvents={getScheduledEvents}
+        customEditor={(scheduler) => (
+          <ScheduleEventEditor
+            scheduler={scheduler}
+            opponents={opponents}
+            locations={locations}
+            onComplete={async () => {
+              enqueueSnackbar('Event Created', {
+                variant: 'success',
+                anchorOrigin: { horizontal: 'center', vertical: 'bottom' }
+              });
+              invalidateOpponents(queryClient);
+            }}
+          />
+        )}
+      />
+    </>
+  );
 };
 
 export default Schedule;

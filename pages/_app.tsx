@@ -8,8 +8,12 @@ import { Database } from '@/lib/database.types';
 import posthog from 'posthog-js';
 import { PostHogProvider } from 'posthog-js/react';
 import { useRouter } from 'next/router';
-import { SnackbarProvider, useSnackbar } from 'notistack';
+import { SnackbarProvider } from 'notistack';
 import CssBaseline from '@mui/material/CssBaseline';
+import {
+  QueryClient,
+  QueryClientProvider
+} from 'react-query';
 
 // Check that PostHog is client-side (used to handle Next.js SSR)
 if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
@@ -41,18 +45,22 @@ export default function App({ Component, pageProps }: any) {
     };
   }, []);
 
+  const queryClient = new QueryClient();
+
   return (
     <>
       <CssBaseline />
-      <SnackbarProvider>
-        <PostHogProvider client={posthog}>
-          <SessionContextProvider supabaseClient={supabaseClient}>
-            <MyUserContextProvider>
-              {getLayout(<Component {...pageProps} />)}
-            </MyUserContextProvider>
-          </SessionContextProvider>
-        </PostHogProvider>
-      </SnackbarProvider>
+      <QueryClientProvider client={queryClient}>
+        <SnackbarProvider>
+          <PostHogProvider client={posthog}>
+            <SessionContextProvider supabaseClient={supabaseClient}>
+              <MyUserContextProvider>
+                {getLayout(<Component {...pageProps} />)}
+              </MyUserContextProvider>
+            </SessionContextProvider>
+          </PostHogProvider>
+        </SnackbarProvider>
+      </QueryClientProvider>
     </>
   );
 }
