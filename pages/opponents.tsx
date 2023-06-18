@@ -2,7 +2,7 @@ import * as React from 'react';
 import Router from 'next/router';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid/DataGrid';
-import { GridColDef } from '@mui/x-data-grid/models';
+import { GridColDef, GridRowId, GridRowModes, GridRowModesModel } from '@mui/x-data-grid/models';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Dialog from '@mui/material/Dialog';
@@ -18,37 +18,15 @@ import { useUser } from '@/utils/useUser';
 import { format, parseISO } from 'date-fns';
 import { useOpponentsStats } from '@/hooks/useOpponentsStats';
 import Button from '@mui/material/Button';
+import { GridActionsCellItem } from '@mui/x-data-grid/components';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/DeleteOutlined';
+import SaveIcon from '@mui/icons-material/Save';
+import CancelIcon from '@mui/icons-material/Close';
 
 function stringOrNA(value: string) {
   return value ? value : 'N/A';
 }
-
-const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID' },
-  {
-    field: 'name',
-    headerName: 'Name',
-    editable: false,
-    width: 200
-  },
-  {
-    field: 'forehand',
-    headerName: 'Forehand',
-    editable: false,
-    width: 120
-  },
-  {
-    field: 'backhand',
-    headerName: 'Backhand',
-    editable: false,
-    width: 120
-  },
-  {
-    field: 'winrate',
-    headerName: 'Winrate',
-    editable: false
-  }
-];
 
 const Opponents = () => {
   const user = useUser();
@@ -58,6 +36,7 @@ const Opponents = () => {
   const [selectedMatch, setSelectedMatch] = React.useState<number>(0);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+  const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>({});
 
   if (user.isLoading) {
     return <LoadingSpinner />;
@@ -71,14 +50,103 @@ const Opponents = () => {
     return <LoadingSpinner />;
   }
 
+  const handleEditClick = (id: GridRowId) => () => {
+    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
+  };
+
+  const handleSaveClick = (id: GridRowId) => () => {
+    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
+  };
+
+  const handleDeleteClick = (id: GridRowId) => () => {
+  };
+
+  const handleCancelClick = (id: GridRowId) => () => {
+    setRowModesModel({
+      ...rowModesModel,
+      [id]: { mode: GridRowModes.View, ignoreModifications: true },
+    });
+
+    const editedRow = rows.find((row) => row.id === id);
+  };
+
+  const columns: GridColDef[] = [
+    { field: 'id', headerName: 'ID' },
+    {
+      field: 'name',
+      headerName: 'Name',
+      editable: true,
+    },
+    {
+      field: 'forehand',
+      headerName: 'Forehand',
+      editable: false,
+    },
+    {
+      field: 'backhand',
+      headerName: 'Backhand',
+      editable: false,
+    },
+    {
+      field: 'winrate',
+      headerName: 'Winrate',
+      editable: false
+    },
+    {
+      field: 'actions',
+      type: 'actions',
+      headerName: 'Actions',
+      cellClassName: 'actions',
+      getActions: ({ id }) => {
+        const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
+  
+        if (isInEditMode) {
+          return [
+            <GridActionsCellItem
+              icon={<SaveIcon />}
+              label="Save"
+              sx={{
+                color: 'primary.main',
+              }}
+              onClick={handleSaveClick(id)}
+            />,
+            <GridActionsCellItem
+              icon={<CancelIcon />}
+              label="Cancel"
+              className="textPrimary"
+              onClick={handleCancelClick(id)}
+              color="inherit"
+            />,
+          ];
+        }
+  
+        return [
+          <GridActionsCellItem
+            icon={<EditIcon />}
+            label="Edit"
+            className="textPrimary"
+            onClick={handleEditClick(id)}
+            color="inherit"
+          />,
+          <GridActionsCellItem
+            icon={<DeleteIcon />}
+            label="Delete"
+            onClick={handleDeleteClick(id)}
+            color="inherit"
+          />,
+        ];
+      }
+    }
+  ];
+
   const opponents = data ? (data as OpponentStatsDTO[]) : [];
 
   const rows = opponents.map((o, i) => {
     return {
       id: i,
       name: o.opponentName,
-      forehand: o.forehand,
-      backhand: o.backhand,
+      forehand: o.forehand === "Right-handed" ? "🫱" : "🫲",
+      backhand: o.backhand === "One-handed" ? "🤚" : "🫱🫲",
       winrate: o.winRate
     };
   });
@@ -91,6 +159,8 @@ const Opponents = () => {
         autoHeight
         sx={{ marginBottom: 5, width: 'auto' }}
         disableRowSelectionOnClick
+        rowModesModel={rowModesModel}
+        onRowModesModelChange={(newRowModesModel: GridRowModesModel) => setRowModesModel(newRowModesModel)}
         columnVisibilityModel={{
           id: false
         }}
