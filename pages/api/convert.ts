@@ -71,7 +71,7 @@ export function toOpponentDAL(
   userId: string
 ): OpponentDAL {
   return {
-    id: uuidv4(),
+    id: opponentDTO.id ? opponentDTO.id : uuidv4(),
     user_id: userId,
     name: opponentDTO.name
   };

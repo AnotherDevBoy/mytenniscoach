@@ -89,6 +89,22 @@ export async function createOpponent(name: string): Promise<OpponentDTO> {
   return response.data;
 }
 
+export async function updateOpponent(
+  opponentDTO: OpponentDTO
+): Promise<OpponentDTO> {
+  const requestId = uuidv4();
+
+  const response = await axios.patch(
+    `api/opponents/${opponentDTO.id}`,
+    opponentDTO,
+    {
+      headers: { 'X-Request-ID': requestId }
+    }
+  );
+
+  return response.data;
+}
+
 export async function getOpponents(): Promise<OpponentDTO[]> {
   const requestId = uuidv4();
 
@@ -113,7 +129,7 @@ export async function getOpponentsStats(): Promise<OpponentStatsDTO[]> {
   return response.data;
 }
 
-export async function deleteOpponents(
+export async function deleteOpponent(
   opponentId: string
 ): Promise<AxiosResponse> {
   const requestId = uuidv4();
