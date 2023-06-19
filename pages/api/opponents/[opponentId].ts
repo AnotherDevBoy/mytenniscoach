@@ -31,7 +31,9 @@ export default async function handler(
       const opponentDTO = req.body as OpponentDTO;
 
       if (opponentDTO.id !== opponentId) {
-        return res.status(401).json({message: `Not allowed to modify user ${opponentId}`});
+        return res
+          .status(401)
+          .json({ message: `Not allowed to modify user ${opponentId}` });
       }
 
       const opponentDAL = toOpponentDAL(opponentDTO, user);

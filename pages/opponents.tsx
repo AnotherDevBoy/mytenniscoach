@@ -2,7 +2,13 @@ import * as React from 'react';
 import Router from 'next/router';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid/DataGrid';
-import { GridColDef, GridRowId, GridRowModel, GridRowModes, GridRowModesModel } from '@mui/x-data-grid/models';
+import {
+  GridColDef,
+  GridRowId,
+  GridRowModel,
+  GridRowModes,
+  GridRowModesModel
+} from '@mui/x-data-grid/models';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Dialog from '@mui/material/Dialog';
@@ -16,7 +22,10 @@ import Grid from '@mui/material/Grid';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { useUser } from '@/utils/useUser';
 import { format, parseISO } from 'date-fns';
-import { useOpponentsStats, invalidateOpponentsStats } from '@/hooks/useOpponentsStats';
+import {
+  useOpponentsStats,
+  invalidateOpponentsStats
+} from '@/hooks/useOpponentsStats';
 import Button from '@mui/material/Button';
 import { GridActionsCellItem } from '@mui/x-data-grid/components';
 import EditIcon from '@mui/icons-material/Edit';
@@ -34,12 +43,16 @@ const Opponents = () => {
   const user = useUser();
   const { isLoading, data } = useOpponentsStats();
   const queryClient = useQueryClient();
-  const [selectedOpponent, setSelectedOpponent] = React.useState<OpponentStatsDTO | undefined>(undefined);
+  const [selectedOpponent, setSelectedOpponent] = React.useState<
+    OpponentStatsDTO | undefined
+  >(undefined);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [selectedMatch, setSelectedMatch] = React.useState<number>(0);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-  const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>({});
+  const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>(
+    {}
+  );
 
   const opponents = data ? (data as OpponentStatsDTO[]) : [];
 
@@ -47,8 +60,8 @@ const Opponents = () => {
     return {
       id: o.opponentId,
       name: o.opponentName,
-      forehand: o.forehand === "Right-handed" ? "🫱" : "🫲",
-      backhand: o.backhand === "One-handed" ? "🤚" : "🫱🫲",
+      forehand: o.forehand === 'Right-handed' ? '🫱' : '🫲',
+      backhand: o.backhand === 'One-handed' ? '🤚' : '🫱🫲',
       winrate: o.winRate
     };
   });
@@ -71,11 +84,11 @@ const Opponents = () => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
   };
 
-  const handleSaveClick = (id: GridRowId) => async() => {
+  const handleSaveClick = (id: GridRowId) => async () => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
   };
 
-  const handleDeleteClick = (id: GridRowId) => async() => {
+  const handleDeleteClick = (id: GridRowId) => async () => {
     await deleteOpponent(id as string);
     invalidateOpponentsStats(queryClient);
   };
@@ -83,15 +96,18 @@ const Opponents = () => {
   const handleCancelClick = (id: GridRowId) => () => {
     setRowModesModel({
       ...rowModesModel,
-      [id]: { mode: GridRowModes.View, ignoreModifications: true },
-    }); 
+      [id]: { mode: GridRowModes.View, ignoreModifications: true }
+    });
   };
 
-  const processRowUpdate = async(newRow: GridRowModel) => {
+  const processRowUpdate = async (newRow: GridRowModel) => {
     const updatedRow = newRow as any;
 
     if (updatedRow?.name) {
-      await updateOpponent({id: updatedRow.id as string, name: updatedRow.name});
+      await updateOpponent({
+        id: updatedRow.id as string,
+        name: updatedRow.name
+      });
       invalidateOpponentsStats(queryClient);
       setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
     }
@@ -104,17 +120,17 @@ const Opponents = () => {
     {
       field: 'name',
       headerName: 'Name',
-      editable: true,
+      editable: true
     },
     {
       field: 'forehand',
       headerName: 'Forehand',
-      editable: false,
+      editable: false
     },
     {
       field: 'backhand',
       headerName: 'Backhand',
-      editable: false,
+      editable: false
     },
     {
       field: 'winrate',
@@ -128,29 +144,32 @@ const Opponents = () => {
       cellClassName: 'actions',
       getActions: ({ id }) => {
         const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
-  
+
         if (isInEditMode) {
           return [
             <GridActionsCellItem
+              key={0}
               icon={<SaveIcon />}
               label="Save"
               sx={{
-                color: 'primary.main',
+                color: 'primary.main'
               }}
               onClick={handleSaveClick(id)}
             />,
             <GridActionsCellItem
+              key={1}
               icon={<CancelIcon />}
               label="Cancel"
               className="textPrimary"
               onClick={handleCancelClick(id)}
               color="inherit"
-            />,
+            />
           ];
         }
-  
+
         return [
           <GridActionsCellItem
+            key={0}
             icon={<EditIcon />}
             label="Edit"
             className="textPrimary"
@@ -158,17 +177,16 @@ const Opponents = () => {
             color="inherit"
           />,
           <GridActionsCellItem
+            key={1}
             icon={<DeleteIcon />}
             label="Delete"
             onClick={handleDeleteClick(id)}
             color="inherit"
-          />,
+          />
         ];
       }
     }
   ];
-
-  
 
   return (
     <>
@@ -180,20 +198,18 @@ const Opponents = () => {
         disableRowSelectionOnClick
         rowModesModel={rowModesModel}
         processRowUpdate={processRowUpdate}
-        onRowModesModelChange={(newRowModesModel: GridRowModesModel) => setRowModesModel(newRowModesModel)}
+        onRowModesModelChange={(newRowModesModel: GridRowModesModel) =>
+          setRowModesModel(newRowModesModel)
+        }
         columnVisibilityModel={{
           id: false
         }}
         onRowClick={(a) => {
           const opponentId = a.id.valueOf() as string;
-        
-          const opponent = opponents.find(o => o.opponentId === opponentId);
 
-          if (
-            opponent && 
-            opponent.matches &&
-            opponent.matches!.length > 0
-          ) {
+          const opponent = opponents.find((o) => o.opponentId === opponentId);
+
+          if (opponent && opponent.matches && opponent.matches!.length > 0) {
             setSelectedOpponent(opponent);
             setSelectedMatch(0);
             setDialogOpen(true);
@@ -210,7 +226,7 @@ const Opponents = () => {
         <Box sx={{ margin: 2 }}>
           {opponents &&
           opponents.length > 0 &&
-          selectedOpponent && 
+          selectedOpponent &&
           selectedOpponent.matches &&
           selectedOpponent.matches!.length > 0 ? (
             <Stack sx={{ alignItems: 'center' }}>
@@ -237,8 +253,8 @@ const Opponents = () => {
                     label="Strength #1"
                     contentEditable={false}
                     value={stringOrNA(
-                      selectedOpponent.matches![selectedMatch]
-                        .performance.strength1
+                      selectedOpponent.matches![selectedMatch].performance
+                        .strength1
                     )}
                     margin="normal"
                     fullWidth={true}
@@ -247,8 +263,8 @@ const Opponents = () => {
                     label="Strength #2"
                     contentEditable={false}
                     value={stringOrNA(
-                      selectedOpponent.matches![selectedMatch]
-                        .performance.strength2
+                      selectedOpponent.matches![selectedMatch].performance
+                        .strength2
                     )}
                     margin="normal"
                     fullWidth={true}
@@ -257,8 +273,8 @@ const Opponents = () => {
                     label="Strength #3"
                     contentEditable={false}
                     value={stringOrNA(
-                      selectedOpponent.matches![selectedMatch]
-                        .performance.strength3
+                      selectedOpponent.matches![selectedMatch].performance
+                        .strength3
                     )}
                     margin="normal"
                     fullWidth={true}
@@ -269,8 +285,8 @@ const Opponents = () => {
                     label="Weakness #1"
                     contentEditable={false}
                     value={stringOrNA(
-                      selectedOpponent.matches![selectedMatch]
-                        .performance.weakness1
+                      selectedOpponent.matches![selectedMatch].performance
+                        .weakness1
                     )}
                     margin="normal"
                     fullWidth={true}
@@ -279,8 +295,8 @@ const Opponents = () => {
                     label="Weakness #2"
                     contentEditable={false}
                     value={stringOrNA(
-                      selectedOpponent.matches![selectedMatch]
-                        .performance.weakness2
+                      selectedOpponent.matches![selectedMatch].performance
+                        .weakness2
                     )}
                     margin="normal"
                     fullWidth={true}
@@ -289,8 +305,8 @@ const Opponents = () => {
                     label="Weakness #3"
                     contentEditable={false}
                     value={stringOrNA(
-                      selectedOpponent.matches![selectedMatch]
-                        .performance.weakness3
+                      selectedOpponent.matches![selectedMatch].performance
+                        .weakness3
                     )}
                     margin="normal"
                     fullWidth={true}
@@ -301,8 +317,8 @@ const Opponents = () => {
                     label="How to beat"
                     contentEditable={false}
                     value={stringOrNA(
-                      selectedOpponent.matches![selectedMatch]
-                        .performance.changeForNextTime
+                      selectedOpponent.matches![selectedMatch].performance
+                        .changeForNextTime
                     )}
                     margin="normal"
                     fullWidth={true}

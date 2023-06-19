@@ -89,12 +89,18 @@ export async function createOpponent(name: string): Promise<OpponentDTO> {
   return response.data;
 }
 
-export async function updateOpponent(opponentDTO: OpponentDTO): Promise<OpponentDTO> {
+export async function updateOpponent(
+  opponentDTO: OpponentDTO
+): Promise<OpponentDTO> {
   const requestId = uuidv4();
 
-  const response = await axios.patch(`api/opponents/${opponentDTO.id}`, opponentDTO, {
-    headers: { 'X-Request-ID': requestId }
-  });
+  const response = await axios.patch(
+    `api/opponents/${opponentDTO.id}`,
+    opponentDTO,
+    {
+      headers: { 'X-Request-ID': requestId }
+    }
+  );
 
   return response.data;
 }
