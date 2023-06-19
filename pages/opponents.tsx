@@ -2,7 +2,7 @@ import * as React from 'react';
 import Router from 'next/router';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid/DataGrid';
-import { GridColDef, GridRowId, GridRowModes, GridRowModesModel } from '@mui/x-data-grid/models';
+import { GridColDef, GridRowId, GridRowModel, GridRowModes, GridRowModesModel } from '@mui/x-data-grid/models';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Dialog from '@mui/material/Dialog';
@@ -16,13 +16,15 @@ import Grid from '@mui/material/Grid';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { useUser } from '@/utils/useUser';
 import { format, parseISO } from 'date-fns';
-import { useOpponentsStats } from '@/hooks/useOpponentsStats';
+import { useOpponentsStats, invalidateOpponentsStats } from '@/hooks/useOpponentsStats';
 import Button from '@mui/material/Button';
 import { GridActionsCellItem } from '@mui/x-data-grid/components';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Close';
+import { useQueryClient } from 'react-query';
+import { updateOpponent, deleteOpponent } from '@/lib/api';
 
 function stringOrNA(value: string) {
   return value ? value : 'N/A';
@@ -31,12 +33,27 @@ function stringOrNA(value: string) {
 const Opponents = () => {
   const user = useUser();
   const { isLoading, data } = useOpponentsStats();
-  const [selectedOpponent, setSelectedOpponent] = React.useState<number>(0);
+  const queryClient = useQueryClient();
+  const [selectedOpponent, setSelectedOpponent] = React.useState<OpponentStatsDTO | undefined>(undefined);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [selectedMatch, setSelectedMatch] = React.useState<number>(0);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
   const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>({});
+
+  const opponents = data ? (data as OpponentStatsDTO[]) : [];
+
+  const initialRows = opponents.map((o) => {
+    return {
+      id: o.opponentId,
+      name: o.opponentName,
+      forehand: o.forehand === "Right-handed" ? "🫱" : "🫲",
+      backhand: o.backhand === "One-handed" ? "🤚" : "🫱🫲",
+      winrate: o.winRate
+    };
+  });
+
+  const [rows, setRows] = React.useState(initialRows);
 
   if (user.isLoading) {
     return <LoadingSpinner />;
@@ -54,20 +71,32 @@ const Opponents = () => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
   };
 
-  const handleSaveClick = (id: GridRowId) => () => {
+  const handleSaveClick = (id: GridRowId) => async() => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
   };
 
-  const handleDeleteClick = (id: GridRowId) => () => {
+  const handleDeleteClick = (id: GridRowId) => async() => {
+    await deleteOpponent(id as string);
+    invalidateOpponentsStats(queryClient);
   };
 
   const handleCancelClick = (id: GridRowId) => () => {
     setRowModesModel({
       ...rowModesModel,
       [id]: { mode: GridRowModes.View, ignoreModifications: true },
-    });
+    }); 
+  };
 
-    const editedRow = rows.find((row) => row.id === id);
+  const processRowUpdate = async(newRow: GridRowModel) => {
+    const updatedRow = newRow as any;
+
+    if (updatedRow?.name) {
+      await updateOpponent({id: updatedRow.id as string, name: updatedRow.name});
+      invalidateOpponentsStats(queryClient);
+      setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
+    }
+
+    return updatedRow;
   };
 
   const columns: GridColDef[] = [
@@ -139,17 +168,7 @@ const Opponents = () => {
     }
   ];
 
-  const opponents = data ? (data as OpponentStatsDTO[]) : [];
-
-  const rows = opponents.map((o, i) => {
-    return {
-      id: i,
-      name: o.opponentName,
-      forehand: o.forehand === "Right-handed" ? "🫱" : "🫲",
-      backhand: o.backhand === "One-handed" ? "🤚" : "🫱🫲",
-      winrate: o.winRate
-    };
-  });
+  
 
   return (
     <>
@@ -160,18 +179,22 @@ const Opponents = () => {
         sx={{ marginBottom: 5, width: 'auto' }}
         disableRowSelectionOnClick
         rowModesModel={rowModesModel}
+        processRowUpdate={processRowUpdate}
         onRowModesModelChange={(newRowModesModel: GridRowModesModel) => setRowModesModel(newRowModesModel)}
         columnVisibilityModel={{
           id: false
         }}
         onRowClick={(a) => {
-          const opponent = a.id.valueOf() as number;
-          setSelectedOpponent(opponent);
+          const opponentId = a.id.valueOf() as string;
+        
+          const opponent = opponents.find(o => o.opponentId === opponentId);
 
           if (
-            opponents[opponent].matches &&
-            opponents[opponent].matches!.length > 0
+            opponent && 
+            opponent.matches &&
+            opponent.matches!.length > 0
           ) {
+            setSelectedOpponent(opponent);
             setSelectedMatch(0);
             setDialogOpen(true);
           }
@@ -187,8 +210,9 @@ const Opponents = () => {
         <Box sx={{ margin: 2 }}>
           {opponents &&
           opponents.length > 0 &&
-          opponents[selectedOpponent].matches &&
-          opponents[selectedOpponent].matches!.length > 0 ? (
+          selectedOpponent && 
+          selectedOpponent.matches &&
+          selectedOpponent.matches!.length > 0 ? (
             <Stack sx={{ alignItems: 'center' }}>
               <Tabs
                 value={selectedMatch}
@@ -196,12 +220,12 @@ const Opponents = () => {
                   setSelectedMatch(v);
                 }}
               >
-                {opponents[selectedOpponent].matches!.map((m, i) => {
+                {selectedOpponent.matches!.map((m, i) => {
                   const parsedDate = parseISO(m.date);
                   const formattedDate = format(parsedDate, 'd/M/yy');
                   return (
                     <Tab
-                      key={`${opponents[selectedOpponent].opponentId}-${i}`}
+                      key={`${selectedOpponent.opponentId}-${i}`}
                       label={formattedDate}
                     />
                   );
@@ -213,7 +237,7 @@ const Opponents = () => {
                     label="Strength #1"
                     contentEditable={false}
                     value={stringOrNA(
-                      opponents[selectedOpponent].matches![selectedMatch]
+                      selectedOpponent.matches![selectedMatch]
                         .performance.strength1
                     )}
                     margin="normal"
@@ -223,7 +247,7 @@ const Opponents = () => {
                     label="Strength #2"
                     contentEditable={false}
                     value={stringOrNA(
-                      opponents[selectedOpponent].matches![selectedMatch]
+                      selectedOpponent.matches![selectedMatch]
                         .performance.strength2
                     )}
                     margin="normal"
@@ -233,7 +257,7 @@ const Opponents = () => {
                     label="Strength #3"
                     contentEditable={false}
                     value={stringOrNA(
-                      opponents[selectedOpponent].matches![selectedMatch]
+                      selectedOpponent.matches![selectedMatch]
                         .performance.strength3
                     )}
                     margin="normal"
@@ -245,7 +269,7 @@ const Opponents = () => {
                     label="Weakness #1"
                     contentEditable={false}
                     value={stringOrNA(
-                      opponents[selectedOpponent].matches![selectedMatch]
+                      selectedOpponent.matches![selectedMatch]
                         .performance.weakness1
                     )}
                     margin="normal"
@@ -255,7 +279,7 @@ const Opponents = () => {
                     label="Weakness #2"
                     contentEditable={false}
                     value={stringOrNA(
-                      opponents[selectedOpponent].matches![selectedMatch]
+                      selectedOpponent.matches![selectedMatch]
                         .performance.weakness2
                     )}
                     margin="normal"
@@ -265,7 +289,7 @@ const Opponents = () => {
                     label="Weakness #3"
                     contentEditable={false}
                     value={stringOrNA(
-                      opponents[selectedOpponent].matches![selectedMatch]
+                      selectedOpponent.matches![selectedMatch]
                         .performance.weakness3
                     )}
                     margin="normal"
@@ -277,7 +301,7 @@ const Opponents = () => {
                     label="How to beat"
                     contentEditable={false}
                     value={stringOrNA(
-                      opponents[selectedOpponent].matches![selectedMatch]
+                      selectedOpponent.matches![selectedMatch]
                         .performance.changeForNextTime
                     )}
                     margin="normal"

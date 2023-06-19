@@ -145,6 +145,12 @@ export class MyTennisCoachRepository {
     this.handleError(response);
   }
 
+  async updateOpponent(opponent: OpponentDAL) {
+    const response = await this.supabase.from('Opponent').update(opponent).eq('id', opponent.id);;
+
+    this.handleError(response);
+  }
+
   async deleteOpponent(opponentId: string) {
     const response = await this.supabase
       .from('Opponent')
